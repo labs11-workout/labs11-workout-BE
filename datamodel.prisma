@@ -2,3 +2,20 @@ type User {
   id: ID! @unique
   name: String!
 }
+
+type Schedule {
+  id: ID! @unique
+  time: DateTime!
+  user: User!
+}
+
+type SavedWorkout {
+  id: ID! @unique
+}
+
+type Workout {
+  id: ID! @unique
+  name: String!
+  schedule: Schedule!
+}
+
