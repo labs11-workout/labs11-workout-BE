@@ -1,0 +1,11 @@
+{
+  "name": "labs11-workout-BE",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/labs11-workout/labs11-workout-BE.git",
+  "author": "MichaelNey <ney.quentin.michael@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.17.4"
+  }
+}
