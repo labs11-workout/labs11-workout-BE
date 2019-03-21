@@ -42,3 +42,20 @@ type Note {
   createdBy: User!
   schedule: Schedule!
 }
+
+type BodyMetric {
+  weight: Float
+  height: Float
+  bodyfat: Float
+  user: User!
+}
+
+type BodyMeasurement {
+  hips: Float
+  waist: Float
+  rightArm: Float
+  leftArm: Float
+  rightLeg: Float
+  leftLeg: Float
+  user: User!
+}
