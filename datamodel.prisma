@@ -1,8 +1,3 @@
-type User {
-  id: ID! @unique
-  name: String!
-}
-
 type Schedule {
   id: ID! @unique
   time: DateTime!
@@ -16,5 +11,34 @@ type SavedWorkout {
 type Workout {
   id: ID! @unique
   name: String!
+  schedule: Schedule!
+}
+
+type WorkoutExercises {
+  id: ID! @unique
+  workouts: [Workout!]!
+  exercises: [Exercise!]!
+}
+
+type Exercise {
+  sets: Int
+  reps: Int
+  intervals: Int
+  duration: Int
+  intensity: Int
+}
+
+type User {
+  id: ID! @unique
+  schedules: [Schedule!]!
+  savedWorkouts: [SavedWorkout!]!
+  notes: [Note!]!
+}
+
+type Note {
+  id: ID! @unique
+  note: String!
+  workout: Workout!
+  createdBy: User!
   schedule: Schedule!
 }
