@@ -1,6 +1,7 @@
 type Query {
 	info: String!
 	users(skip: Int, first: Int): [User]
+	user(googleId: String): User
 }
 
 type Schedule {

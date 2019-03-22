@@ -31,7 +31,7 @@ type User {
 	schedules: [Schedule!]!
 	savedWorkouts: [SavedWorkout!]!
 	notes: [Note!]!
-	googleId: String!
+	googleId: String! @unique
 }
 
 type Note {
