@@ -1,19 +1,13 @@
+require("dotenv").config();
+
 const { GraphQLServer } = require("graphql-yoga");
-
-const typeDefs = `
-type Query {
-  info: String!
-}`;
-
-const resolvers = {
-	Query: {
-		info: () => `This is the API of CleanLift`
-	}
-};
+const { prisma } = require("./generated/prisma-client");
+const resolvers = require("./resolvers");
 
 const server = new GraphQLServer({
-	typeDefs,
-	resolvers
+	typeDefs: "./schema.graphql",
+	resolvers,
+	context: { prisma }
 });
 
 const port = process.env.PORT || 4000;
@@ -21,5 +15,3 @@ const port = process.env.PORT || 4000;
 server.start(({ port }) => {
 	console.log(`Server is running on port ${port}`);
 });
-
-
