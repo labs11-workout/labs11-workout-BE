@@ -7,7 +7,7 @@ async function seedDB() {
 			schedules: {
 				create: [
 					{
-						time: new Date(),
+						time: `${new Date()}`,
 						workouts: {
 							create: [
 								{

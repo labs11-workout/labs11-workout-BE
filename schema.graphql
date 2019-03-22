@@ -1,23 +1,28 @@
+type Query {
+	info: String!
+	users(skip: Int, first: Int): [User]
+}
+
 type Schedule {
-	id: ID! @unique
+	id: ID!
 	time: String
 	workouts: [Workout!]!
 }
 
 type Workout {
-	id: ID! @unique
+	id: ID!
 	name: String!
 	exercises: [Exercise!]!
 }
 
 type SavedWorkout {
-	id: ID! @unique
+	id: ID!
 	workout: Workout!
 	exercises: [Exercise!]!
 }
 
 type Exercise {
-	id: ID! @unique
+	id: ID!
 	name: String!
 	sets: Int
 	reps: Int
@@ -27,7 +32,7 @@ type Exercise {
 }
 
 type User {
-	id: ID! @unique
+	id: ID!
 	schedules: [Schedule!]!
 	savedWorkouts: [SavedWorkout!]!
 	notes: [Note!]!
@@ -35,7 +40,7 @@ type User {
 }
 
 type Note {
-	id: ID! @unique
+	id: ID!
 	note: String!
 	workout: Workout!
 	createdBy: User!
