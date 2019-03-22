@@ -1,6 +1,62 @@
+type Schedule {
+	id: ID! @unique
+	time: DateTime!
+	workouts: [Workout!]!
+}
+
+type Workout {
+	id: ID! @unique
+	name: String!
+	exercises: [Exercise!]!
+}
+
+type SavedWorkout {
+	id: ID! @unique
+	workout: Workout!
+	exercises: [Exercise!]!
+}
+
+type Exercise {
+	id: ID! @unique
+	name: String!
+	sets: Int
+	reps: Int
+	intervals: Int
+	duration: Int
+	intensity: Int
+}
+
 type User {
-  id: ID! @unique
-  name: String!
+	id: ID! @unique
+	schedules: [Schedule!]!
+	savedWorkouts: [SavedWorkout!]!
+	notes: [Note!]!
+	googleId: String!
+}
+
+type Note {
+	id: ID! @unique
+	note: String!
+	workout: Workout!
+	createdBy: User!
+	schedule: Schedule!
+}
+
+type BodyMetric {
+	weight: Float
+	height: Float
+	bodyfat: Float
+	user: User!
+}
+
+type BodyMeasurement {
+	hips: Float
+	waist: Float
+	rightArm: Float
+	leftArm: Float
+	rightLeg: Float
+	leftLeg: Float
+	user: User!
 }
 
 type Schedule {
