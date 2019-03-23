@@ -1,28 +1,30 @@
-type Query {
+type Query { #These are all the queries that can be called from our API. If you create a resolver and want it to be a query, you need to place the query here and define what it is called, it's arguments if it has any, and the type of data it returns.
 	info: String!
 	users(skip: Int, first: Int): [User]
 	user(googleId: String): User
 }
 
-type Schedule {
+type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.
 	id: ID!
-	time: String
+	time: String!
 	workouts: [Workout!]!
+	completed: Boolean # User may or may not want to track which Workouts they attend.
 }
 
-type Workout {
+type Workout { # A workout that is named, and has exercises under it.
 	id: ID!
 	name: String!
 	exercises: [Exercise!]!
+	completed: Boolean
 }
 
-type SavedWorkout {
+type SavedWorkout { # This is a workout the user has saved, so they can easily add it to any day instead of having to create it over and over.
 	id: ID!
 	workout: Workout!
 	exercises: [Exercise!]!
 }
 
-type Exercise {
+type Exercise { # One exercise.
 	id: ID!
 	name: String!
 	sets: Int
@@ -30,37 +32,42 @@ type Exercise {
 	intervals: Int
 	duration: Int
 	intensity: Int
+	completed: Boolean # Users can track which exercises and workouts that are completed.
 }
 
-type User {
+type User { # User model.
 	id: ID!
 	schedules: [Schedule!]!
 	savedWorkouts: [SavedWorkout!]!
 	notes: [Note!]!
+	bodyMetrics: [BodyMetric!]!
+	bodyMeasurements: [BodyMeasurement!]!
 	googleId: String!
 }
 
-type Note {
+type Note { # A user can write a note about a single scheduled workout time, or a workout.
 	id: ID!
 	note: String!
-	workout: Workout!
+	workout: Workout
 	createdBy: User!
-	schedule: Schedule!
+	schedule: Schedule
 }
 
 type BodyMetric {
+	id: ID!
+	time: String! #Track what time this is recorded, so overtime a user can track their progression.
 	weight: Float
 	height: Float
-	bodyfat: Float
-	user: User!
+	bodyfat: Float #User could enter a number representing the % of body fat.
 }
 
 type BodyMeasurement {
+	id: ID!
+	time: String! #Track what time this is recorded, so overtime a user can track their progression.
 	hips: Float
 	waist: Float
 	rightArm: Float
 	leftArm: Float
 	rightLeg: Float
 	leftLeg: Float
-	user: User!
 }

@@ -1,22 +1,24 @@
-type Schedule {
+type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.
 	id: ID! @unique
-	time: String
+	time: String!
 	workouts: [Workout!]!
+	completed: Boolean @default(value: false) # User may or may not want to track which Workouts they attend.
 }
 
-type Workout {
+type Workout { # A workout that is named, and has exercises under it.
 	id: ID! @unique
 	name: String!
 	exercises: [Exercise!]!
+	completed: Boolean @default(value: false)
 }
 
-type SavedWorkout {
+type SavedWorkout { # This is a workout the user has saved, so they can easily add it to any day instead of having to create it over and over.
 	id: ID! @unique
 	workout: Workout!
 	exercises: [Exercise!]!
 }
 
-type Exercise {
+type Exercise { # One exercise.
 	id: ID! @unique
 	name: String!
 	sets: Int
@@ -24,37 +26,42 @@ type Exercise {
 	intervals: Int
 	duration: Int
 	intensity: Int
+	completed: Boolean @default(value: false) # Users can track which exercises and workouts that are completed.
 }
 
-type User {
+type User { # User model.
 	id: ID! @unique
 	schedules: [Schedule!]!
 	savedWorkouts: [SavedWorkout!]!
 	notes: [Note!]!
+	bodyMetrics: [BodyMetric!]!
+	bodyMeasurements: [BodyMeasurement!]!
 	googleId: String! @unique
 }
 
-type Note {
+type Note { # A user can write a note about a single scheduled workout time, or a workout.
 	id: ID! @unique
 	note: String!
-	workout: Workout!
+	workout: Workout
 	createdBy: User!
-	schedule: Schedule!
+	schedule: Schedule
 }
 
 type BodyMetric {
+	id: ID! @unique
+	time: String! #Track what time this is recorded, so overtime a user can track their progression.
 	weight: Float
 	height: Float
-	bodyfat: Float
-	user: User!
+	bodyfat: Float #User could enter a number representing the % of body fat.
 }
 
 type BodyMeasurement {
+	id: ID! @unique
+	time: String! #Track what time this is recorded, so overtime a user can track their progression.
 	hips: Float
 	waist: Float
 	rightArm: Float
 	leftArm: Float
 	rightLeg: Float
 	leftLeg: Float
-	user: User!
 }
