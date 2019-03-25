@@ -25,7 +25,7 @@ type Workout { # A workout that is named, and has exercises under it.
 
 type SavedWorkout { # This is a workout the user has saved, so they can easily add it to any day instead of having to create it over and over.
 	id: ID!
-	workout: Workout!
+	name: String!
 	exercises: [Exercise!]!
 }
 
@@ -35,7 +35,7 @@ type Exercise { # One exercise.
 	sets: Int
 	reps: Int
 	intervals: Int
-	duration: Int
+	duration: Float
 	intensity: Int
 	completed: Boolean # Users can track which exercises and workouts that are completed.
 }
