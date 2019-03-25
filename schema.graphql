@@ -60,7 +60,6 @@ type Note { # A user can write a note about a single scheduled workout time, or 
 
 type BodyMetric {
 	id: ID!
-	time: String! #Track what time this is recorded, so overtime a user can track their progression.
 	weight: Float
 	height: Float
 	bodyfat: Float #User could enter a number representing the % of body fat.
@@ -68,7 +67,6 @@ type BodyMetric {
 
 type BodyMeasurement {
 	id: ID!
-	time: String! #Track what time this is recorded, so overtime a user can track their progression.
 	hips: Float
 	waist: Float
 	rightArm: Float
