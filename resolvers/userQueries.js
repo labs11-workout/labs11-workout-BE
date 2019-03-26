@@ -16,8 +16,12 @@ const userLogin = async (root, args, context, info) => {
 	}
 };
 
+const getProfile = async (root, args, context, info) =>
+	context.prisma.user({ authId: context.userID });
+
 module.exports = {
 	users,
 	user,
-	userLogin
+	userLogin,
+	getProfile
 };
