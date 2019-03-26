@@ -40,6 +40,7 @@ type BatchPayload {
 }
 
 type BodyMeasurement {
+  id: ID!
   hips: Float
   waist: Float
   rightArm: Float
@@ -62,7 +63,21 @@ input BodyMeasurementCreateInput {
   leftArm: Float
   rightLeg: Float
   leftLeg: Float
-  user: UserCreateOneInput!
+  user: UserCreateOneWithoutBodyMeasurementsInput!
+}
+
+input BodyMeasurementCreateManyWithoutUserInput {
+  create: [BodyMeasurementCreateWithoutUserInput!]
+  connect: [BodyMeasurementWhereUniqueInput!]
+}
+
+input BodyMeasurementCreateWithoutUserInput {
+  hips: Float
+  waist: Float
+  rightArm: Float
+  leftArm: Float
+  rightLeg: Float
+  leftLeg: Float
 }
 
 type BodyMeasurementEdge {
@@ -71,6 +86,8 @@ type BodyMeasurementEdge {
 }
 
 enum BodyMeasurementOrderByInput {
+  id_ASC
+  id_DESC
   hips_ASC
   hips_DESC
   waist_ASC
@@ -83,8 +100,6 @@ enum BodyMeasurementOrderByInput {
   rightLeg_DESC
   leftLeg_ASC
   leftLeg_DESC
-  id_ASC
-  id_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -92,12 +107,81 @@ enum BodyMeasurementOrderByInput {
 }
 
 type BodyMeasurementPreviousValues {
+  id: ID!
   hips: Float
   waist: Float
   rightArm: Float
   leftArm: Float
   rightLeg: Float
   leftLeg: Float
+}
+
+input BodyMeasurementScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  hips: Float
+  hips_not: Float
+  hips_in: [Float!]
+  hips_not_in: [Float!]
+  hips_lt: Float
+  hips_lte: Float
+  hips_gt: Float
+  hips_gte: Float
+  waist: Float
+  waist_not: Float
+  waist_in: [Float!]
+  waist_not_in: [Float!]
+  waist_lt: Float
+  waist_lte: Float
+  waist_gt: Float
+  waist_gte: Float
+  rightArm: Float
+  rightArm_not: Float
+  rightArm_in: [Float!]
+  rightArm_not_in: [Float!]
+  rightArm_lt: Float
+  rightArm_lte: Float
+  rightArm_gt: Float
+  rightArm_gte: Float
+  leftArm: Float
+  leftArm_not: Float
+  leftArm_in: [Float!]
+  leftArm_not_in: [Float!]
+  leftArm_lt: Float
+  leftArm_lte: Float
+  leftArm_gt: Float
+  leftArm_gte: Float
+  rightLeg: Float
+  rightLeg_not: Float
+  rightLeg_in: [Float!]
+  rightLeg_not_in: [Float!]
+  rightLeg_lt: Float
+  rightLeg_lte: Float
+  rightLeg_gt: Float
+  rightLeg_gte: Float
+  leftLeg: Float
+  leftLeg_not: Float
+  leftLeg_in: [Float!]
+  leftLeg_not_in: [Float!]
+  leftLeg_lt: Float
+  leftLeg_lte: Float
+  leftLeg_gt: Float
+  leftLeg_gte: Float
+  AND: [BodyMeasurementScalarWhereInput!]
+  OR: [BodyMeasurementScalarWhereInput!]
+  NOT: [BodyMeasurementScalarWhereInput!]
 }
 
 type BodyMeasurementSubscriptionPayload {
@@ -118,6 +202,25 @@ input BodyMeasurementSubscriptionWhereInput {
   NOT: [BodyMeasurementSubscriptionWhereInput!]
 }
 
+input BodyMeasurementUpdateInput {
+  hips: Float
+  waist: Float
+  rightArm: Float
+  leftArm: Float
+  rightLeg: Float
+  leftLeg: Float
+  user: UserUpdateOneRequiredWithoutBodyMeasurementsInput
+}
+
+input BodyMeasurementUpdateManyDataInput {
+  hips: Float
+  waist: Float
+  rightArm: Float
+  leftArm: Float
+  rightLeg: Float
+  leftLeg: Float
+}
+
 input BodyMeasurementUpdateManyMutationInput {
   hips: Float
   waist: Float
@@ -127,7 +230,58 @@ input BodyMeasurementUpdateManyMutationInput {
   leftLeg: Float
 }
 
+input BodyMeasurementUpdateManyWithoutUserInput {
+  create: [BodyMeasurementCreateWithoutUserInput!]
+  delete: [BodyMeasurementWhereUniqueInput!]
+  connect: [BodyMeasurementWhereUniqueInput!]
+  set: [BodyMeasurementWhereUniqueInput!]
+  disconnect: [BodyMeasurementWhereUniqueInput!]
+  update: [BodyMeasurementUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [BodyMeasurementUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [BodyMeasurementScalarWhereInput!]
+  updateMany: [BodyMeasurementUpdateManyWithWhereNestedInput!]
+}
+
+input BodyMeasurementUpdateManyWithWhereNestedInput {
+  where: BodyMeasurementScalarWhereInput!
+  data: BodyMeasurementUpdateManyDataInput!
+}
+
+input BodyMeasurementUpdateWithoutUserDataInput {
+  hips: Float
+  waist: Float
+  rightArm: Float
+  leftArm: Float
+  rightLeg: Float
+  leftLeg: Float
+}
+
+input BodyMeasurementUpdateWithWhereUniqueWithoutUserInput {
+  where: BodyMeasurementWhereUniqueInput!
+  data: BodyMeasurementUpdateWithoutUserDataInput!
+}
+
+input BodyMeasurementUpsertWithWhereUniqueWithoutUserInput {
+  where: BodyMeasurementWhereUniqueInput!
+  update: BodyMeasurementUpdateWithoutUserDataInput!
+  create: BodyMeasurementCreateWithoutUserInput!
+}
+
 input BodyMeasurementWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
   hips: Float
   hips_not: Float
   hips_in: [Float!]
@@ -182,7 +336,12 @@ input BodyMeasurementWhereInput {
   NOT: [BodyMeasurementWhereInput!]
 }
 
+input BodyMeasurementWhereUniqueInput {
+  id: ID
+}
+
 type BodyMetric {
+  id: ID!
   weight: Float
   height: Float
   bodyfat: Float
@@ -199,7 +358,18 @@ input BodyMetricCreateInput {
   weight: Float
   height: Float
   bodyfat: Float
-  user: UserCreateOneInput!
+  user: UserCreateOneWithoutBodyMetricsInput!
+}
+
+input BodyMetricCreateManyWithoutUserInput {
+  create: [BodyMetricCreateWithoutUserInput!]
+  connect: [BodyMetricWhereUniqueInput!]
+}
+
+input BodyMetricCreateWithoutUserInput {
+  weight: Float
+  height: Float
+  bodyfat: Float
 }
 
 type BodyMetricEdge {
@@ -208,14 +378,14 @@ type BodyMetricEdge {
 }
 
 enum BodyMetricOrderByInput {
+  id_ASC
+  id_DESC
   weight_ASC
   weight_DESC
   height_ASC
   height_DESC
   bodyfat_ASC
   bodyfat_DESC
-  id_ASC
-  id_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -223,9 +393,54 @@ enum BodyMetricOrderByInput {
 }
 
 type BodyMetricPreviousValues {
+  id: ID!
   weight: Float
   height: Float
   bodyfat: Float
+}
+
+input BodyMetricScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  weight: Float
+  weight_not: Float
+  weight_in: [Float!]
+  weight_not_in: [Float!]
+  weight_lt: Float
+  weight_lte: Float
+  weight_gt: Float
+  weight_gte: Float
+  height: Float
+  height_not: Float
+  height_in: [Float!]
+  height_not_in: [Float!]
+  height_lt: Float
+  height_lte: Float
+  height_gt: Float
+  height_gte: Float
+  bodyfat: Float
+  bodyfat_not: Float
+  bodyfat_in: [Float!]
+  bodyfat_not_in: [Float!]
+  bodyfat_lt: Float
+  bodyfat_lte: Float
+  bodyfat_gt: Float
+  bodyfat_gte: Float
+  AND: [BodyMetricScalarWhereInput!]
+  OR: [BodyMetricScalarWhereInput!]
+  NOT: [BodyMetricScalarWhereInput!]
 }
 
 type BodyMetricSubscriptionPayload {
@@ -246,13 +461,74 @@ input BodyMetricSubscriptionWhereInput {
   NOT: [BodyMetricSubscriptionWhereInput!]
 }
 
+input BodyMetricUpdateInput {
+  weight: Float
+  height: Float
+  bodyfat: Float
+  user: UserUpdateOneRequiredWithoutBodyMetricsInput
+}
+
+input BodyMetricUpdateManyDataInput {
+  weight: Float
+  height: Float
+  bodyfat: Float
+}
+
 input BodyMetricUpdateManyMutationInput {
   weight: Float
   height: Float
   bodyfat: Float
 }
 
+input BodyMetricUpdateManyWithoutUserInput {
+  create: [BodyMetricCreateWithoutUserInput!]
+  delete: [BodyMetricWhereUniqueInput!]
+  connect: [BodyMetricWhereUniqueInput!]
+  set: [BodyMetricWhereUniqueInput!]
+  disconnect: [BodyMetricWhereUniqueInput!]
+  update: [BodyMetricUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [BodyMetricUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [BodyMetricScalarWhereInput!]
+  updateMany: [BodyMetricUpdateManyWithWhereNestedInput!]
+}
+
+input BodyMetricUpdateManyWithWhereNestedInput {
+  where: BodyMetricScalarWhereInput!
+  data: BodyMetricUpdateManyDataInput!
+}
+
+input BodyMetricUpdateWithoutUserDataInput {
+  weight: Float
+  height: Float
+  bodyfat: Float
+}
+
+input BodyMetricUpdateWithWhereUniqueWithoutUserInput {
+  where: BodyMetricWhereUniqueInput!
+  data: BodyMetricUpdateWithoutUserDataInput!
+}
+
+input BodyMetricUpsertWithWhereUniqueWithoutUserInput {
+  where: BodyMetricWhereUniqueInput!
+  update: BodyMetricUpdateWithoutUserDataInput!
+  create: BodyMetricCreateWithoutUserInput!
+}
+
 input BodyMetricWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
   weight: Float
   weight_not: Float
   weight_in: [Float!]
@@ -283,7 +559,9 @@ input BodyMetricWhereInput {
   NOT: [BodyMetricWhereInput!]
 }
 
-scalar DateTime
+input BodyMetricWhereUniqueInput {
+  id: ID
+}
 
 type Exercise {
   id: ID!
@@ -291,8 +569,11 @@ type Exercise {
   sets: Int
   reps: Int
   intervals: Int
-  duration: Int
+  duration: Float
   intensity: Int
+  completed: Boolean
+  workout: Workout
+  savedWorkout: SavedWorkout
 }
 
 type ExerciseConnection {
@@ -306,13 +587,43 @@ input ExerciseCreateInput {
   sets: Int
   reps: Int
   intervals: Int
-  duration: Int
+  duration: Float
   intensity: Int
+  completed: Boolean
+  workout: WorkoutCreateOneWithoutExercisesInput
+  savedWorkout: SavedWorkoutCreateOneWithoutExercisesInput
 }
 
-input ExerciseCreateManyInput {
-  create: [ExerciseCreateInput!]
+input ExerciseCreateManyWithoutSavedWorkoutInput {
+  create: [ExerciseCreateWithoutSavedWorkoutInput!]
   connect: [ExerciseWhereUniqueInput!]
+}
+
+input ExerciseCreateManyWithoutWorkoutInput {
+  create: [ExerciseCreateWithoutWorkoutInput!]
+  connect: [ExerciseWhereUniqueInput!]
+}
+
+input ExerciseCreateWithoutSavedWorkoutInput {
+  name: String!
+  sets: Int
+  reps: Int
+  intervals: Int
+  duration: Float
+  intensity: Int
+  completed: Boolean
+  workout: WorkoutCreateOneWithoutExercisesInput
+}
+
+input ExerciseCreateWithoutWorkoutInput {
+  name: String!
+  sets: Int
+  reps: Int
+  intervals: Int
+  duration: Float
+  intensity: Int
+  completed: Boolean
+  savedWorkout: SavedWorkoutCreateOneWithoutExercisesInput
 }
 
 type ExerciseEdge {
@@ -335,6 +646,8 @@ enum ExerciseOrderByInput {
   duration_DESC
   intensity_ASC
   intensity_DESC
+  completed_ASC
+  completed_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -347,8 +660,9 @@ type ExercisePreviousValues {
   sets: Int
   reps: Int
   intervals: Int
-  duration: Int
+  duration: Float
   intensity: Int
+  completed: Boolean
 }
 
 input ExerciseScalarWhereInput {
@@ -404,14 +718,14 @@ input ExerciseScalarWhereInput {
   intervals_lte: Int
   intervals_gt: Int
   intervals_gte: Int
-  duration: Int
-  duration_not: Int
-  duration_in: [Int!]
-  duration_not_in: [Int!]
-  duration_lt: Int
-  duration_lte: Int
-  duration_gt: Int
-  duration_gte: Int
+  duration: Float
+  duration_not: Float
+  duration_in: [Float!]
+  duration_not_in: [Float!]
+  duration_lt: Float
+  duration_lte: Float
+  duration_gt: Float
+  duration_gte: Float
   intensity: Int
   intensity_not: Int
   intensity_in: [Int!]
@@ -420,6 +734,8 @@ input ExerciseScalarWhereInput {
   intensity_lte: Int
   intensity_gt: Int
   intensity_gte: Int
+  completed: Boolean
+  completed_not: Boolean
   AND: [ExerciseScalarWhereInput!]
   OR: [ExerciseScalarWhereInput!]
   NOT: [ExerciseScalarWhereInput!]
@@ -443,22 +759,16 @@ input ExerciseSubscriptionWhereInput {
   NOT: [ExerciseSubscriptionWhereInput!]
 }
 
-input ExerciseUpdateDataInput {
-  name: String
-  sets: Int
-  reps: Int
-  intervals: Int
-  duration: Int
-  intensity: Int
-}
-
 input ExerciseUpdateInput {
   name: String
   sets: Int
   reps: Int
   intervals: Int
-  duration: Int
+  duration: Float
   intensity: Int
+  completed: Boolean
+  workout: WorkoutUpdateOneWithoutExercisesInput
+  savedWorkout: SavedWorkoutUpdateOneWithoutExercisesInput
 }
 
 input ExerciseUpdateManyDataInput {
@@ -466,20 +776,9 @@ input ExerciseUpdateManyDataInput {
   sets: Int
   reps: Int
   intervals: Int
-  duration: Int
+  duration: Float
   intensity: Int
-}
-
-input ExerciseUpdateManyInput {
-  create: [ExerciseCreateInput!]
-  update: [ExerciseUpdateWithWhereUniqueNestedInput!]
-  upsert: [ExerciseUpsertWithWhereUniqueNestedInput!]
-  delete: [ExerciseWhereUniqueInput!]
-  connect: [ExerciseWhereUniqueInput!]
-  set: [ExerciseWhereUniqueInput!]
-  disconnect: [ExerciseWhereUniqueInput!]
-  deleteMany: [ExerciseScalarWhereInput!]
-  updateMany: [ExerciseUpdateManyWithWhereNestedInput!]
+  completed: Boolean
 }
 
 input ExerciseUpdateManyMutationInput {
@@ -487,8 +786,33 @@ input ExerciseUpdateManyMutationInput {
   sets: Int
   reps: Int
   intervals: Int
-  duration: Int
+  duration: Float
   intensity: Int
+  completed: Boolean
+}
+
+input ExerciseUpdateManyWithoutSavedWorkoutInput {
+  create: [ExerciseCreateWithoutSavedWorkoutInput!]
+  delete: [ExerciseWhereUniqueInput!]
+  connect: [ExerciseWhereUniqueInput!]
+  set: [ExerciseWhereUniqueInput!]
+  disconnect: [ExerciseWhereUniqueInput!]
+  update: [ExerciseUpdateWithWhereUniqueWithoutSavedWorkoutInput!]
+  upsert: [ExerciseUpsertWithWhereUniqueWithoutSavedWorkoutInput!]
+  deleteMany: [ExerciseScalarWhereInput!]
+  updateMany: [ExerciseUpdateManyWithWhereNestedInput!]
+}
+
+input ExerciseUpdateManyWithoutWorkoutInput {
+  create: [ExerciseCreateWithoutWorkoutInput!]
+  delete: [ExerciseWhereUniqueInput!]
+  connect: [ExerciseWhereUniqueInput!]
+  set: [ExerciseWhereUniqueInput!]
+  disconnect: [ExerciseWhereUniqueInput!]
+  update: [ExerciseUpdateWithWhereUniqueWithoutWorkoutInput!]
+  upsert: [ExerciseUpsertWithWhereUniqueWithoutWorkoutInput!]
+  deleteMany: [ExerciseScalarWhereInput!]
+  updateMany: [ExerciseUpdateManyWithWhereNestedInput!]
 }
 
 input ExerciseUpdateManyWithWhereNestedInput {
@@ -496,15 +820,48 @@ input ExerciseUpdateManyWithWhereNestedInput {
   data: ExerciseUpdateManyDataInput!
 }
 
-input ExerciseUpdateWithWhereUniqueNestedInput {
-  where: ExerciseWhereUniqueInput!
-  data: ExerciseUpdateDataInput!
+input ExerciseUpdateWithoutSavedWorkoutDataInput {
+  name: String
+  sets: Int
+  reps: Int
+  intervals: Int
+  duration: Float
+  intensity: Int
+  completed: Boolean
+  workout: WorkoutUpdateOneWithoutExercisesInput
 }
 
-input ExerciseUpsertWithWhereUniqueNestedInput {
+input ExerciseUpdateWithoutWorkoutDataInput {
+  name: String
+  sets: Int
+  reps: Int
+  intervals: Int
+  duration: Float
+  intensity: Int
+  completed: Boolean
+  savedWorkout: SavedWorkoutUpdateOneWithoutExercisesInput
+}
+
+input ExerciseUpdateWithWhereUniqueWithoutSavedWorkoutInput {
   where: ExerciseWhereUniqueInput!
-  update: ExerciseUpdateDataInput!
-  create: ExerciseCreateInput!
+  data: ExerciseUpdateWithoutSavedWorkoutDataInput!
+}
+
+input ExerciseUpdateWithWhereUniqueWithoutWorkoutInput {
+  where: ExerciseWhereUniqueInput!
+  data: ExerciseUpdateWithoutWorkoutDataInput!
+}
+
+input ExerciseUpsertWithWhereUniqueWithoutSavedWorkoutInput {
+  where: ExerciseWhereUniqueInput!
+  update: ExerciseUpdateWithoutSavedWorkoutDataInput!
+  create: ExerciseCreateWithoutSavedWorkoutInput!
+}
+
+input ExerciseUpsertWithWhereUniqueWithoutWorkoutInput {
+  where: ExerciseWhereUniqueInput!
+  update: ExerciseUpdateWithoutWorkoutDataInput!
+  create: ExerciseCreateWithoutWorkoutInput!
 }
 
 input ExerciseWhereInput {
@@ -560,14 +917,14 @@ input ExerciseWhereInput {
   intervals_lte: Int
   intervals_gt: Int
   intervals_gte: Int
-  duration: Int
-  duration_not: Int
-  duration_in: [Int!]
-  duration_not_in: [Int!]
-  duration_lt: Int
-  duration_lte: Int
-  duration_gt: Int
-  duration_gte: Int
+  duration: Float
+  duration_not: Float
+  duration_in: [Float!]
+  duration_not_in: [Float!]
+  duration_lt: Float
+  duration_lte: Float
+  duration_gt: Float
+  duration_gte: Float
   intensity: Int
   intensity_not: Int
   intensity_in: [Int!]
@@ -576,6 +933,10 @@ input ExerciseWhereInput {
   intensity_lte: Int
   intensity_gt: Int
   intensity_gte: Int
+  completed: Boolean
+  completed_not: Boolean
+  workout: WorkoutWhereInput
+  savedWorkout: SavedWorkoutWhereInput
   AND: [ExerciseWhereInput!]
   OR: [ExerciseWhereInput!]
   NOT: [ExerciseWhereInput!]
@@ -589,10 +950,16 @@ scalar Long
 
 type Mutation {
   createBodyMeasurement(data: BodyMeasurementCreateInput!): BodyMeasurement!
+  updateBodyMeasurement(data: BodyMeasurementUpdateInput!, where: BodyMeasurementWhereUniqueInput!): BodyMeasurement
   updateManyBodyMeasurements(data: BodyMeasurementUpdateManyMutationInput!, where: BodyMeasurementWhereInput): BatchPayload!
+  upsertBodyMeasurement(where: BodyMeasurementWhereUniqueInput!, create: BodyMeasurementCreateInput!, update: BodyMeasurementUpdateInput!): BodyMeasurement!
+  deleteBodyMeasurement(where: BodyMeasurementWhereUniqueInput!): BodyMeasurement
   deleteManyBodyMeasurements(where: BodyMeasurementWhereInput): BatchPayload!
   createBodyMetric(data: BodyMetricCreateInput!): BodyMetric!
+  updateBodyMetric(data: BodyMetricUpdateInput!, where: BodyMetricWhereUniqueInput!): BodyMetric
   updateManyBodyMetrics(data: BodyMetricUpdateManyMutationInput!, where: BodyMetricWhereInput): BatchPayload!
+  upsertBodyMetric(where: BodyMetricWhereUniqueInput!, create: BodyMetricCreateInput!, update: BodyMetricUpdateInput!): BodyMetric!
+  deleteBodyMetric(where: BodyMetricWhereUniqueInput!): BodyMetric
   deleteManyBodyMetrics(where: BodyMetricWhereInput): BatchPayload!
   createExercise(data: ExerciseCreateInput!): Exercise!
   updateExercise(data: ExerciseUpdateInput!, where: ExerciseWhereUniqueInput!): Exercise
@@ -608,6 +975,7 @@ type Mutation {
   deleteManyNotes(where: NoteWhereInput): BatchPayload!
   createSavedWorkout(data: SavedWorkoutCreateInput!): SavedWorkout!
   updateSavedWorkout(data: SavedWorkoutUpdateInput!, where: SavedWorkoutWhereUniqueInput!): SavedWorkout
+  updateManySavedWorkouts(data: SavedWorkoutUpdateManyMutationInput!, where: SavedWorkoutWhereInput): BatchPayload!
   upsertSavedWorkout(where: SavedWorkoutWhereUniqueInput!, create: SavedWorkoutCreateInput!, update: SavedWorkoutUpdateInput!): SavedWorkout!
   deleteSavedWorkout(where: SavedWorkoutWhereUniqueInput!): SavedWorkout
   deleteManySavedWorkouts(where: SavedWorkoutWhereInput): BatchPayload!
@@ -644,9 +1012,9 @@ interface Node {
 type Note {
   id: ID!
   note: String!
-  workout: Workout!
+  workout: Workout
   createdBy: User!
-  schedule: Schedule!
+  schedule: Schedule
 }
 
 type NoteConnection {
@@ -657,9 +1025,9 @@ type NoteConnection {
 
 input NoteCreateInput {
   note: String!
-  workout: WorkoutCreateOneInput!
+  workout: WorkoutCreateOneInput
   createdBy: UserCreateOneWithoutNotesInput!
-  schedule: ScheduleCreateOneInput!
+  schedule: ScheduleCreateOneInput
 }
 
 input NoteCreateManyWithoutCreatedByInput {
@@ -669,8 +1037,8 @@ input NoteCreateManyWithoutCreatedByInput {
 
 input NoteCreateWithoutCreatedByInput {
   note: String!
-  workout: WorkoutCreateOneInput!
-  schedule: ScheduleCreateOneInput!
+  workout: WorkoutCreateOneInput
+  schedule: ScheduleCreateOneInput
 }
 
 type NoteEdge {
@@ -748,9 +1116,9 @@ input NoteSubscriptionWhereInput {
 
 input NoteUpdateInput {
   note: String
-  workout: WorkoutUpdateOneRequiredInput
+  workout: WorkoutUpdateOneInput
   createdBy: UserUpdateOneRequiredWithoutNotesInput
-  schedule: ScheduleUpdateOneRequiredInput
+  schedule: ScheduleUpdateOneInput
 }
 
 input NoteUpdateManyDataInput {
@@ -780,8 +1148,8 @@ input NoteUpdateManyWithWhereNestedInput {
 
 input NoteUpdateWithoutCreatedByDataInput {
   note: String
-  workout: WorkoutUpdateOneRequiredInput
-  schedule: ScheduleUpdateOneRequiredInput
+  workout: WorkoutUpdateOneInput
+  schedule: ScheduleUpdateOneInput
 }
 
 input NoteUpdateWithWhereUniqueWithoutCreatedByInput {
@@ -844,8 +1212,10 @@ type PageInfo {
 }
 
 type Query {
+  bodyMeasurement(where: BodyMeasurementWhereUniqueInput!): BodyMeasurement
   bodyMeasurements(where: BodyMeasurementWhereInput, orderBy: BodyMeasurementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BodyMeasurement]!
   bodyMeasurementsConnection(where: BodyMeasurementWhereInput, orderBy: BodyMeasurementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BodyMeasurementConnection!
+  bodyMetric(where: BodyMetricWhereUniqueInput!): BodyMetric
   bodyMetrics(where: BodyMetricWhereInput, orderBy: BodyMetricOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BodyMetric]!
   bodyMetricsConnection(where: BodyMetricWhereInput, orderBy: BodyMetricOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BodyMetricConnection!
   exercise(where: ExerciseWhereUniqueInput!): Exercise
@@ -871,8 +1241,9 @@ type Query {
 
 type SavedWorkout {
   id: ID!
-  workout: Workout!
+  name: String!
   exercises(where: ExerciseWhereInput, orderBy: ExerciseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Exercise!]
+  user: User!
 }
 
 type SavedWorkoutConnection {
@@ -882,13 +1253,29 @@ type SavedWorkoutConnection {
 }
 
 input SavedWorkoutCreateInput {
-  workout: WorkoutCreateOneInput!
-  exercises: ExerciseCreateManyInput
+  name: String!
+  exercises: ExerciseCreateManyWithoutSavedWorkoutInput
+  user: UserCreateOneWithoutSavedWorkoutsInput!
 }
 
-input SavedWorkoutCreateManyInput {
-  create: [SavedWorkoutCreateInput!]
+input SavedWorkoutCreateManyWithoutUserInput {
+  create: [SavedWorkoutCreateWithoutUserInput!]
   connect: [SavedWorkoutWhereUniqueInput!]
+}
+
+input SavedWorkoutCreateOneWithoutExercisesInput {
+  create: SavedWorkoutCreateWithoutExercisesInput
+  connect: SavedWorkoutWhereUniqueInput
+}
+
+input SavedWorkoutCreateWithoutExercisesInput {
+  name: String!
+  user: UserCreateOneWithoutSavedWorkoutsInput!
+}
+
+input SavedWorkoutCreateWithoutUserInput {
+  name: String!
+  exercises: ExerciseCreateManyWithoutSavedWorkoutInput
 }
 
 type SavedWorkoutEdge {
@@ -899,6 +1286,8 @@ type SavedWorkoutEdge {
 enum SavedWorkoutOrderByInput {
   id_ASC
   id_DESC
+  name_ASC
+  name_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -907,6 +1296,7 @@ enum SavedWorkoutOrderByInput {
 
 type SavedWorkoutPreviousValues {
   id: ID!
+  name: String!
 }
 
 input SavedWorkoutScalarWhereInput {
@@ -924,6 +1314,20 @@ input SavedWorkoutScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
   AND: [SavedWorkoutScalarWhereInput!]
   OR: [SavedWorkoutScalarWhereInput!]
   NOT: [SavedWorkoutScalarWhereInput!]
@@ -947,36 +1351,70 @@ input SavedWorkoutSubscriptionWhereInput {
   NOT: [SavedWorkoutSubscriptionWhereInput!]
 }
 
-input SavedWorkoutUpdateDataInput {
-  workout: WorkoutUpdateOneRequiredInput
-  exercises: ExerciseUpdateManyInput
-}
-
 input SavedWorkoutUpdateInput {
-  workout: WorkoutUpdateOneRequiredInput
-  exercises: ExerciseUpdateManyInput
+  name: String
+  exercises: ExerciseUpdateManyWithoutSavedWorkoutInput
+  user: UserUpdateOneRequiredWithoutSavedWorkoutsInput
 }
 
-input SavedWorkoutUpdateManyInput {
-  create: [SavedWorkoutCreateInput!]
-  update: [SavedWorkoutUpdateWithWhereUniqueNestedInput!]
-  upsert: [SavedWorkoutUpsertWithWhereUniqueNestedInput!]
+input SavedWorkoutUpdateManyDataInput {
+  name: String
+}
+
+input SavedWorkoutUpdateManyMutationInput {
+  name: String
+}
+
+input SavedWorkoutUpdateManyWithoutUserInput {
+  create: [SavedWorkoutCreateWithoutUserInput!]
   delete: [SavedWorkoutWhereUniqueInput!]
   connect: [SavedWorkoutWhereUniqueInput!]
   set: [SavedWorkoutWhereUniqueInput!]
   disconnect: [SavedWorkoutWhereUniqueInput!]
+  update: [SavedWorkoutUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [SavedWorkoutUpsertWithWhereUniqueWithoutUserInput!]
   deleteMany: [SavedWorkoutScalarWhereInput!]
+  updateMany: [SavedWorkoutUpdateManyWithWhereNestedInput!]
 }
 
-input SavedWorkoutUpdateWithWhereUniqueNestedInput {
-  where: SavedWorkoutWhereUniqueInput!
-  data: SavedWorkoutUpdateDataInput!
+input SavedWorkoutUpdateManyWithWhereNestedInput {
+  where: SavedWorkoutScalarWhereInput!
+  data: SavedWorkoutUpdateManyDataInput!
 }
 
-input SavedWorkoutUpsertWithWhereUniqueNestedInput {
+input SavedWorkoutUpdateOneWithoutExercisesInput {
+  create: SavedWorkoutCreateWithoutExercisesInput
+  update: SavedWorkoutUpdateWithoutExercisesDataInput
+  upsert: SavedWorkoutUpsertWithoutExercisesInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: SavedWorkoutWhereUniqueInput
+}
+
+input SavedWorkoutUpdateWithoutExercisesDataInput {
+  name: String
+  user: UserUpdateOneRequiredWithoutSavedWorkoutsInput
+}
+
+input SavedWorkoutUpdateWithoutUserDataInput {
+  name: String
+  exercises: ExerciseUpdateManyWithoutSavedWorkoutInput
+}
+
+input SavedWorkoutUpdateWithWhereUniqueWithoutUserInput {
   where: SavedWorkoutWhereUniqueInput!
-  update: SavedWorkoutUpdateDataInput!
-  create: SavedWorkoutCreateInput!
+  data: SavedWorkoutUpdateWithoutUserDataInput!
+}
+
+input SavedWorkoutUpsertWithoutExercisesInput {
+  update: SavedWorkoutUpdateWithoutExercisesDataInput!
+  create: SavedWorkoutCreateWithoutExercisesInput!
+}
+
+input SavedWorkoutUpsertWithWhereUniqueWithoutUserInput {
+  where: SavedWorkoutWhereUniqueInput!
+  update: SavedWorkoutUpdateWithoutUserDataInput!
+  create: SavedWorkoutCreateWithoutUserInput!
 }
 
 input SavedWorkoutWhereInput {
@@ -994,10 +1432,24 @@ input SavedWorkoutWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  workout: WorkoutWhereInput
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
   exercises_every: ExerciseWhereInput
   exercises_some: ExerciseWhereInput
   exercises_none: ExerciseWhereInput
+  user: UserWhereInput
   AND: [SavedWorkoutWhereInput!]
   OR: [SavedWorkoutWhereInput!]
   NOT: [SavedWorkoutWhereInput!]
@@ -1009,8 +1461,10 @@ input SavedWorkoutWhereUniqueInput {
 
 type Schedule {
   id: ID!
-  time: DateTime!
+  time: String!
   workouts(where: WorkoutWhereInput, orderBy: WorkoutOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Workout!]
+  completed: Boolean
+  user: User!
 }
 
 type ScheduleConnection {
@@ -1020,18 +1474,37 @@ type ScheduleConnection {
 }
 
 input ScheduleCreateInput {
-  time: DateTime!
-  workouts: WorkoutCreateManyInput
+  time: String!
+  workouts: WorkoutCreateManyWithoutScheduleInput
+  completed: Boolean
+  user: UserCreateOneWithoutSchedulesInput!
 }
 
-input ScheduleCreateManyInput {
-  create: [ScheduleCreateInput!]
+input ScheduleCreateManyWithoutUserInput {
+  create: [ScheduleCreateWithoutUserInput!]
   connect: [ScheduleWhereUniqueInput!]
 }
 
 input ScheduleCreateOneInput {
   create: ScheduleCreateInput
   connect: ScheduleWhereUniqueInput
+}
+
+input ScheduleCreateOneWithoutWorkoutsInput {
+  create: ScheduleCreateWithoutWorkoutsInput
+  connect: ScheduleWhereUniqueInput
+}
+
+input ScheduleCreateWithoutUserInput {
+  time: String!
+  workouts: WorkoutCreateManyWithoutScheduleInput
+  completed: Boolean
+}
+
+input ScheduleCreateWithoutWorkoutsInput {
+  time: String!
+  completed: Boolean
+  user: UserCreateOneWithoutSchedulesInput!
 }
 
 type ScheduleEdge {
@@ -1044,6 +1517,8 @@ enum ScheduleOrderByInput {
   id_DESC
   time_ASC
   time_DESC
+  completed_ASC
+  completed_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1052,7 +1527,8 @@ enum ScheduleOrderByInput {
 
 type SchedulePreviousValues {
   id: ID!
-  time: DateTime!
+  time: String!
+  completed: Boolean
 }
 
 input ScheduleScalarWhereInput {
@@ -1070,14 +1546,22 @@ input ScheduleScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  time: DateTime
-  time_not: DateTime
-  time_in: [DateTime!]
-  time_not_in: [DateTime!]
-  time_lt: DateTime
-  time_lte: DateTime
-  time_gt: DateTime
-  time_gte: DateTime
+  time: String
+  time_not: String
+  time_in: [String!]
+  time_not_in: [String!]
+  time_lt: String
+  time_lte: String
+  time_gt: String
+  time_gte: String
+  time_contains: String
+  time_not_contains: String
+  time_starts_with: String
+  time_not_starts_with: String
+  time_ends_with: String
+  time_not_ends_with: String
+  completed: Boolean
+  completed_not: Boolean
   AND: [ScheduleScalarWhereInput!]
   OR: [ScheduleScalarWhereInput!]
   NOT: [ScheduleScalarWhereInput!]
@@ -1102,33 +1586,39 @@ input ScheduleSubscriptionWhereInput {
 }
 
 input ScheduleUpdateDataInput {
-  time: DateTime
-  workouts: WorkoutUpdateManyInput
+  time: String
+  workouts: WorkoutUpdateManyWithoutScheduleInput
+  completed: Boolean
+  user: UserUpdateOneRequiredWithoutSchedulesInput
 }
 
 input ScheduleUpdateInput {
-  time: DateTime
-  workouts: WorkoutUpdateManyInput
+  time: String
+  workouts: WorkoutUpdateManyWithoutScheduleInput
+  completed: Boolean
+  user: UserUpdateOneRequiredWithoutSchedulesInput
 }
 
 input ScheduleUpdateManyDataInput {
-  time: DateTime
+  time: String
+  completed: Boolean
 }
 
-input ScheduleUpdateManyInput {
-  create: [ScheduleCreateInput!]
-  update: [ScheduleUpdateWithWhereUniqueNestedInput!]
-  upsert: [ScheduleUpsertWithWhereUniqueNestedInput!]
+input ScheduleUpdateManyMutationInput {
+  time: String
+  completed: Boolean
+}
+
+input ScheduleUpdateManyWithoutUserInput {
+  create: [ScheduleCreateWithoutUserInput!]
   delete: [ScheduleWhereUniqueInput!]
   connect: [ScheduleWhereUniqueInput!]
   set: [ScheduleWhereUniqueInput!]
   disconnect: [ScheduleWhereUniqueInput!]
+  update: [ScheduleUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [ScheduleUpsertWithWhereUniqueWithoutUserInput!]
   deleteMany: [ScheduleScalarWhereInput!]
   updateMany: [ScheduleUpdateManyWithWhereNestedInput!]
-}
-
-input ScheduleUpdateManyMutationInput {
-  time: DateTime
 }
 
 input ScheduleUpdateManyWithWhereNestedInput {
@@ -1136,16 +1626,37 @@ input ScheduleUpdateManyWithWhereNestedInput {
   data: ScheduleUpdateManyDataInput!
 }
 
-input ScheduleUpdateOneRequiredInput {
+input ScheduleUpdateOneInput {
   create: ScheduleCreateInput
   update: ScheduleUpdateDataInput
   upsert: ScheduleUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
   connect: ScheduleWhereUniqueInput
 }
 
-input ScheduleUpdateWithWhereUniqueNestedInput {
+input ScheduleUpdateOneRequiredWithoutWorkoutsInput {
+  create: ScheduleCreateWithoutWorkoutsInput
+  update: ScheduleUpdateWithoutWorkoutsDataInput
+  upsert: ScheduleUpsertWithoutWorkoutsInput
+  connect: ScheduleWhereUniqueInput
+}
+
+input ScheduleUpdateWithoutUserDataInput {
+  time: String
+  workouts: WorkoutUpdateManyWithoutScheduleInput
+  completed: Boolean
+}
+
+input ScheduleUpdateWithoutWorkoutsDataInput {
+  time: String
+  completed: Boolean
+  user: UserUpdateOneRequiredWithoutSchedulesInput
+}
+
+input ScheduleUpdateWithWhereUniqueWithoutUserInput {
   where: ScheduleWhereUniqueInput!
-  data: ScheduleUpdateDataInput!
+  data: ScheduleUpdateWithoutUserDataInput!
 }
 
 input ScheduleUpsertNestedInput {
@@ -1153,10 +1664,15 @@ input ScheduleUpsertNestedInput {
   create: ScheduleCreateInput!
 }
 
-input ScheduleUpsertWithWhereUniqueNestedInput {
+input ScheduleUpsertWithoutWorkoutsInput {
+  update: ScheduleUpdateWithoutWorkoutsDataInput!
+  create: ScheduleCreateWithoutWorkoutsInput!
+}
+
+input ScheduleUpsertWithWhereUniqueWithoutUserInput {
   where: ScheduleWhereUniqueInput!
-  update: ScheduleUpdateDataInput!
-  create: ScheduleCreateInput!
+  update: ScheduleUpdateWithoutUserDataInput!
+  create: ScheduleCreateWithoutUserInput!
 }
 
 input ScheduleWhereInput {
@@ -1174,17 +1690,26 @@ input ScheduleWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  time: DateTime
-  time_not: DateTime
-  time_in: [DateTime!]
-  time_not_in: [DateTime!]
-  time_lt: DateTime
-  time_lte: DateTime
-  time_gt: DateTime
-  time_gte: DateTime
+  time: String
+  time_not: String
+  time_in: [String!]
+  time_not_in: [String!]
+  time_lt: String
+  time_lte: String
+  time_gt: String
+  time_gte: String
+  time_contains: String
+  time_not_contains: String
+  time_starts_with: String
+  time_not_starts_with: String
+  time_ends_with: String
+  time_not_ends_with: String
   workouts_every: WorkoutWhereInput
   workouts_some: WorkoutWhereInput
   workouts_none: WorkoutWhereInput
+  completed: Boolean
+  completed_not: Boolean
+  user: UserWhereInput
   AND: [ScheduleWhereInput!]
   OR: [ScheduleWhereInput!]
   NOT: [ScheduleWhereInput!]
@@ -1210,7 +1735,9 @@ type User {
   schedules(where: ScheduleWhereInput, orderBy: ScheduleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Schedule!]
   savedWorkouts(where: SavedWorkoutWhereInput, orderBy: SavedWorkoutOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SavedWorkout!]
   notes(where: NoteWhereInput, orderBy: NoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Note!]
-  googleId: String!
+  bodyMetrics(where: BodyMetricWhereInput, orderBy: BodyMetricOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BodyMetric!]
+  bodyMeasurements(where: BodyMeasurementWhereInput, orderBy: BodyMeasurementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BodyMeasurement!]
+  authId: String!
 }
 
 type UserConnection {
@@ -1220,14 +1747,21 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  schedules: ScheduleCreateManyInput
-  savedWorkouts: SavedWorkoutCreateManyInput
+  schedules: ScheduleCreateManyWithoutUserInput
+  savedWorkouts: SavedWorkoutCreateManyWithoutUserInput
   notes: NoteCreateManyWithoutCreatedByInput
-  googleId: String!
+  bodyMetrics: BodyMetricCreateManyWithoutUserInput
+  bodyMeasurements: BodyMeasurementCreateManyWithoutUserInput
+  authId: String!
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
+input UserCreateOneWithoutBodyMeasurementsInput {
+  create: UserCreateWithoutBodyMeasurementsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutBodyMetricsInput {
+  create: UserCreateWithoutBodyMetricsInput
   connect: UserWhereUniqueInput
 }
 
@@ -1236,10 +1770,54 @@ input UserCreateOneWithoutNotesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutSavedWorkoutsInput {
+  create: UserCreateWithoutSavedWorkoutsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutSchedulesInput {
+  create: UserCreateWithoutSchedulesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutBodyMeasurementsInput {
+  schedules: ScheduleCreateManyWithoutUserInput
+  savedWorkouts: SavedWorkoutCreateManyWithoutUserInput
+  notes: NoteCreateManyWithoutCreatedByInput
+  bodyMetrics: BodyMetricCreateManyWithoutUserInput
+  authId: String!
+}
+
+input UserCreateWithoutBodyMetricsInput {
+  schedules: ScheduleCreateManyWithoutUserInput
+  savedWorkouts: SavedWorkoutCreateManyWithoutUserInput
+  notes: NoteCreateManyWithoutCreatedByInput
+  bodyMeasurements: BodyMeasurementCreateManyWithoutUserInput
+  authId: String!
+}
+
 input UserCreateWithoutNotesInput {
-  schedules: ScheduleCreateManyInput
-  savedWorkouts: SavedWorkoutCreateManyInput
-  googleId: String!
+  schedules: ScheduleCreateManyWithoutUserInput
+  savedWorkouts: SavedWorkoutCreateManyWithoutUserInput
+  bodyMetrics: BodyMetricCreateManyWithoutUserInput
+  bodyMeasurements: BodyMeasurementCreateManyWithoutUserInput
+  authId: String!
+}
+
+input UserCreateWithoutSavedWorkoutsInput {
+  schedules: ScheduleCreateManyWithoutUserInput
+  notes: NoteCreateManyWithoutCreatedByInput
+  bodyMetrics: BodyMetricCreateManyWithoutUserInput
+  bodyMeasurements: BodyMeasurementCreateManyWithoutUserInput
+  authId: String!
+}
+
+input UserCreateWithoutSchedulesInput {
+  savedWorkouts: SavedWorkoutCreateManyWithoutUserInput
+  notes: NoteCreateManyWithoutCreatedByInput
+  bodyMetrics: BodyMetricCreateManyWithoutUserInput
+  bodyMeasurements: BodyMeasurementCreateManyWithoutUserInput
+  authId: String!
 }
 
 type UserEdge {
@@ -1250,8 +1828,8 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  googleId_ASC
-  googleId_DESC
+  authId_ASC
+  authId_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1260,7 +1838,7 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  googleId: String!
+  authId: String!
 }
 
 type UserSubscriptionPayload {
@@ -1282,14 +1860,30 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  schedules: ScheduleUpdateManyInput
-  savedWorkouts: SavedWorkoutUpdateManyInput
+  schedules: ScheduleUpdateManyWithoutUserInput
+  savedWorkouts: SavedWorkoutUpdateManyWithoutUserInput
   notes: NoteUpdateManyWithoutCreatedByInput
-  googleId: String
+  bodyMetrics: BodyMetricUpdateManyWithoutUserInput
+  bodyMeasurements: BodyMeasurementUpdateManyWithoutUserInput
+  authId: String
 }
 
 input UserUpdateManyMutationInput {
-  googleId: String
+  authId: String
+}
+
+input UserUpdateOneRequiredWithoutBodyMeasurementsInput {
+  create: UserCreateWithoutBodyMeasurementsInput
+  update: UserUpdateWithoutBodyMeasurementsDataInput
+  upsert: UserUpsertWithoutBodyMeasurementsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutBodyMetricsInput {
+  create: UserCreateWithoutBodyMetricsInput
+  update: UserUpdateWithoutBodyMetricsDataInput
+  upsert: UserUpsertWithoutBodyMetricsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneRequiredWithoutNotesInput {
@@ -1299,15 +1893,83 @@ input UserUpdateOneRequiredWithoutNotesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateOneRequiredWithoutSavedWorkoutsInput {
+  create: UserCreateWithoutSavedWorkoutsInput
+  update: UserUpdateWithoutSavedWorkoutsDataInput
+  upsert: UserUpsertWithoutSavedWorkoutsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneRequiredWithoutSchedulesInput {
+  create: UserCreateWithoutSchedulesInput
+  update: UserUpdateWithoutSchedulesDataInput
+  upsert: UserUpsertWithoutSchedulesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutBodyMeasurementsDataInput {
+  schedules: ScheduleUpdateManyWithoutUserInput
+  savedWorkouts: SavedWorkoutUpdateManyWithoutUserInput
+  notes: NoteUpdateManyWithoutCreatedByInput
+  bodyMetrics: BodyMetricUpdateManyWithoutUserInput
+  authId: String
+}
+
+input UserUpdateWithoutBodyMetricsDataInput {
+  schedules: ScheduleUpdateManyWithoutUserInput
+  savedWorkouts: SavedWorkoutUpdateManyWithoutUserInput
+  notes: NoteUpdateManyWithoutCreatedByInput
+  bodyMeasurements: BodyMeasurementUpdateManyWithoutUserInput
+  authId: String
+}
+
 input UserUpdateWithoutNotesDataInput {
-  schedules: ScheduleUpdateManyInput
-  savedWorkouts: SavedWorkoutUpdateManyInput
-  googleId: String
+  schedules: ScheduleUpdateManyWithoutUserInput
+  savedWorkouts: SavedWorkoutUpdateManyWithoutUserInput
+  bodyMetrics: BodyMetricUpdateManyWithoutUserInput
+  bodyMeasurements: BodyMeasurementUpdateManyWithoutUserInput
+  authId: String
+}
+
+input UserUpdateWithoutSavedWorkoutsDataInput {
+  schedules: ScheduleUpdateManyWithoutUserInput
+  notes: NoteUpdateManyWithoutCreatedByInput
+  bodyMetrics: BodyMetricUpdateManyWithoutUserInput
+  bodyMeasurements: BodyMeasurementUpdateManyWithoutUserInput
+  authId: String
+}
+
+input UserUpdateWithoutSchedulesDataInput {
+  savedWorkouts: SavedWorkoutUpdateManyWithoutUserInput
+  notes: NoteUpdateManyWithoutCreatedByInput
+  bodyMetrics: BodyMetricUpdateManyWithoutUserInput
+  bodyMeasurements: BodyMeasurementUpdateManyWithoutUserInput
+  authId: String
+}
+
+input UserUpsertWithoutBodyMeasurementsInput {
+  update: UserUpdateWithoutBodyMeasurementsDataInput!
+  create: UserCreateWithoutBodyMeasurementsInput!
+}
+
+input UserUpsertWithoutBodyMetricsInput {
+  update: UserUpdateWithoutBodyMetricsDataInput!
+  create: UserCreateWithoutBodyMetricsInput!
 }
 
 input UserUpsertWithoutNotesInput {
   update: UserUpdateWithoutNotesDataInput!
   create: UserCreateWithoutNotesInput!
+}
+
+input UserUpsertWithoutSavedWorkoutsInput {
+  update: UserUpdateWithoutSavedWorkoutsDataInput!
+  create: UserCreateWithoutSavedWorkoutsInput!
+}
+
+input UserUpsertWithoutSchedulesInput {
+  update: UserUpdateWithoutSchedulesDataInput!
+  create: UserCreateWithoutSchedulesInput!
 }
 
 input UserWhereInput {
@@ -1334,20 +1996,26 @@ input UserWhereInput {
   notes_every: NoteWhereInput
   notes_some: NoteWhereInput
   notes_none: NoteWhereInput
-  googleId: String
-  googleId_not: String
-  googleId_in: [String!]
-  googleId_not_in: [String!]
-  googleId_lt: String
-  googleId_lte: String
-  googleId_gt: String
-  googleId_gte: String
-  googleId_contains: String
-  googleId_not_contains: String
-  googleId_starts_with: String
-  googleId_not_starts_with: String
-  googleId_ends_with: String
-  googleId_not_ends_with: String
+  bodyMetrics_every: BodyMetricWhereInput
+  bodyMetrics_some: BodyMetricWhereInput
+  bodyMetrics_none: BodyMetricWhereInput
+  bodyMeasurements_every: BodyMeasurementWhereInput
+  bodyMeasurements_some: BodyMeasurementWhereInput
+  bodyMeasurements_none: BodyMeasurementWhereInput
+  authId: String
+  authId_not: String
+  authId_in: [String!]
+  authId_not_in: [String!]
+  authId_lt: String
+  authId_lte: String
+  authId_gt: String
+  authId_gte: String
+  authId_contains: String
+  authId_not_contains: String
+  authId_starts_with: String
+  authId_not_starts_with: String
+  authId_ends_with: String
+  authId_not_ends_with: String
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -1355,12 +2023,15 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  authId: String
 }
 
 type Workout {
   id: ID!
   name: String!
   exercises(where: ExerciseWhereInput, orderBy: ExerciseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Exercise!]
+  completed: Boolean
+  schedule: Schedule!
 }
 
 type WorkoutConnection {
@@ -1371,17 +2042,36 @@ type WorkoutConnection {
 
 input WorkoutCreateInput {
   name: String!
-  exercises: ExerciseCreateManyInput
+  exercises: ExerciseCreateManyWithoutWorkoutInput
+  completed: Boolean
+  schedule: ScheduleCreateOneWithoutWorkoutsInput!
 }
 
-input WorkoutCreateManyInput {
-  create: [WorkoutCreateInput!]
+input WorkoutCreateManyWithoutScheduleInput {
+  create: [WorkoutCreateWithoutScheduleInput!]
   connect: [WorkoutWhereUniqueInput!]
 }
 
 input WorkoutCreateOneInput {
   create: WorkoutCreateInput
   connect: WorkoutWhereUniqueInput
+}
+
+input WorkoutCreateOneWithoutExercisesInput {
+  create: WorkoutCreateWithoutExercisesInput
+  connect: WorkoutWhereUniqueInput
+}
+
+input WorkoutCreateWithoutExercisesInput {
+  name: String!
+  completed: Boolean
+  schedule: ScheduleCreateOneWithoutWorkoutsInput!
+}
+
+input WorkoutCreateWithoutScheduleInput {
+  name: String!
+  exercises: ExerciseCreateManyWithoutWorkoutInput
+  completed: Boolean
 }
 
 type WorkoutEdge {
@@ -1394,6 +2084,8 @@ enum WorkoutOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  completed_ASC
+  completed_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1403,6 +2095,7 @@ enum WorkoutOrderByInput {
 type WorkoutPreviousValues {
   id: ID!
   name: String!
+  completed: Boolean
 }
 
 input WorkoutScalarWhereInput {
@@ -1434,6 +2127,8 @@ input WorkoutScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  completed: Boolean
+  completed_not: Boolean
   AND: [WorkoutScalarWhereInput!]
   OR: [WorkoutScalarWhereInput!]
   NOT: [WorkoutScalarWhereInput!]
@@ -1459,32 +2154,38 @@ input WorkoutSubscriptionWhereInput {
 
 input WorkoutUpdateDataInput {
   name: String
-  exercises: ExerciseUpdateManyInput
+  exercises: ExerciseUpdateManyWithoutWorkoutInput
+  completed: Boolean
+  schedule: ScheduleUpdateOneRequiredWithoutWorkoutsInput
 }
 
 input WorkoutUpdateInput {
   name: String
-  exercises: ExerciseUpdateManyInput
+  exercises: ExerciseUpdateManyWithoutWorkoutInput
+  completed: Boolean
+  schedule: ScheduleUpdateOneRequiredWithoutWorkoutsInput
 }
 
 input WorkoutUpdateManyDataInput {
   name: String
-}
-
-input WorkoutUpdateManyInput {
-  create: [WorkoutCreateInput!]
-  update: [WorkoutUpdateWithWhereUniqueNestedInput!]
-  upsert: [WorkoutUpsertWithWhereUniqueNestedInput!]
-  delete: [WorkoutWhereUniqueInput!]
-  connect: [WorkoutWhereUniqueInput!]
-  set: [WorkoutWhereUniqueInput!]
-  disconnect: [WorkoutWhereUniqueInput!]
-  deleteMany: [WorkoutScalarWhereInput!]
-  updateMany: [WorkoutUpdateManyWithWhereNestedInput!]
+  completed: Boolean
 }
 
 input WorkoutUpdateManyMutationInput {
   name: String
+  completed: Boolean
+}
+
+input WorkoutUpdateManyWithoutScheduleInput {
+  create: [WorkoutCreateWithoutScheduleInput!]
+  delete: [WorkoutWhereUniqueInput!]
+  connect: [WorkoutWhereUniqueInput!]
+  set: [WorkoutWhereUniqueInput!]
+  disconnect: [WorkoutWhereUniqueInput!]
+  update: [WorkoutUpdateWithWhereUniqueWithoutScheduleInput!]
+  upsert: [WorkoutUpsertWithWhereUniqueWithoutScheduleInput!]
+  deleteMany: [WorkoutScalarWhereInput!]
+  updateMany: [WorkoutUpdateManyWithWhereNestedInput!]
 }
 
 input WorkoutUpdateManyWithWhereNestedInput {
@@ -1492,16 +2193,39 @@ input WorkoutUpdateManyWithWhereNestedInput {
   data: WorkoutUpdateManyDataInput!
 }
 
-input WorkoutUpdateOneRequiredInput {
+input WorkoutUpdateOneInput {
   create: WorkoutCreateInput
   update: WorkoutUpdateDataInput
   upsert: WorkoutUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
   connect: WorkoutWhereUniqueInput
 }
 
-input WorkoutUpdateWithWhereUniqueNestedInput {
+input WorkoutUpdateOneWithoutExercisesInput {
+  create: WorkoutCreateWithoutExercisesInput
+  update: WorkoutUpdateWithoutExercisesDataInput
+  upsert: WorkoutUpsertWithoutExercisesInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: WorkoutWhereUniqueInput
+}
+
+input WorkoutUpdateWithoutExercisesDataInput {
+  name: String
+  completed: Boolean
+  schedule: ScheduleUpdateOneRequiredWithoutWorkoutsInput
+}
+
+input WorkoutUpdateWithoutScheduleDataInput {
+  name: String
+  exercises: ExerciseUpdateManyWithoutWorkoutInput
+  completed: Boolean
+}
+
+input WorkoutUpdateWithWhereUniqueWithoutScheduleInput {
   where: WorkoutWhereUniqueInput!
-  data: WorkoutUpdateDataInput!
+  data: WorkoutUpdateWithoutScheduleDataInput!
 }
 
 input WorkoutUpsertNestedInput {
@@ -1509,10 +2233,15 @@ input WorkoutUpsertNestedInput {
   create: WorkoutCreateInput!
 }
 
-input WorkoutUpsertWithWhereUniqueNestedInput {
+input WorkoutUpsertWithoutExercisesInput {
+  update: WorkoutUpdateWithoutExercisesDataInput!
+  create: WorkoutCreateWithoutExercisesInput!
+}
+
+input WorkoutUpsertWithWhereUniqueWithoutScheduleInput {
   where: WorkoutWhereUniqueInput!
-  update: WorkoutUpdateDataInput!
-  create: WorkoutCreateInput!
+  update: WorkoutUpdateWithoutScheduleDataInput!
+  create: WorkoutCreateWithoutScheduleInput!
 }
 
 input WorkoutWhereInput {
@@ -1547,6 +2276,9 @@ input WorkoutWhereInput {
   exercises_every: ExerciseWhereInput
   exercises_some: ExerciseWhereInput
   exercises_none: ExerciseWhereInput
+  completed: Boolean
+  completed_not: Boolean
+  schedule: ScheduleWhereInput
   AND: [WorkoutWhereInput!]
   OR: [WorkoutWhereInput!]
   NOT: [WorkoutWhereInput!]

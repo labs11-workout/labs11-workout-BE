@@ -1,9 +1,9 @@
 const { prisma } = require("./generated/prisma-client/index");
 
 async function seedDB() {
-	for (let i = 0; i < 500; i++) {
+	for (let i = 0; i < 50; i++) {
 		const newUser = await prisma.createUser({
-			googleId: `${i + 1}`,
+			authId: `${i + 1}`,
 			schedules: {
 				create: [
 					{
