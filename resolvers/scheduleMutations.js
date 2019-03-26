@@ -9,7 +9,14 @@ const addSchedule = async (root, args, context, info) =>
 const deleteSchedule = async (root, args, context, info) =>
 	await context.prisma.deleteSchedule({ id: args.id });
 
+const editSchedule = async (root, args, context, info) =>
+	await context.prisma.updateSchedule({
+		data: { time: args.time },
+		where: { id: args.id }
+	});
+
 module.exports = {
 	addSchedule,
-	deleteSchedule
+	deleteSchedule,
+	editSchedule
 };
