@@ -25,8 +25,9 @@ type Workout { # A workout that is named, and has exercises under it.
 
 type SavedWorkout { # This is a workout the user has saved, so they can easily add it to any day instead of having to create it over and over.
 	id: ID!
-	workout: Workout!
+	name: String!
 	exercises: [Exercise!]!
+	user: User!
 }
 
 type Exercise { # One exercise.
@@ -35,7 +36,7 @@ type Exercise { # One exercise.
 	sets: Int
 	reps: Int
 	intervals: Int
-	duration: Int
+	duration: Float
 	intensity: Int
 	completed: Boolean # Users can track which exercises and workouts that are completed.
 }
@@ -60,19 +61,19 @@ type Note { # A user can write a note about a single scheduled workout time, or 
 
 type BodyMetric {
 	id: ID!
-	time: String! #Track what time this is recorded, so overtime a user can track their progression.
 	weight: Float
 	height: Float
 	bodyfat: Float #User could enter a number representing the % of body fat.
+	user: User!
 }
 
 type BodyMeasurement {
 	id: ID!
-	time: String! #Track what time this is recorded, so overtime a user can track their progression.
 	hips: Float
 	waist: Float
 	rightArm: Float
 	leftArm: Float
 	rightLeg: Float
 	leftLeg: Float
+	user: User!
 }
