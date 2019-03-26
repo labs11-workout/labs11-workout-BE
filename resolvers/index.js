@@ -1,5 +1,6 @@
 const userQueries = require("./userQueries");
 const scheduleQueries = require("./scheduleQueries");
+const scheduleMutations = require("./scheduleMutations");
 
 const typeResolvers = require("./typeResolvers");
 
@@ -9,7 +10,9 @@ const resolvers = {
 		...userQueries,
 		...scheduleQueries
 	},
-	// Mutation: {}, Uncomment and add mutation resolvers inside.
+	Mutation: {
+		...scheduleMutations
+	},
 	...typeResolvers
 };
 

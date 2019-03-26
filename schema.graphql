@@ -2,13 +2,13 @@ type Query { #These are all the queries that can be called from our API. If you 
 	info: String!
 	users(skip: Int, first: Int): [User]
 	user(authId: String): User
+	userLogin: User
 	getSchedules: [Schedule]
 }
 
-# Leave empty while no mutations
-# type Mutation { #These are all the mutations that can be called from our API. If you create a resolver and want it to be a mutation, you need to place the mutation here and define what it is called, it's arguments if it has any, and the type of data it returns. (Must match a mutation that's in the Mutation Resolver Object.)
-
-# }
+type Mutation { #These are all the mutations that can be called from our API. If you create a resolver and want it to be a mutation, you need to place the mutation here and define what it is called, it's arguments if it has any, and the type of data it returns. (Must match a mutation that's in the Mutation Resolver Object.)
+	addSchedule(time: String!): Schedule
+}
 
 type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.
 	id: ID!
