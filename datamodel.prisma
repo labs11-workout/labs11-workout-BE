@@ -3,6 +3,7 @@ type Schedule { # Each record of this type is one single time a user has schedul
 	time: String!
 	workouts: [Workout!]!
 	completed: Boolean @default(value: false) # User may or may not want to track which Workouts they attend.
+	user: User!
 }
 
 type Workout { # A workout that is named, and has exercises under it.
@@ -10,6 +11,7 @@ type Workout { # A workout that is named, and has exercises under it.
 	name: String!
 	exercises: [Exercise!]!
 	completed: Boolean @default(value: false)
+	schedule: Schedule!
 }
 
 type SavedWorkout { # This is a workout the user has saved, so they can easily add it to any day instead of having to create it over and over.
@@ -28,6 +30,8 @@ type Exercise { # One exercise.
 	duration: Float
 	intensity: Int
 	completed: Boolean @default(value: false) # Users can track which exercises and workouts that are completed.
+	workout: Workout
+	savedWorkout: SavedWorkout
 }
 
 type User { # User model.
@@ -37,7 +41,7 @@ type User { # User model.
 	notes: [Note!]!
 	bodyMetrics: [BodyMetric!]!
 	bodyMeasurements: [BodyMeasurement!]!
-	googleId: String! @unique
+	authId: String! @unique
 }
 
 type Note { # A user can write a note about a single scheduled workout time, or a workout.
