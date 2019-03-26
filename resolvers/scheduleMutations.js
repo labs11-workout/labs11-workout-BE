@@ -6,6 +6,10 @@ const addSchedule = async (root, args, context, info) =>
 		}
 	});
 
+const deleteSchedule = async (root, args, context, info) =>
+	await context.prisma.deleteSchedule({ id: args.id });
+
 module.exports = {
-	addSchedule
+	addSchedule,
+	deleteSchedule
 };
