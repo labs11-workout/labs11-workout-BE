@@ -43,6 +43,9 @@ export interface Prisma {
    * Queries
    */
 
+  bodyMeasurement: (
+    where: BodyMeasurementWhereUniqueInput
+  ) => BodyMeasurementPromise;
   bodyMeasurements: (
     args?: {
       where?: BodyMeasurementWhereInput;
@@ -65,6 +68,7 @@ export interface Prisma {
       last?: Int;
     }
   ) => BodyMeasurementConnectionPromise;
+  bodyMetric: (where: BodyMetricWhereUniqueInput) => BodyMetricPromise;
   bodyMetrics: (
     args?: {
       where?: BodyMetricWhereInput;
@@ -234,22 +238,49 @@ export interface Prisma {
   createBodyMeasurement: (
     data: BodyMeasurementCreateInput
   ) => BodyMeasurementPromise;
+  updateBodyMeasurement: (
+    args: {
+      data: BodyMeasurementUpdateInput;
+      where: BodyMeasurementWhereUniqueInput;
+    }
+  ) => BodyMeasurementPromise;
   updateManyBodyMeasurements: (
     args: {
       data: BodyMeasurementUpdateManyMutationInput;
       where?: BodyMeasurementWhereInput;
     }
   ) => BatchPayloadPromise;
+  upsertBodyMeasurement: (
+    args: {
+      where: BodyMeasurementWhereUniqueInput;
+      create: BodyMeasurementCreateInput;
+      update: BodyMeasurementUpdateInput;
+    }
+  ) => BodyMeasurementPromise;
+  deleteBodyMeasurement: (
+    where: BodyMeasurementWhereUniqueInput
+  ) => BodyMeasurementPromise;
   deleteManyBodyMeasurements: (
     where?: BodyMeasurementWhereInput
   ) => BatchPayloadPromise;
   createBodyMetric: (data: BodyMetricCreateInput) => BodyMetricPromise;
+  updateBodyMetric: (
+    args: { data: BodyMetricUpdateInput; where: BodyMetricWhereUniqueInput }
+  ) => BodyMetricPromise;
   updateManyBodyMetrics: (
     args: {
       data: BodyMetricUpdateManyMutationInput;
       where?: BodyMetricWhereInput;
     }
   ) => BatchPayloadPromise;
+  upsertBodyMetric: (
+    args: {
+      where: BodyMetricWhereUniqueInput;
+      create: BodyMetricCreateInput;
+      update: BodyMetricUpdateInput;
+    }
+  ) => BodyMetricPromise;
+  deleteBodyMetric: (where: BodyMetricWhereUniqueInput) => BodyMetricPromise;
   deleteManyBodyMetrics: (where?: BodyMetricWhereInput) => BatchPayloadPromise;
   createExercise: (data: ExerciseCreateInput) => ExercisePromise;
   updateExercise: (
@@ -287,6 +318,12 @@ export interface Prisma {
   updateSavedWorkout: (
     args: { data: SavedWorkoutUpdateInput; where: SavedWorkoutWhereUniqueInput }
   ) => SavedWorkoutPromise;
+  updateManySavedWorkouts: (
+    args: {
+      data: SavedWorkoutUpdateManyMutationInput;
+      where?: SavedWorkoutWhereInput;
+    }
+  ) => BatchPayloadPromise;
   upsertSavedWorkout: (
     args: {
       where: SavedWorkoutWhereUniqueInput;
@@ -391,31 +428,13 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type BodyMeasurementOrderByInput =
-  | "hips_ASC"
-  | "hips_DESC"
-  | "waist_ASC"
-  | "waist_DESC"
-  | "rightArm_ASC"
-  | "rightArm_DESC"
-  | "leftArm_ASC"
-  | "leftArm_DESC"
-  | "rightLeg_ASC"
-  | "rightLeg_DESC"
-  | "leftLeg_ASC"
-  | "leftLeg_DESC"
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
 export type ScheduleOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "time_ASC"
   | "time_DESC"
+  | "completed_ASC"
+  | "completed_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -426,6 +445,8 @@ export type WorkoutOrderByInput =
   | "id_DESC"
   | "name_ASC"
   | "name_DESC"
+  | "completed_ASC"
+  | "completed_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -446,6 +467,8 @@ export type ExerciseOrderByInput =
   | "duration_DESC"
   | "intensity_ASC"
   | "intensity_DESC"
+  | "completed_ASC"
+  | "completed_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -454,6 +477,8 @@ export type ExerciseOrderByInput =
 export type SavedWorkoutOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -470,14 +495,34 @@ export type NoteOrderByInput =
   | "updatedAt_DESC";
 
 export type BodyMetricOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
   | "weight_ASC"
   | "weight_DESC"
   | "height_ASC"
   | "height_DESC"
   | "bodyfat_ASC"
   | "bodyfat_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type BodyMeasurementOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "hips_ASC"
+  | "hips_DESC"
+  | "waist_ASC"
+  | "waist_DESC"
+  | "rightArm_ASC"
+  | "rightArm_DESC"
+  | "leftArm_ASC"
+  | "leftArm_DESC"
+  | "rightLeg_ASC"
+  | "rightLeg_DESC"
+  | "leftLeg_ASC"
+  | "leftLeg_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -486,8 +531,8 @@ export type BodyMetricOrderByInput =
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "googleId_ASC"
-  | "googleId_DESC"
+  | "authId_ASC"
+  | "authId_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -495,103 +540,9 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface BodyMeasurementWhereInput {
-  hips?: Float;
-  hips_not?: Float;
-  hips_in?: Float[] | Float;
-  hips_not_in?: Float[] | Float;
-  hips_lt?: Float;
-  hips_lte?: Float;
-  hips_gt?: Float;
-  hips_gte?: Float;
-  waist?: Float;
-  waist_not?: Float;
-  waist_in?: Float[] | Float;
-  waist_not_in?: Float[] | Float;
-  waist_lt?: Float;
-  waist_lte?: Float;
-  waist_gt?: Float;
-  waist_gte?: Float;
-  rightArm?: Float;
-  rightArm_not?: Float;
-  rightArm_in?: Float[] | Float;
-  rightArm_not_in?: Float[] | Float;
-  rightArm_lt?: Float;
-  rightArm_lte?: Float;
-  rightArm_gt?: Float;
-  rightArm_gte?: Float;
-  leftArm?: Float;
-  leftArm_not?: Float;
-  leftArm_in?: Float[] | Float;
-  leftArm_not_in?: Float[] | Float;
-  leftArm_lt?: Float;
-  leftArm_lte?: Float;
-  leftArm_gt?: Float;
-  leftArm_gte?: Float;
-  rightLeg?: Float;
-  rightLeg_not?: Float;
-  rightLeg_in?: Float[] | Float;
-  rightLeg_not_in?: Float[] | Float;
-  rightLeg_lt?: Float;
-  rightLeg_lte?: Float;
-  rightLeg_gt?: Float;
-  rightLeg_gte?: Float;
-  leftLeg?: Float;
-  leftLeg_not?: Float;
-  leftLeg_in?: Float[] | Float;
-  leftLeg_not_in?: Float[] | Float;
-  leftLeg_lt?: Float;
-  leftLeg_lte?: Float;
-  leftLeg_gt?: Float;
-  leftLeg_gte?: Float;
-  user?: UserWhereInput;
-  AND?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
-  OR?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
-  NOT?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
-}
-
-export interface UserWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  schedules_every?: ScheduleWhereInput;
-  schedules_some?: ScheduleWhereInput;
-  schedules_none?: ScheduleWhereInput;
-  savedWorkouts_every?: SavedWorkoutWhereInput;
-  savedWorkouts_some?: SavedWorkoutWhereInput;
-  savedWorkouts_none?: SavedWorkoutWhereInput;
-  notes_every?: NoteWhereInput;
-  notes_some?: NoteWhereInput;
-  notes_none?: NoteWhereInput;
-  googleId?: String;
-  googleId_not?: String;
-  googleId_in?: String[] | String;
-  googleId_not_in?: String[] | String;
-  googleId_lt?: String;
-  googleId_lte?: String;
-  googleId_gt?: String;
-  googleId_gte?: String;
-  googleId_contains?: String;
-  googleId_not_contains?: String;
-  googleId_starts_with?: String;
-  googleId_not_starts_with?: String;
-  googleId_ends_with?: String;
-  googleId_not_ends_with?: String;
-  AND?: UserWhereInput[] | UserWhereInput;
-  OR?: UserWhereInput[] | UserWhereInput;
-  NOT?: UserWhereInput[] | UserWhereInput;
-}
+export type BodyMeasurementWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
 
 export interface ScheduleWhereInput {
   id?: ID_Input;
@@ -608,17 +559,26 @@ export interface ScheduleWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  time?: DateTimeInput;
-  time_not?: DateTimeInput;
-  time_in?: DateTimeInput[] | DateTimeInput;
-  time_not_in?: DateTimeInput[] | DateTimeInput;
-  time_lt?: DateTimeInput;
-  time_lte?: DateTimeInput;
-  time_gt?: DateTimeInput;
-  time_gte?: DateTimeInput;
+  time?: String;
+  time_not?: String;
+  time_in?: String[] | String;
+  time_not_in?: String[] | String;
+  time_lt?: String;
+  time_lte?: String;
+  time_gt?: String;
+  time_gte?: String;
+  time_contains?: String;
+  time_not_contains?: String;
+  time_starts_with?: String;
+  time_not_starts_with?: String;
+  time_ends_with?: String;
+  time_not_ends_with?: String;
   workouts_every?: WorkoutWhereInput;
   workouts_some?: WorkoutWhereInput;
   workouts_none?: WorkoutWhereInput;
+  completed?: Boolean;
+  completed_not?: Boolean;
+  user?: UserWhereInput;
   AND?: ScheduleWhereInput[] | ScheduleWhereInput;
   OR?: ScheduleWhereInput[] | ScheduleWhereInput;
   NOT?: ScheduleWhereInput[] | ScheduleWhereInput;
@@ -656,6 +616,9 @@ export interface WorkoutWhereInput {
   exercises_every?: ExerciseWhereInput;
   exercises_some?: ExerciseWhereInput;
   exercises_none?: ExerciseWhereInput;
+  completed?: Boolean;
+  completed_not?: Boolean;
+  schedule?: ScheduleWhereInput;
   AND?: WorkoutWhereInput[] | WorkoutWhereInput;
   OR?: WorkoutWhereInput[] | WorkoutWhereInput;
   NOT?: WorkoutWhereInput[] | WorkoutWhereInput;
@@ -714,14 +677,14 @@ export interface ExerciseWhereInput {
   intervals_lte?: Int;
   intervals_gt?: Int;
   intervals_gte?: Int;
-  duration?: Int;
-  duration_not?: Int;
-  duration_in?: Int[] | Int;
-  duration_not_in?: Int[] | Int;
-  duration_lt?: Int;
-  duration_lte?: Int;
-  duration_gt?: Int;
-  duration_gte?: Int;
+  duration?: Float;
+  duration_not?: Float;
+  duration_in?: Float[] | Float;
+  duration_not_in?: Float[] | Float;
+  duration_lt?: Float;
+  duration_lte?: Float;
+  duration_gt?: Float;
+  duration_gte?: Float;
   intensity?: Int;
   intensity_not?: Int;
   intensity_in?: Int[] | Int;
@@ -730,6 +693,10 @@ export interface ExerciseWhereInput {
   intensity_lte?: Int;
   intensity_gt?: Int;
   intensity_gte?: Int;
+  completed?: Boolean;
+  completed_not?: Boolean;
+  workout?: WorkoutWhereInput;
+  savedWorkout?: SavedWorkoutWhereInput;
   AND?: ExerciseWhereInput[] | ExerciseWhereInput;
   OR?: ExerciseWhereInput[] | ExerciseWhereInput;
   NOT?: ExerciseWhereInput[] | ExerciseWhereInput;
@@ -750,13 +717,76 @@ export interface SavedWorkoutWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  workout?: WorkoutWhereInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
   exercises_every?: ExerciseWhereInput;
   exercises_some?: ExerciseWhereInput;
   exercises_none?: ExerciseWhereInput;
+  user?: UserWhereInput;
   AND?: SavedWorkoutWhereInput[] | SavedWorkoutWhereInput;
   OR?: SavedWorkoutWhereInput[] | SavedWorkoutWhereInput;
   NOT?: SavedWorkoutWhereInput[] | SavedWorkoutWhereInput;
+}
+
+export interface UserWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  schedules_every?: ScheduleWhereInput;
+  schedules_some?: ScheduleWhereInput;
+  schedules_none?: ScheduleWhereInput;
+  savedWorkouts_every?: SavedWorkoutWhereInput;
+  savedWorkouts_some?: SavedWorkoutWhereInput;
+  savedWorkouts_none?: SavedWorkoutWhereInput;
+  notes_every?: NoteWhereInput;
+  notes_some?: NoteWhereInput;
+  notes_none?: NoteWhereInput;
+  bodyMetrics_every?: BodyMetricWhereInput;
+  bodyMetrics_some?: BodyMetricWhereInput;
+  bodyMetrics_none?: BodyMetricWhereInput;
+  bodyMeasurements_every?: BodyMeasurementWhereInput;
+  bodyMeasurements_some?: BodyMeasurementWhereInput;
+  bodyMeasurements_none?: BodyMeasurementWhereInput;
+  authId?: String;
+  authId_not?: String;
+  authId_in?: String[] | String;
+  authId_not_in?: String[] | String;
+  authId_lt?: String;
+  authId_lte?: String;
+  authId_gt?: String;
+  authId_gte?: String;
+  authId_contains?: String;
+  authId_not_contains?: String;
+  authId_starts_with?: String;
+  authId_not_starts_with?: String;
+  authId_ends_with?: String;
+  authId_not_ends_with?: String;
+  AND?: UserWhereInput[] | UserWhereInput;
+  OR?: UserWhereInput[] | UserWhereInput;
+  NOT?: UserWhereInput[] | UserWhereInput;
 }
 
 export interface NoteWhereInput {
@@ -797,6 +827,20 @@ export interface NoteWhereInput {
 }
 
 export interface BodyMetricWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
   weight?: Float;
   weight_not?: Float;
   weight_in?: Float[] | Float;
@@ -827,6 +871,79 @@ export interface BodyMetricWhereInput {
   NOT?: BodyMetricWhereInput[] | BodyMetricWhereInput;
 }
 
+export interface BodyMeasurementWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  hips?: Float;
+  hips_not?: Float;
+  hips_in?: Float[] | Float;
+  hips_not_in?: Float[] | Float;
+  hips_lt?: Float;
+  hips_lte?: Float;
+  hips_gt?: Float;
+  hips_gte?: Float;
+  waist?: Float;
+  waist_not?: Float;
+  waist_in?: Float[] | Float;
+  waist_not_in?: Float[] | Float;
+  waist_lt?: Float;
+  waist_lte?: Float;
+  waist_gt?: Float;
+  waist_gte?: Float;
+  rightArm?: Float;
+  rightArm_not?: Float;
+  rightArm_in?: Float[] | Float;
+  rightArm_not_in?: Float[] | Float;
+  rightArm_lt?: Float;
+  rightArm_lte?: Float;
+  rightArm_gt?: Float;
+  rightArm_gte?: Float;
+  leftArm?: Float;
+  leftArm_not?: Float;
+  leftArm_in?: Float[] | Float;
+  leftArm_not_in?: Float[] | Float;
+  leftArm_lt?: Float;
+  leftArm_lte?: Float;
+  leftArm_gt?: Float;
+  leftArm_gte?: Float;
+  rightLeg?: Float;
+  rightLeg_not?: Float;
+  rightLeg_in?: Float[] | Float;
+  rightLeg_not_in?: Float[] | Float;
+  rightLeg_lt?: Float;
+  rightLeg_lte?: Float;
+  rightLeg_gt?: Float;
+  rightLeg_gte?: Float;
+  leftLeg?: Float;
+  leftLeg_not?: Float;
+  leftLeg_in?: Float[] | Float;
+  leftLeg_not_in?: Float[] | Float;
+  leftLeg_lt?: Float;
+  leftLeg_lte?: Float;
+  leftLeg_gt?: Float;
+  leftLeg_gte?: Float;
+  user?: UserWhereInput;
+  AND?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
+  OR?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
+  NOT?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
+}
+
+export type BodyMetricWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
 export type ExerciseWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
@@ -845,6 +962,7 @@ export type ScheduleWhereUniqueInput = AtLeastOne<{
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
+  authId?: String;
 }>;
 
 export type WorkoutWhereUniqueInput = AtLeastOne<{
@@ -858,68 +976,85 @@ export interface BodyMeasurementCreateInput {
   leftArm?: Float;
   rightLeg?: Float;
   leftLeg?: Float;
-  user: UserCreateOneInput;
+  user: UserCreateOneWithoutBodyMeasurementsInput;
 }
 
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
+export interface UserCreateOneWithoutBodyMeasurementsInput {
+  create?: UserCreateWithoutBodyMeasurementsInput;
   connect?: UserWhereUniqueInput;
 }
 
-export interface UserCreateInput {
-  schedules?: ScheduleCreateManyInput;
-  savedWorkouts?: SavedWorkoutCreateManyInput;
+export interface UserCreateWithoutBodyMeasurementsInput {
+  schedules?: ScheduleCreateManyWithoutUserInput;
+  savedWorkouts?: SavedWorkoutCreateManyWithoutUserInput;
   notes?: NoteCreateManyWithoutCreatedByInput;
-  googleId: String;
+  bodyMetrics?: BodyMetricCreateManyWithoutUserInput;
+  authId: String;
 }
 
-export interface ScheduleCreateManyInput {
-  create?: ScheduleCreateInput[] | ScheduleCreateInput;
+export interface ScheduleCreateManyWithoutUserInput {
+  create?: ScheduleCreateWithoutUserInput[] | ScheduleCreateWithoutUserInput;
   connect?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
 }
 
-export interface ScheduleCreateInput {
-  time: DateTimeInput;
-  workouts?: WorkoutCreateManyInput;
+export interface ScheduleCreateWithoutUserInput {
+  time: String;
+  workouts?: WorkoutCreateManyWithoutScheduleInput;
+  completed?: Boolean;
 }
 
-export interface WorkoutCreateManyInput {
-  create?: WorkoutCreateInput[] | WorkoutCreateInput;
+export interface WorkoutCreateManyWithoutScheduleInput {
+  create?:
+    | WorkoutCreateWithoutScheduleInput[]
+    | WorkoutCreateWithoutScheduleInput;
   connect?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
 }
 
-export interface WorkoutCreateInput {
+export interface WorkoutCreateWithoutScheduleInput {
   name: String;
-  exercises?: ExerciseCreateManyInput;
+  exercises?: ExerciseCreateManyWithoutWorkoutInput;
+  completed?: Boolean;
 }
 
-export interface ExerciseCreateManyInput {
-  create?: ExerciseCreateInput[] | ExerciseCreateInput;
+export interface ExerciseCreateManyWithoutWorkoutInput {
+  create?:
+    | ExerciseCreateWithoutWorkoutInput[]
+    | ExerciseCreateWithoutWorkoutInput;
   connect?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
 }
 
-export interface ExerciseCreateInput {
+export interface ExerciseCreateWithoutWorkoutInput {
   name: String;
   sets?: Int;
   reps?: Int;
   intervals?: Int;
-  duration?: Int;
+  duration?: Float;
   intensity?: Int;
+  completed?: Boolean;
+  savedWorkout?: SavedWorkoutCreateOneWithoutExercisesInput;
 }
 
-export interface SavedWorkoutCreateManyInput {
-  create?: SavedWorkoutCreateInput[] | SavedWorkoutCreateInput;
-  connect?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
+export interface SavedWorkoutCreateOneWithoutExercisesInput {
+  create?: SavedWorkoutCreateWithoutExercisesInput;
+  connect?: SavedWorkoutWhereUniqueInput;
 }
 
-export interface SavedWorkoutCreateInput {
-  workout: WorkoutCreateOneInput;
-  exercises?: ExerciseCreateManyInput;
+export interface SavedWorkoutCreateWithoutExercisesInput {
+  name: String;
+  user: UserCreateOneWithoutSavedWorkoutsInput;
 }
 
-export interface WorkoutCreateOneInput {
-  create?: WorkoutCreateInput;
-  connect?: WorkoutWhereUniqueInput;
+export interface UserCreateOneWithoutSavedWorkoutsInput {
+  create?: UserCreateWithoutSavedWorkoutsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateWithoutSavedWorkoutsInput {
+  schedules?: ScheduleCreateManyWithoutUserInput;
+  notes?: NoteCreateManyWithoutCreatedByInput;
+  bodyMetrics?: BodyMetricCreateManyWithoutUserInput;
+  bodyMeasurements?: BodyMeasurementCreateManyWithoutUserInput;
+  authId: String;
 }
 
 export interface NoteCreateManyWithoutCreatedByInput {
@@ -929,16 +1064,108 @@ export interface NoteCreateManyWithoutCreatedByInput {
 
 export interface NoteCreateWithoutCreatedByInput {
   note: String;
-  workout: WorkoutCreateOneInput;
-  schedule: ScheduleCreateOneInput;
+  workout?: WorkoutCreateOneInput;
+  schedule?: ScheduleCreateOneInput;
 }
 
-export interface ScheduleCreateOneInput {
-  create?: ScheduleCreateInput;
+export interface WorkoutCreateOneInput {
+  create?: WorkoutCreateInput;
+  connect?: WorkoutWhereUniqueInput;
+}
+
+export interface WorkoutCreateInput {
+  name: String;
+  exercises?: ExerciseCreateManyWithoutWorkoutInput;
+  completed?: Boolean;
+  schedule: ScheduleCreateOneWithoutWorkoutsInput;
+}
+
+export interface ScheduleCreateOneWithoutWorkoutsInput {
+  create?: ScheduleCreateWithoutWorkoutsInput;
   connect?: ScheduleWhereUniqueInput;
 }
 
-export interface BodyMeasurementUpdateManyMutationInput {
+export interface ScheduleCreateWithoutWorkoutsInput {
+  time: String;
+  completed?: Boolean;
+  user: UserCreateOneWithoutSchedulesInput;
+}
+
+export interface UserCreateOneWithoutSchedulesInput {
+  create?: UserCreateWithoutSchedulesInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateWithoutSchedulesInput {
+  savedWorkouts?: SavedWorkoutCreateManyWithoutUserInput;
+  notes?: NoteCreateManyWithoutCreatedByInput;
+  bodyMetrics?: BodyMetricCreateManyWithoutUserInput;
+  bodyMeasurements?: BodyMeasurementCreateManyWithoutUserInput;
+  authId: String;
+}
+
+export interface SavedWorkoutCreateManyWithoutUserInput {
+  create?:
+    | SavedWorkoutCreateWithoutUserInput[]
+    | SavedWorkoutCreateWithoutUserInput;
+  connect?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
+}
+
+export interface SavedWorkoutCreateWithoutUserInput {
+  name: String;
+  exercises?: ExerciseCreateManyWithoutSavedWorkoutInput;
+}
+
+export interface ExerciseCreateManyWithoutSavedWorkoutInput {
+  create?:
+    | ExerciseCreateWithoutSavedWorkoutInput[]
+    | ExerciseCreateWithoutSavedWorkoutInput;
+  connect?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
+}
+
+export interface ExerciseCreateWithoutSavedWorkoutInput {
+  name: String;
+  sets?: Int;
+  reps?: Int;
+  intervals?: Int;
+  duration?: Float;
+  intensity?: Int;
+  completed?: Boolean;
+  workout?: WorkoutCreateOneWithoutExercisesInput;
+}
+
+export interface WorkoutCreateOneWithoutExercisesInput {
+  create?: WorkoutCreateWithoutExercisesInput;
+  connect?: WorkoutWhereUniqueInput;
+}
+
+export interface WorkoutCreateWithoutExercisesInput {
+  name: String;
+  completed?: Boolean;
+  schedule: ScheduleCreateOneWithoutWorkoutsInput;
+}
+
+export interface BodyMetricCreateManyWithoutUserInput {
+  create?:
+    | BodyMetricCreateWithoutUserInput[]
+    | BodyMetricCreateWithoutUserInput;
+  connect?: BodyMetricWhereUniqueInput[] | BodyMetricWhereUniqueInput;
+}
+
+export interface BodyMetricCreateWithoutUserInput {
+  weight?: Float;
+  height?: Float;
+  bodyfat?: Float;
+}
+
+export interface BodyMeasurementCreateManyWithoutUserInput {
+  create?:
+    | BodyMeasurementCreateWithoutUserInput[]
+    | BodyMeasurementCreateWithoutUserInput;
+  connect?: BodyMeasurementWhereUniqueInput[] | BodyMeasurementWhereUniqueInput;
+}
+
+export interface BodyMeasurementCreateWithoutUserInput {
   hips?: Float;
   waist?: Float;
   rightArm?: Float;
@@ -947,110 +1174,331 @@ export interface BodyMeasurementUpdateManyMutationInput {
   leftLeg?: Float;
 }
 
-export interface BodyMetricCreateInput {
-  weight?: Float;
-  height?: Float;
-  bodyfat?: Float;
-  user: UserCreateOneInput;
+export interface ScheduleCreateOneInput {
+  create?: ScheduleCreateInput;
+  connect?: ScheduleWhereUniqueInput;
 }
 
-export interface BodyMetricUpdateManyMutationInput {
-  weight?: Float;
-  height?: Float;
-  bodyfat?: Float;
+export interface ScheduleCreateInput {
+  time: String;
+  workouts?: WorkoutCreateManyWithoutScheduleInput;
+  completed?: Boolean;
+  user: UserCreateOneWithoutSchedulesInput;
 }
 
-export interface ExerciseUpdateInput {
-  name?: String;
-  sets?: Int;
-  reps?: Int;
-  intervals?: Int;
-  duration?: Int;
-  intensity?: Int;
+export interface BodyMeasurementUpdateInput {
+  hips?: Float;
+  waist?: Float;
+  rightArm?: Float;
+  leftArm?: Float;
+  rightLeg?: Float;
+  leftLeg?: Float;
+  user?: UserUpdateOneRequiredWithoutBodyMeasurementsInput;
 }
 
-export interface ExerciseUpdateManyMutationInput {
-  name?: String;
-  sets?: Int;
-  reps?: Int;
-  intervals?: Int;
-  duration?: Int;
-  intensity?: Int;
-}
-
-export interface NoteCreateInput {
-  note: String;
-  workout: WorkoutCreateOneInput;
-  createdBy: UserCreateOneWithoutNotesInput;
-  schedule: ScheduleCreateOneInput;
-}
-
-export interface UserCreateOneWithoutNotesInput {
-  create?: UserCreateWithoutNotesInput;
+export interface UserUpdateOneRequiredWithoutBodyMeasurementsInput {
+  create?: UserCreateWithoutBodyMeasurementsInput;
+  update?: UserUpdateWithoutBodyMeasurementsDataInput;
+  upsert?: UserUpsertWithoutBodyMeasurementsInput;
   connect?: UserWhereUniqueInput;
 }
 
-export interface UserCreateWithoutNotesInput {
-  schedules?: ScheduleCreateManyInput;
-  savedWorkouts?: SavedWorkoutCreateManyInput;
-  googleId: String;
+export interface UserUpdateWithoutBodyMeasurementsDataInput {
+  schedules?: ScheduleUpdateManyWithoutUserInput;
+  savedWorkouts?: SavedWorkoutUpdateManyWithoutUserInput;
+  notes?: NoteUpdateManyWithoutCreatedByInput;
+  bodyMetrics?: BodyMetricUpdateManyWithoutUserInput;
+  authId?: String;
 }
 
-export interface NoteUpdateInput {
-  note?: String;
-  workout?: WorkoutUpdateOneRequiredInput;
-  createdBy?: UserUpdateOneRequiredWithoutNotesInput;
-  schedule?: ScheduleUpdateOneRequiredInput;
-}
-
-export interface WorkoutUpdateOneRequiredInput {
-  create?: WorkoutCreateInput;
-  update?: WorkoutUpdateDataInput;
-  upsert?: WorkoutUpsertNestedInput;
-  connect?: WorkoutWhereUniqueInput;
-}
-
-export interface WorkoutUpdateDataInput {
-  name?: String;
-  exercises?: ExerciseUpdateManyInput;
-}
-
-export interface ExerciseUpdateManyInput {
-  create?: ExerciseCreateInput[] | ExerciseCreateInput;
+export interface ScheduleUpdateManyWithoutUserInput {
+  create?: ScheduleCreateWithoutUserInput[] | ScheduleCreateWithoutUserInput;
+  delete?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
+  connect?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
+  set?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
+  disconnect?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
   update?:
-    | ExerciseUpdateWithWhereUniqueNestedInput[]
-    | ExerciseUpdateWithWhereUniqueNestedInput;
+    | ScheduleUpdateWithWhereUniqueWithoutUserInput[]
+    | ScheduleUpdateWithWhereUniqueWithoutUserInput;
   upsert?:
-    | ExerciseUpsertWithWhereUniqueNestedInput[]
-    | ExerciseUpsertWithWhereUniqueNestedInput;
+    | ScheduleUpsertWithWhereUniqueWithoutUserInput[]
+    | ScheduleUpsertWithWhereUniqueWithoutUserInput;
+  deleteMany?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
+  updateMany?:
+    | ScheduleUpdateManyWithWhereNestedInput[]
+    | ScheduleUpdateManyWithWhereNestedInput;
+}
+
+export interface ScheduleUpdateWithWhereUniqueWithoutUserInput {
+  where: ScheduleWhereUniqueInput;
+  data: ScheduleUpdateWithoutUserDataInput;
+}
+
+export interface ScheduleUpdateWithoutUserDataInput {
+  time?: String;
+  workouts?: WorkoutUpdateManyWithoutScheduleInput;
+  completed?: Boolean;
+}
+
+export interface WorkoutUpdateManyWithoutScheduleInput {
+  create?:
+    | WorkoutCreateWithoutScheduleInput[]
+    | WorkoutCreateWithoutScheduleInput;
+  delete?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
+  connect?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
+  set?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
+  disconnect?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
+  update?:
+    | WorkoutUpdateWithWhereUniqueWithoutScheduleInput[]
+    | WorkoutUpdateWithWhereUniqueWithoutScheduleInput;
+  upsert?:
+    | WorkoutUpsertWithWhereUniqueWithoutScheduleInput[]
+    | WorkoutUpsertWithWhereUniqueWithoutScheduleInput;
+  deleteMany?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
+  updateMany?:
+    | WorkoutUpdateManyWithWhereNestedInput[]
+    | WorkoutUpdateManyWithWhereNestedInput;
+}
+
+export interface WorkoutUpdateWithWhereUniqueWithoutScheduleInput {
+  where: WorkoutWhereUniqueInput;
+  data: WorkoutUpdateWithoutScheduleDataInput;
+}
+
+export interface WorkoutUpdateWithoutScheduleDataInput {
+  name?: String;
+  exercises?: ExerciseUpdateManyWithoutWorkoutInput;
+  completed?: Boolean;
+}
+
+export interface ExerciseUpdateManyWithoutWorkoutInput {
+  create?:
+    | ExerciseCreateWithoutWorkoutInput[]
+    | ExerciseCreateWithoutWorkoutInput;
   delete?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
   connect?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
   set?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
   disconnect?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
+  update?:
+    | ExerciseUpdateWithWhereUniqueWithoutWorkoutInput[]
+    | ExerciseUpdateWithWhereUniqueWithoutWorkoutInput;
+  upsert?:
+    | ExerciseUpsertWithWhereUniqueWithoutWorkoutInput[]
+    | ExerciseUpsertWithWhereUniqueWithoutWorkoutInput;
   deleteMany?: ExerciseScalarWhereInput[] | ExerciseScalarWhereInput;
   updateMany?:
     | ExerciseUpdateManyWithWhereNestedInput[]
     | ExerciseUpdateManyWithWhereNestedInput;
 }
 
-export interface ExerciseUpdateWithWhereUniqueNestedInput {
+export interface ExerciseUpdateWithWhereUniqueWithoutWorkoutInput {
   where: ExerciseWhereUniqueInput;
-  data: ExerciseUpdateDataInput;
+  data: ExerciseUpdateWithoutWorkoutDataInput;
 }
 
-export interface ExerciseUpdateDataInput {
+export interface ExerciseUpdateWithoutWorkoutDataInput {
   name?: String;
   sets?: Int;
   reps?: Int;
   intervals?: Int;
-  duration?: Int;
+  duration?: Float;
   intensity?: Int;
+  completed?: Boolean;
+  savedWorkout?: SavedWorkoutUpdateOneWithoutExercisesInput;
 }
 
-export interface ExerciseUpsertWithWhereUniqueNestedInput {
+export interface SavedWorkoutUpdateOneWithoutExercisesInput {
+  create?: SavedWorkoutCreateWithoutExercisesInput;
+  update?: SavedWorkoutUpdateWithoutExercisesDataInput;
+  upsert?: SavedWorkoutUpsertWithoutExercisesInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: SavedWorkoutWhereUniqueInput;
+}
+
+export interface SavedWorkoutUpdateWithoutExercisesDataInput {
+  name?: String;
+  user?: UserUpdateOneRequiredWithoutSavedWorkoutsInput;
+}
+
+export interface UserUpdateOneRequiredWithoutSavedWorkoutsInput {
+  create?: UserCreateWithoutSavedWorkoutsInput;
+  update?: UserUpdateWithoutSavedWorkoutsDataInput;
+  upsert?: UserUpsertWithoutSavedWorkoutsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateWithoutSavedWorkoutsDataInput {
+  schedules?: ScheduleUpdateManyWithoutUserInput;
+  notes?: NoteUpdateManyWithoutCreatedByInput;
+  bodyMetrics?: BodyMetricUpdateManyWithoutUserInput;
+  bodyMeasurements?: BodyMeasurementUpdateManyWithoutUserInput;
+  authId?: String;
+}
+
+export interface NoteUpdateManyWithoutCreatedByInput {
+  create?: NoteCreateWithoutCreatedByInput[] | NoteCreateWithoutCreatedByInput;
+  delete?: NoteWhereUniqueInput[] | NoteWhereUniqueInput;
+  connect?: NoteWhereUniqueInput[] | NoteWhereUniqueInput;
+  set?: NoteWhereUniqueInput[] | NoteWhereUniqueInput;
+  disconnect?: NoteWhereUniqueInput[] | NoteWhereUniqueInput;
+  update?:
+    | NoteUpdateWithWhereUniqueWithoutCreatedByInput[]
+    | NoteUpdateWithWhereUniqueWithoutCreatedByInput;
+  upsert?:
+    | NoteUpsertWithWhereUniqueWithoutCreatedByInput[]
+    | NoteUpsertWithWhereUniqueWithoutCreatedByInput;
+  deleteMany?: NoteScalarWhereInput[] | NoteScalarWhereInput;
+  updateMany?:
+    | NoteUpdateManyWithWhereNestedInput[]
+    | NoteUpdateManyWithWhereNestedInput;
+}
+
+export interface NoteUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: NoteWhereUniqueInput;
+  data: NoteUpdateWithoutCreatedByDataInput;
+}
+
+export interface NoteUpdateWithoutCreatedByDataInput {
+  note?: String;
+  workout?: WorkoutUpdateOneInput;
+  schedule?: ScheduleUpdateOneInput;
+}
+
+export interface WorkoutUpdateOneInput {
+  create?: WorkoutCreateInput;
+  update?: WorkoutUpdateDataInput;
+  upsert?: WorkoutUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: WorkoutWhereUniqueInput;
+}
+
+export interface WorkoutUpdateDataInput {
+  name?: String;
+  exercises?: ExerciseUpdateManyWithoutWorkoutInput;
+  completed?: Boolean;
+  schedule?: ScheduleUpdateOneRequiredWithoutWorkoutsInput;
+}
+
+export interface ScheduleUpdateOneRequiredWithoutWorkoutsInput {
+  create?: ScheduleCreateWithoutWorkoutsInput;
+  update?: ScheduleUpdateWithoutWorkoutsDataInput;
+  upsert?: ScheduleUpsertWithoutWorkoutsInput;
+  connect?: ScheduleWhereUniqueInput;
+}
+
+export interface ScheduleUpdateWithoutWorkoutsDataInput {
+  time?: String;
+  completed?: Boolean;
+  user?: UserUpdateOneRequiredWithoutSchedulesInput;
+}
+
+export interface UserUpdateOneRequiredWithoutSchedulesInput {
+  create?: UserCreateWithoutSchedulesInput;
+  update?: UserUpdateWithoutSchedulesDataInput;
+  upsert?: UserUpsertWithoutSchedulesInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateWithoutSchedulesDataInput {
+  savedWorkouts?: SavedWorkoutUpdateManyWithoutUserInput;
+  notes?: NoteUpdateManyWithoutCreatedByInput;
+  bodyMetrics?: BodyMetricUpdateManyWithoutUserInput;
+  bodyMeasurements?: BodyMeasurementUpdateManyWithoutUserInput;
+  authId?: String;
+}
+
+export interface SavedWorkoutUpdateManyWithoutUserInput {
+  create?:
+    | SavedWorkoutCreateWithoutUserInput[]
+    | SavedWorkoutCreateWithoutUserInput;
+  delete?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
+  connect?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
+  set?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
+  disconnect?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
+  update?:
+    | SavedWorkoutUpdateWithWhereUniqueWithoutUserInput[]
+    | SavedWorkoutUpdateWithWhereUniqueWithoutUserInput;
+  upsert?:
+    | SavedWorkoutUpsertWithWhereUniqueWithoutUserInput[]
+    | SavedWorkoutUpsertWithWhereUniqueWithoutUserInput;
+  deleteMany?: SavedWorkoutScalarWhereInput[] | SavedWorkoutScalarWhereInput;
+  updateMany?:
+    | SavedWorkoutUpdateManyWithWhereNestedInput[]
+    | SavedWorkoutUpdateManyWithWhereNestedInput;
+}
+
+export interface SavedWorkoutUpdateWithWhereUniqueWithoutUserInput {
+  where: SavedWorkoutWhereUniqueInput;
+  data: SavedWorkoutUpdateWithoutUserDataInput;
+}
+
+export interface SavedWorkoutUpdateWithoutUserDataInput {
+  name?: String;
+  exercises?: ExerciseUpdateManyWithoutSavedWorkoutInput;
+}
+
+export interface ExerciseUpdateManyWithoutSavedWorkoutInput {
+  create?:
+    | ExerciseCreateWithoutSavedWorkoutInput[]
+    | ExerciseCreateWithoutSavedWorkoutInput;
+  delete?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
+  connect?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
+  set?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
+  disconnect?: ExerciseWhereUniqueInput[] | ExerciseWhereUniqueInput;
+  update?:
+    | ExerciseUpdateWithWhereUniqueWithoutSavedWorkoutInput[]
+    | ExerciseUpdateWithWhereUniqueWithoutSavedWorkoutInput;
+  upsert?:
+    | ExerciseUpsertWithWhereUniqueWithoutSavedWorkoutInput[]
+    | ExerciseUpsertWithWhereUniqueWithoutSavedWorkoutInput;
+  deleteMany?: ExerciseScalarWhereInput[] | ExerciseScalarWhereInput;
+  updateMany?:
+    | ExerciseUpdateManyWithWhereNestedInput[]
+    | ExerciseUpdateManyWithWhereNestedInput;
+}
+
+export interface ExerciseUpdateWithWhereUniqueWithoutSavedWorkoutInput {
   where: ExerciseWhereUniqueInput;
-  update: ExerciseUpdateDataInput;
-  create: ExerciseCreateInput;
+  data: ExerciseUpdateWithoutSavedWorkoutDataInput;
+}
+
+export interface ExerciseUpdateWithoutSavedWorkoutDataInput {
+  name?: String;
+  sets?: Int;
+  reps?: Int;
+  intervals?: Int;
+  duration?: Float;
+  intensity?: Int;
+  completed?: Boolean;
+  workout?: WorkoutUpdateOneWithoutExercisesInput;
+}
+
+export interface WorkoutUpdateOneWithoutExercisesInput {
+  create?: WorkoutCreateWithoutExercisesInput;
+  update?: WorkoutUpdateWithoutExercisesDataInput;
+  upsert?: WorkoutUpsertWithoutExercisesInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: WorkoutWhereUniqueInput;
+}
+
+export interface WorkoutUpdateWithoutExercisesDataInput {
+  name?: String;
+  completed?: Boolean;
+  schedule?: ScheduleUpdateOneRequiredWithoutWorkoutsInput;
+}
+
+export interface WorkoutUpsertWithoutExercisesInput {
+  update: WorkoutUpdateWithoutExercisesDataInput;
+  create: WorkoutCreateWithoutExercisesInput;
+}
+
+export interface ExerciseUpsertWithWhereUniqueWithoutSavedWorkoutInput {
+  where: ExerciseWhereUniqueInput;
+  update: ExerciseUpdateWithoutSavedWorkoutDataInput;
+  create: ExerciseCreateWithoutSavedWorkoutInput;
 }
 
 export interface ExerciseScalarWhereInput {
@@ -1106,14 +1554,14 @@ export interface ExerciseScalarWhereInput {
   intervals_lte?: Int;
   intervals_gt?: Int;
   intervals_gte?: Int;
-  duration?: Int;
-  duration_not?: Int;
-  duration_in?: Int[] | Int;
-  duration_not_in?: Int[] | Int;
-  duration_lt?: Int;
-  duration_lte?: Int;
-  duration_gt?: Int;
-  duration_gte?: Int;
+  duration?: Float;
+  duration_not?: Float;
+  duration_in?: Float[] | Float;
+  duration_not_in?: Float[] | Float;
+  duration_lt?: Float;
+  duration_lte?: Float;
+  duration_gt?: Float;
+  duration_gte?: Float;
   intensity?: Int;
   intensity_not?: Int;
   intensity_in?: Int[] | Int;
@@ -1122,6 +1570,8 @@ export interface ExerciseScalarWhereInput {
   intensity_lte?: Int;
   intensity_gt?: Int;
   intensity_gte?: Int;
+  completed?: Boolean;
+  completed_not?: Boolean;
   AND?: ExerciseScalarWhereInput[] | ExerciseScalarWhereInput;
   OR?: ExerciseScalarWhereInput[] | ExerciseScalarWhereInput;
   NOT?: ExerciseScalarWhereInput[] | ExerciseScalarWhereInput;
@@ -1137,86 +1587,18 @@ export interface ExerciseUpdateManyDataInput {
   sets?: Int;
   reps?: Int;
   intervals?: Int;
-  duration?: Int;
+  duration?: Float;
   intensity?: Int;
+  completed?: Boolean;
 }
 
-export interface WorkoutUpsertNestedInput {
-  update: WorkoutUpdateDataInput;
-  create: WorkoutCreateInput;
+export interface SavedWorkoutUpsertWithWhereUniqueWithoutUserInput {
+  where: SavedWorkoutWhereUniqueInput;
+  update: SavedWorkoutUpdateWithoutUserDataInput;
+  create: SavedWorkoutCreateWithoutUserInput;
 }
 
-export interface UserUpdateOneRequiredWithoutNotesInput {
-  create?: UserCreateWithoutNotesInput;
-  update?: UserUpdateWithoutNotesDataInput;
-  upsert?: UserUpsertWithoutNotesInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface UserUpdateWithoutNotesDataInput {
-  schedules?: ScheduleUpdateManyInput;
-  savedWorkouts?: SavedWorkoutUpdateManyInput;
-  googleId?: String;
-}
-
-export interface ScheduleUpdateManyInput {
-  create?: ScheduleCreateInput[] | ScheduleCreateInput;
-  update?:
-    | ScheduleUpdateWithWhereUniqueNestedInput[]
-    | ScheduleUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | ScheduleUpsertWithWhereUniqueNestedInput[]
-    | ScheduleUpsertWithWhereUniqueNestedInput;
-  delete?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
-  connect?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
-  set?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
-  disconnect?: ScheduleWhereUniqueInput[] | ScheduleWhereUniqueInput;
-  deleteMany?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
-  updateMany?:
-    | ScheduleUpdateManyWithWhereNestedInput[]
-    | ScheduleUpdateManyWithWhereNestedInput;
-}
-
-export interface ScheduleUpdateWithWhereUniqueNestedInput {
-  where: ScheduleWhereUniqueInput;
-  data: ScheduleUpdateDataInput;
-}
-
-export interface ScheduleUpdateDataInput {
-  time?: DateTimeInput;
-  workouts?: WorkoutUpdateManyInput;
-}
-
-export interface WorkoutUpdateManyInput {
-  create?: WorkoutCreateInput[] | WorkoutCreateInput;
-  update?:
-    | WorkoutUpdateWithWhereUniqueNestedInput[]
-    | WorkoutUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | WorkoutUpsertWithWhereUniqueNestedInput[]
-    | WorkoutUpsertWithWhereUniqueNestedInput;
-  delete?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
-  connect?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
-  set?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
-  disconnect?: WorkoutWhereUniqueInput[] | WorkoutWhereUniqueInput;
-  deleteMany?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
-  updateMany?:
-    | WorkoutUpdateManyWithWhereNestedInput[]
-    | WorkoutUpdateManyWithWhereNestedInput;
-}
-
-export interface WorkoutUpdateWithWhereUniqueNestedInput {
-  where: WorkoutWhereUniqueInput;
-  data: WorkoutUpdateDataInput;
-}
-
-export interface WorkoutUpsertWithWhereUniqueNestedInput {
-  where: WorkoutWhereUniqueInput;
-  update: WorkoutUpdateDataInput;
-  create: WorkoutCreateInput;
-}
-
-export interface WorkoutScalarWhereInput {
+export interface SavedWorkoutScalarWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -1245,183 +1627,272 @@ export interface WorkoutScalarWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
-  AND?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
-  OR?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
-  NOT?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
-}
-
-export interface WorkoutUpdateManyWithWhereNestedInput {
-  where: WorkoutScalarWhereInput;
-  data: WorkoutUpdateManyDataInput;
-}
-
-export interface WorkoutUpdateManyDataInput {
-  name?: String;
-}
-
-export interface ScheduleUpsertWithWhereUniqueNestedInput {
-  where: ScheduleWhereUniqueInput;
-  update: ScheduleUpdateDataInput;
-  create: ScheduleCreateInput;
-}
-
-export interface ScheduleScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  time?: DateTimeInput;
-  time_not?: DateTimeInput;
-  time_in?: DateTimeInput[] | DateTimeInput;
-  time_not_in?: DateTimeInput[] | DateTimeInput;
-  time_lt?: DateTimeInput;
-  time_lte?: DateTimeInput;
-  time_gt?: DateTimeInput;
-  time_gte?: DateTimeInput;
-  AND?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
-  OR?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
-  NOT?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
-}
-
-export interface ScheduleUpdateManyWithWhereNestedInput {
-  where: ScheduleScalarWhereInput;
-  data: ScheduleUpdateManyDataInput;
-}
-
-export interface ScheduleUpdateManyDataInput {
-  time?: DateTimeInput;
-}
-
-export interface SavedWorkoutUpdateManyInput {
-  create?: SavedWorkoutCreateInput[] | SavedWorkoutCreateInput;
-  update?:
-    | SavedWorkoutUpdateWithWhereUniqueNestedInput[]
-    | SavedWorkoutUpdateWithWhereUniqueNestedInput;
-  upsert?:
-    | SavedWorkoutUpsertWithWhereUniqueNestedInput[]
-    | SavedWorkoutUpsertWithWhereUniqueNestedInput;
-  delete?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
-  connect?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
-  set?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
-  disconnect?: SavedWorkoutWhereUniqueInput[] | SavedWorkoutWhereUniqueInput;
-  deleteMany?: SavedWorkoutScalarWhereInput[] | SavedWorkoutScalarWhereInput;
-}
-
-export interface SavedWorkoutUpdateWithWhereUniqueNestedInput {
-  where: SavedWorkoutWhereUniqueInput;
-  data: SavedWorkoutUpdateDataInput;
-}
-
-export interface SavedWorkoutUpdateDataInput {
-  workout?: WorkoutUpdateOneRequiredInput;
-  exercises?: ExerciseUpdateManyInput;
-}
-
-export interface SavedWorkoutUpsertWithWhereUniqueNestedInput {
-  where: SavedWorkoutWhereUniqueInput;
-  update: SavedWorkoutUpdateDataInput;
-  create: SavedWorkoutCreateInput;
-}
-
-export interface SavedWorkoutScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
   AND?: SavedWorkoutScalarWhereInput[] | SavedWorkoutScalarWhereInput;
   OR?: SavedWorkoutScalarWhereInput[] | SavedWorkoutScalarWhereInput;
   NOT?: SavedWorkoutScalarWhereInput[] | SavedWorkoutScalarWhereInput;
 }
 
-export interface UserUpsertWithoutNotesInput {
-  update: UserUpdateWithoutNotesDataInput;
-  create: UserCreateWithoutNotesInput;
+export interface SavedWorkoutUpdateManyWithWhereNestedInput {
+  where: SavedWorkoutScalarWhereInput;
+  data: SavedWorkoutUpdateManyDataInput;
 }
 
-export interface ScheduleUpdateOneRequiredInput {
+export interface SavedWorkoutUpdateManyDataInput {
+  name?: String;
+}
+
+export interface BodyMetricUpdateManyWithoutUserInput {
+  create?:
+    | BodyMetricCreateWithoutUserInput[]
+    | BodyMetricCreateWithoutUserInput;
+  delete?: BodyMetricWhereUniqueInput[] | BodyMetricWhereUniqueInput;
+  connect?: BodyMetricWhereUniqueInput[] | BodyMetricWhereUniqueInput;
+  set?: BodyMetricWhereUniqueInput[] | BodyMetricWhereUniqueInput;
+  disconnect?: BodyMetricWhereUniqueInput[] | BodyMetricWhereUniqueInput;
+  update?:
+    | BodyMetricUpdateWithWhereUniqueWithoutUserInput[]
+    | BodyMetricUpdateWithWhereUniqueWithoutUserInput;
+  upsert?:
+    | BodyMetricUpsertWithWhereUniqueWithoutUserInput[]
+    | BodyMetricUpsertWithWhereUniqueWithoutUserInput;
+  deleteMany?: BodyMetricScalarWhereInput[] | BodyMetricScalarWhereInput;
+  updateMany?:
+    | BodyMetricUpdateManyWithWhereNestedInput[]
+    | BodyMetricUpdateManyWithWhereNestedInput;
+}
+
+export interface BodyMetricUpdateWithWhereUniqueWithoutUserInput {
+  where: BodyMetricWhereUniqueInput;
+  data: BodyMetricUpdateWithoutUserDataInput;
+}
+
+export interface BodyMetricUpdateWithoutUserDataInput {
+  weight?: Float;
+  height?: Float;
+  bodyfat?: Float;
+}
+
+export interface BodyMetricUpsertWithWhereUniqueWithoutUserInput {
+  where: BodyMetricWhereUniqueInput;
+  update: BodyMetricUpdateWithoutUserDataInput;
+  create: BodyMetricCreateWithoutUserInput;
+}
+
+export interface BodyMetricScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  weight?: Float;
+  weight_not?: Float;
+  weight_in?: Float[] | Float;
+  weight_not_in?: Float[] | Float;
+  weight_lt?: Float;
+  weight_lte?: Float;
+  weight_gt?: Float;
+  weight_gte?: Float;
+  height?: Float;
+  height_not?: Float;
+  height_in?: Float[] | Float;
+  height_not_in?: Float[] | Float;
+  height_lt?: Float;
+  height_lte?: Float;
+  height_gt?: Float;
+  height_gte?: Float;
+  bodyfat?: Float;
+  bodyfat_not?: Float;
+  bodyfat_in?: Float[] | Float;
+  bodyfat_not_in?: Float[] | Float;
+  bodyfat_lt?: Float;
+  bodyfat_lte?: Float;
+  bodyfat_gt?: Float;
+  bodyfat_gte?: Float;
+  AND?: BodyMetricScalarWhereInput[] | BodyMetricScalarWhereInput;
+  OR?: BodyMetricScalarWhereInput[] | BodyMetricScalarWhereInput;
+  NOT?: BodyMetricScalarWhereInput[] | BodyMetricScalarWhereInput;
+}
+
+export interface BodyMetricUpdateManyWithWhereNestedInput {
+  where: BodyMetricScalarWhereInput;
+  data: BodyMetricUpdateManyDataInput;
+}
+
+export interface BodyMetricUpdateManyDataInput {
+  weight?: Float;
+  height?: Float;
+  bodyfat?: Float;
+}
+
+export interface BodyMeasurementUpdateManyWithoutUserInput {
+  create?:
+    | BodyMeasurementCreateWithoutUserInput[]
+    | BodyMeasurementCreateWithoutUserInput;
+  delete?: BodyMeasurementWhereUniqueInput[] | BodyMeasurementWhereUniqueInput;
+  connect?: BodyMeasurementWhereUniqueInput[] | BodyMeasurementWhereUniqueInput;
+  set?: BodyMeasurementWhereUniqueInput[] | BodyMeasurementWhereUniqueInput;
+  disconnect?:
+    | BodyMeasurementWhereUniqueInput[]
+    | BodyMeasurementWhereUniqueInput;
+  update?:
+    | BodyMeasurementUpdateWithWhereUniqueWithoutUserInput[]
+    | BodyMeasurementUpdateWithWhereUniqueWithoutUserInput;
+  upsert?:
+    | BodyMeasurementUpsertWithWhereUniqueWithoutUserInput[]
+    | BodyMeasurementUpsertWithWhereUniqueWithoutUserInput;
+  deleteMany?:
+    | BodyMeasurementScalarWhereInput[]
+    | BodyMeasurementScalarWhereInput;
+  updateMany?:
+    | BodyMeasurementUpdateManyWithWhereNestedInput[]
+    | BodyMeasurementUpdateManyWithWhereNestedInput;
+}
+
+export interface BodyMeasurementUpdateWithWhereUniqueWithoutUserInput {
+  where: BodyMeasurementWhereUniqueInput;
+  data: BodyMeasurementUpdateWithoutUserDataInput;
+}
+
+export interface BodyMeasurementUpdateWithoutUserDataInput {
+  hips?: Float;
+  waist?: Float;
+  rightArm?: Float;
+  leftArm?: Float;
+  rightLeg?: Float;
+  leftLeg?: Float;
+}
+
+export interface BodyMeasurementUpsertWithWhereUniqueWithoutUserInput {
+  where: BodyMeasurementWhereUniqueInput;
+  update: BodyMeasurementUpdateWithoutUserDataInput;
+  create: BodyMeasurementCreateWithoutUserInput;
+}
+
+export interface BodyMeasurementScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  hips?: Float;
+  hips_not?: Float;
+  hips_in?: Float[] | Float;
+  hips_not_in?: Float[] | Float;
+  hips_lt?: Float;
+  hips_lte?: Float;
+  hips_gt?: Float;
+  hips_gte?: Float;
+  waist?: Float;
+  waist_not?: Float;
+  waist_in?: Float[] | Float;
+  waist_not_in?: Float[] | Float;
+  waist_lt?: Float;
+  waist_lte?: Float;
+  waist_gt?: Float;
+  waist_gte?: Float;
+  rightArm?: Float;
+  rightArm_not?: Float;
+  rightArm_in?: Float[] | Float;
+  rightArm_not_in?: Float[] | Float;
+  rightArm_lt?: Float;
+  rightArm_lte?: Float;
+  rightArm_gt?: Float;
+  rightArm_gte?: Float;
+  leftArm?: Float;
+  leftArm_not?: Float;
+  leftArm_in?: Float[] | Float;
+  leftArm_not_in?: Float[] | Float;
+  leftArm_lt?: Float;
+  leftArm_lte?: Float;
+  leftArm_gt?: Float;
+  leftArm_gte?: Float;
+  rightLeg?: Float;
+  rightLeg_not?: Float;
+  rightLeg_in?: Float[] | Float;
+  rightLeg_not_in?: Float[] | Float;
+  rightLeg_lt?: Float;
+  rightLeg_lte?: Float;
+  rightLeg_gt?: Float;
+  rightLeg_gte?: Float;
+  leftLeg?: Float;
+  leftLeg_not?: Float;
+  leftLeg_in?: Float[] | Float;
+  leftLeg_not_in?: Float[] | Float;
+  leftLeg_lt?: Float;
+  leftLeg_lte?: Float;
+  leftLeg_gt?: Float;
+  leftLeg_gte?: Float;
+  AND?: BodyMeasurementScalarWhereInput[] | BodyMeasurementScalarWhereInput;
+  OR?: BodyMeasurementScalarWhereInput[] | BodyMeasurementScalarWhereInput;
+  NOT?: BodyMeasurementScalarWhereInput[] | BodyMeasurementScalarWhereInput;
+}
+
+export interface BodyMeasurementUpdateManyWithWhereNestedInput {
+  where: BodyMeasurementScalarWhereInput;
+  data: BodyMeasurementUpdateManyDataInput;
+}
+
+export interface BodyMeasurementUpdateManyDataInput {
+  hips?: Float;
+  waist?: Float;
+  rightArm?: Float;
+  leftArm?: Float;
+  rightLeg?: Float;
+  leftLeg?: Float;
+}
+
+export interface UserUpsertWithoutSchedulesInput {
+  update: UserUpdateWithoutSchedulesDataInput;
+  create: UserCreateWithoutSchedulesInput;
+}
+
+export interface ScheduleUpsertWithoutWorkoutsInput {
+  update: ScheduleUpdateWithoutWorkoutsDataInput;
+  create: ScheduleCreateWithoutWorkoutsInput;
+}
+
+export interface WorkoutUpsertNestedInput {
+  update: WorkoutUpdateDataInput;
+  create: WorkoutCreateInput;
+}
+
+export interface ScheduleUpdateOneInput {
   create?: ScheduleCreateInput;
   update?: ScheduleUpdateDataInput;
   upsert?: ScheduleUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
   connect?: ScheduleWhereUniqueInput;
+}
+
+export interface ScheduleUpdateDataInput {
+  time?: String;
+  workouts?: WorkoutUpdateManyWithoutScheduleInput;
+  completed?: Boolean;
+  user?: UserUpdateOneRequiredWithoutSchedulesInput;
 }
 
 export interface ScheduleUpsertNestedInput {
   update: ScheduleUpdateDataInput;
   create: ScheduleCreateInput;
-}
-
-export interface NoteUpdateManyMutationInput {
-  note?: String;
-}
-
-export interface SavedWorkoutUpdateInput {
-  workout?: WorkoutUpdateOneRequiredInput;
-  exercises?: ExerciseUpdateManyInput;
-}
-
-export interface ScheduleUpdateInput {
-  time?: DateTimeInput;
-  workouts?: WorkoutUpdateManyInput;
-}
-
-export interface ScheduleUpdateManyMutationInput {
-  time?: DateTimeInput;
-}
-
-export interface UserUpdateInput {
-  schedules?: ScheduleUpdateManyInput;
-  savedWorkouts?: SavedWorkoutUpdateManyInput;
-  notes?: NoteUpdateManyWithoutCreatedByInput;
-  googleId?: String;
-}
-
-export interface NoteUpdateManyWithoutCreatedByInput {
-  create?: NoteCreateWithoutCreatedByInput[] | NoteCreateWithoutCreatedByInput;
-  delete?: NoteWhereUniqueInput[] | NoteWhereUniqueInput;
-  connect?: NoteWhereUniqueInput[] | NoteWhereUniqueInput;
-  set?: NoteWhereUniqueInput[] | NoteWhereUniqueInput;
-  disconnect?: NoteWhereUniqueInput[] | NoteWhereUniqueInput;
-  update?:
-    | NoteUpdateWithWhereUniqueWithoutCreatedByInput[]
-    | NoteUpdateWithWhereUniqueWithoutCreatedByInput;
-  upsert?:
-    | NoteUpsertWithWhereUniqueWithoutCreatedByInput[]
-    | NoteUpsertWithWhereUniqueWithoutCreatedByInput;
-  deleteMany?: NoteScalarWhereInput[] | NoteScalarWhereInput;
-  updateMany?:
-    | NoteUpdateManyWithWhereNestedInput[]
-    | NoteUpdateManyWithWhereNestedInput;
-}
-
-export interface NoteUpdateWithWhereUniqueWithoutCreatedByInput {
-  where: NoteWhereUniqueInput;
-  data: NoteUpdateWithoutCreatedByDataInput;
-}
-
-export interface NoteUpdateWithoutCreatedByDataInput {
-  note?: String;
-  workout?: WorkoutUpdateOneRequiredInput;
-  schedule?: ScheduleUpdateOneRequiredInput;
 }
 
 export interface NoteUpsertWithWhereUniqueWithoutCreatedByInput {
@@ -1473,17 +1944,338 @@ export interface NoteUpdateManyDataInput {
   note?: String;
 }
 
+export interface UserUpsertWithoutSavedWorkoutsInput {
+  update: UserUpdateWithoutSavedWorkoutsDataInput;
+  create: UserCreateWithoutSavedWorkoutsInput;
+}
+
+export interface SavedWorkoutUpsertWithoutExercisesInput {
+  update: SavedWorkoutUpdateWithoutExercisesDataInput;
+  create: SavedWorkoutCreateWithoutExercisesInput;
+}
+
+export interface ExerciseUpsertWithWhereUniqueWithoutWorkoutInput {
+  where: ExerciseWhereUniqueInput;
+  update: ExerciseUpdateWithoutWorkoutDataInput;
+  create: ExerciseCreateWithoutWorkoutInput;
+}
+
+export interface WorkoutUpsertWithWhereUniqueWithoutScheduleInput {
+  where: WorkoutWhereUniqueInput;
+  update: WorkoutUpdateWithoutScheduleDataInput;
+  create: WorkoutCreateWithoutScheduleInput;
+}
+
+export interface WorkoutScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  completed?: Boolean;
+  completed_not?: Boolean;
+  AND?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
+  OR?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
+  NOT?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
+}
+
+export interface WorkoutUpdateManyWithWhereNestedInput {
+  where: WorkoutScalarWhereInput;
+  data: WorkoutUpdateManyDataInput;
+}
+
+export interface WorkoutUpdateManyDataInput {
+  name?: String;
+  completed?: Boolean;
+}
+
+export interface ScheduleUpsertWithWhereUniqueWithoutUserInput {
+  where: ScheduleWhereUniqueInput;
+  update: ScheduleUpdateWithoutUserDataInput;
+  create: ScheduleCreateWithoutUserInput;
+}
+
+export interface ScheduleScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  time?: String;
+  time_not?: String;
+  time_in?: String[] | String;
+  time_not_in?: String[] | String;
+  time_lt?: String;
+  time_lte?: String;
+  time_gt?: String;
+  time_gte?: String;
+  time_contains?: String;
+  time_not_contains?: String;
+  time_starts_with?: String;
+  time_not_starts_with?: String;
+  time_ends_with?: String;
+  time_not_ends_with?: String;
+  completed?: Boolean;
+  completed_not?: Boolean;
+  AND?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
+  OR?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
+  NOT?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
+}
+
+export interface ScheduleUpdateManyWithWhereNestedInput {
+  where: ScheduleScalarWhereInput;
+  data: ScheduleUpdateManyDataInput;
+}
+
+export interface ScheduleUpdateManyDataInput {
+  time?: String;
+  completed?: Boolean;
+}
+
+export interface UserUpsertWithoutBodyMeasurementsInput {
+  update: UserUpdateWithoutBodyMeasurementsDataInput;
+  create: UserCreateWithoutBodyMeasurementsInput;
+}
+
+export interface BodyMeasurementUpdateManyMutationInput {
+  hips?: Float;
+  waist?: Float;
+  rightArm?: Float;
+  leftArm?: Float;
+  rightLeg?: Float;
+  leftLeg?: Float;
+}
+
+export interface BodyMetricCreateInput {
+  weight?: Float;
+  height?: Float;
+  bodyfat?: Float;
+  user: UserCreateOneWithoutBodyMetricsInput;
+}
+
+export interface UserCreateOneWithoutBodyMetricsInput {
+  create?: UserCreateWithoutBodyMetricsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateWithoutBodyMetricsInput {
+  schedules?: ScheduleCreateManyWithoutUserInput;
+  savedWorkouts?: SavedWorkoutCreateManyWithoutUserInput;
+  notes?: NoteCreateManyWithoutCreatedByInput;
+  bodyMeasurements?: BodyMeasurementCreateManyWithoutUserInput;
+  authId: String;
+}
+
+export interface BodyMetricUpdateInput {
+  weight?: Float;
+  height?: Float;
+  bodyfat?: Float;
+  user?: UserUpdateOneRequiredWithoutBodyMetricsInput;
+}
+
+export interface UserUpdateOneRequiredWithoutBodyMetricsInput {
+  create?: UserCreateWithoutBodyMetricsInput;
+  update?: UserUpdateWithoutBodyMetricsDataInput;
+  upsert?: UserUpsertWithoutBodyMetricsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateWithoutBodyMetricsDataInput {
+  schedules?: ScheduleUpdateManyWithoutUserInput;
+  savedWorkouts?: SavedWorkoutUpdateManyWithoutUserInput;
+  notes?: NoteUpdateManyWithoutCreatedByInput;
+  bodyMeasurements?: BodyMeasurementUpdateManyWithoutUserInput;
+  authId?: String;
+}
+
+export interface UserUpsertWithoutBodyMetricsInput {
+  update: UserUpdateWithoutBodyMetricsDataInput;
+  create: UserCreateWithoutBodyMetricsInput;
+}
+
+export interface BodyMetricUpdateManyMutationInput {
+  weight?: Float;
+  height?: Float;
+  bodyfat?: Float;
+}
+
+export interface ExerciseCreateInput {
+  name: String;
+  sets?: Int;
+  reps?: Int;
+  intervals?: Int;
+  duration?: Float;
+  intensity?: Int;
+  completed?: Boolean;
+  workout?: WorkoutCreateOneWithoutExercisesInput;
+  savedWorkout?: SavedWorkoutCreateOneWithoutExercisesInput;
+}
+
+export interface ExerciseUpdateInput {
+  name?: String;
+  sets?: Int;
+  reps?: Int;
+  intervals?: Int;
+  duration?: Float;
+  intensity?: Int;
+  completed?: Boolean;
+  workout?: WorkoutUpdateOneWithoutExercisesInput;
+  savedWorkout?: SavedWorkoutUpdateOneWithoutExercisesInput;
+}
+
+export interface ExerciseUpdateManyMutationInput {
+  name?: String;
+  sets?: Int;
+  reps?: Int;
+  intervals?: Int;
+  duration?: Float;
+  intensity?: Int;
+  completed?: Boolean;
+}
+
+export interface NoteCreateInput {
+  note: String;
+  workout?: WorkoutCreateOneInput;
+  createdBy: UserCreateOneWithoutNotesInput;
+  schedule?: ScheduleCreateOneInput;
+}
+
+export interface UserCreateOneWithoutNotesInput {
+  create?: UserCreateWithoutNotesInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateWithoutNotesInput {
+  schedules?: ScheduleCreateManyWithoutUserInput;
+  savedWorkouts?: SavedWorkoutCreateManyWithoutUserInput;
+  bodyMetrics?: BodyMetricCreateManyWithoutUserInput;
+  bodyMeasurements?: BodyMeasurementCreateManyWithoutUserInput;
+  authId: String;
+}
+
+export interface NoteUpdateInput {
+  note?: String;
+  workout?: WorkoutUpdateOneInput;
+  createdBy?: UserUpdateOneRequiredWithoutNotesInput;
+  schedule?: ScheduleUpdateOneInput;
+}
+
+export interface UserUpdateOneRequiredWithoutNotesInput {
+  create?: UserCreateWithoutNotesInput;
+  update?: UserUpdateWithoutNotesDataInput;
+  upsert?: UserUpsertWithoutNotesInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserUpdateWithoutNotesDataInput {
+  schedules?: ScheduleUpdateManyWithoutUserInput;
+  savedWorkouts?: SavedWorkoutUpdateManyWithoutUserInput;
+  bodyMetrics?: BodyMetricUpdateManyWithoutUserInput;
+  bodyMeasurements?: BodyMeasurementUpdateManyWithoutUserInput;
+  authId?: String;
+}
+
+export interface UserUpsertWithoutNotesInput {
+  update: UserUpdateWithoutNotesDataInput;
+  create: UserCreateWithoutNotesInput;
+}
+
+export interface NoteUpdateManyMutationInput {
+  note?: String;
+}
+
+export interface SavedWorkoutCreateInput {
+  name: String;
+  exercises?: ExerciseCreateManyWithoutSavedWorkoutInput;
+  user: UserCreateOneWithoutSavedWorkoutsInput;
+}
+
+export interface SavedWorkoutUpdateInput {
+  name?: String;
+  exercises?: ExerciseUpdateManyWithoutSavedWorkoutInput;
+  user?: UserUpdateOneRequiredWithoutSavedWorkoutsInput;
+}
+
+export interface SavedWorkoutUpdateManyMutationInput {
+  name?: String;
+}
+
+export interface ScheduleUpdateInput {
+  time?: String;
+  workouts?: WorkoutUpdateManyWithoutScheduleInput;
+  completed?: Boolean;
+  user?: UserUpdateOneRequiredWithoutSchedulesInput;
+}
+
+export interface ScheduleUpdateManyMutationInput {
+  time?: String;
+  completed?: Boolean;
+}
+
+export interface UserCreateInput {
+  schedules?: ScheduleCreateManyWithoutUserInput;
+  savedWorkouts?: SavedWorkoutCreateManyWithoutUserInput;
+  notes?: NoteCreateManyWithoutCreatedByInput;
+  bodyMetrics?: BodyMetricCreateManyWithoutUserInput;
+  bodyMeasurements?: BodyMeasurementCreateManyWithoutUserInput;
+  authId: String;
+}
+
+export interface UserUpdateInput {
+  schedules?: ScheduleUpdateManyWithoutUserInput;
+  savedWorkouts?: SavedWorkoutUpdateManyWithoutUserInput;
+  notes?: NoteUpdateManyWithoutCreatedByInput;
+  bodyMetrics?: BodyMetricUpdateManyWithoutUserInput;
+  bodyMeasurements?: BodyMeasurementUpdateManyWithoutUserInput;
+  authId?: String;
+}
+
 export interface UserUpdateManyMutationInput {
-  googleId?: String;
+  authId?: String;
 }
 
 export interface WorkoutUpdateInput {
   name?: String;
-  exercises?: ExerciseUpdateManyInput;
+  exercises?: ExerciseUpdateManyWithoutWorkoutInput;
+  completed?: Boolean;
+  schedule?: ScheduleUpdateOneRequiredWithoutWorkoutsInput;
 }
 
 export interface WorkoutUpdateManyMutationInput {
   name?: String;
+  completed?: Boolean;
 }
 
 export interface BodyMeasurementSubscriptionWhereInput {
@@ -1591,6 +2383,7 @@ export interface NodeNode {
 }
 
 export interface BodyMeasurement {
+  id: ID_Output;
   hips?: Float;
   waist?: Float;
   rightArm?: Float;
@@ -1602,6 +2395,7 @@ export interface BodyMeasurement {
 export interface BodyMeasurementPromise
   extends Promise<BodyMeasurement>,
     Fragmentable {
+  id: () => Promise<ID_Output>;
   hips: () => Promise<Float>;
   waist: () => Promise<Float>;
   rightArm: () => Promise<Float>;
@@ -1614,6 +2408,7 @@ export interface BodyMeasurementPromise
 export interface BodyMeasurementSubscription
   extends Promise<AsyncIterator<BodyMeasurement>>,
     Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
   hips: () => Promise<AsyncIterator<Float>>;
   waist: () => Promise<AsyncIterator<Float>>;
   rightArm: () => Promise<AsyncIterator<Float>>;
@@ -1625,7 +2420,7 @@ export interface BodyMeasurementSubscription
 
 export interface User {
   id: ID_Output;
-  googleId: String;
+  authId: String;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -1663,7 +2458,29 @@ export interface UserPromise extends Promise<User>, Fragmentable {
       last?: Int;
     }
   ) => T;
-  googleId: () => Promise<String>;
+  bodyMetrics: <T = FragmentableArray<BodyMetric>>(
+    args?: {
+      where?: BodyMetricWhereInput;
+      orderBy?: BodyMetricOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  bodyMeasurements: <T = FragmentableArray<BodyMeasurement>>(
+    args?: {
+      where?: BodyMeasurementWhereInput;
+      orderBy?: BodyMeasurementOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  authId: () => Promise<String>;
 }
 
 export interface UserSubscription
@@ -1703,17 +2520,40 @@ export interface UserSubscription
       last?: Int;
     }
   ) => T;
-  googleId: () => Promise<AsyncIterator<String>>;
+  bodyMetrics: <T = Promise<AsyncIterator<BodyMetricSubscription>>>(
+    args?: {
+      where?: BodyMetricWhereInput;
+      orderBy?: BodyMetricOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  bodyMeasurements: <T = Promise<AsyncIterator<BodyMeasurementSubscription>>>(
+    args?: {
+      where?: BodyMeasurementWhereInput;
+      orderBy?: BodyMeasurementOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  authId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Schedule {
   id: ID_Output;
-  time: DateTimeOutput;
+  time: String;
+  completed?: Boolean;
 }
 
 export interface SchedulePromise extends Promise<Schedule>, Fragmentable {
   id: () => Promise<ID_Output>;
-  time: () => Promise<DateTimeOutput>;
+  time: () => Promise<String>;
   workouts: <T = FragmentableArray<Workout>>(
     args?: {
       where?: WorkoutWhereInput;
@@ -1725,13 +2565,15 @@ export interface SchedulePromise extends Promise<Schedule>, Fragmentable {
       last?: Int;
     }
   ) => T;
+  completed: () => Promise<Boolean>;
+  user: <T = UserPromise>() => T;
 }
 
 export interface ScheduleSubscription
   extends Promise<AsyncIterator<Schedule>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  time: () => Promise<AsyncIterator<DateTimeOutput>>;
+  time: () => Promise<AsyncIterator<String>>;
   workouts: <T = Promise<AsyncIterator<WorkoutSubscription>>>(
     args?: {
       where?: WorkoutWhereInput;
@@ -1743,11 +2585,14 @@ export interface ScheduleSubscription
       last?: Int;
     }
   ) => T;
+  completed: () => Promise<AsyncIterator<Boolean>>;
+  user: <T = UserSubscription>() => T;
 }
 
 export interface Workout {
   id: ID_Output;
   name: String;
+  completed?: Boolean;
 }
 
 export interface WorkoutPromise extends Promise<Workout>, Fragmentable {
@@ -1764,6 +2609,8 @@ export interface WorkoutPromise extends Promise<Workout>, Fragmentable {
       last?: Int;
     }
   ) => T;
+  completed: () => Promise<Boolean>;
+  schedule: <T = SchedulePromise>() => T;
 }
 
 export interface WorkoutSubscription
@@ -1782,6 +2629,8 @@ export interface WorkoutSubscription
       last?: Int;
     }
   ) => T;
+  completed: () => Promise<AsyncIterator<Boolean>>;
+  schedule: <T = ScheduleSubscription>() => T;
 }
 
 export interface Exercise {
@@ -1790,8 +2639,9 @@ export interface Exercise {
   sets?: Int;
   reps?: Int;
   intervals?: Int;
-  duration?: Int;
+  duration?: Float;
   intensity?: Int;
+  completed?: Boolean;
 }
 
 export interface ExercisePromise extends Promise<Exercise>, Fragmentable {
@@ -1800,8 +2650,11 @@ export interface ExercisePromise extends Promise<Exercise>, Fragmentable {
   sets: () => Promise<Int>;
   reps: () => Promise<Int>;
   intervals: () => Promise<Int>;
-  duration: () => Promise<Int>;
+  duration: () => Promise<Float>;
   intensity: () => Promise<Int>;
+  completed: () => Promise<Boolean>;
+  workout: <T = WorkoutPromise>() => T;
+  savedWorkout: <T = SavedWorkoutPromise>() => T;
 }
 
 export interface ExerciseSubscription
@@ -1812,19 +2665,23 @@ export interface ExerciseSubscription
   sets: () => Promise<AsyncIterator<Int>>;
   reps: () => Promise<AsyncIterator<Int>>;
   intervals: () => Promise<AsyncIterator<Int>>;
-  duration: () => Promise<AsyncIterator<Int>>;
+  duration: () => Promise<AsyncIterator<Float>>;
   intensity: () => Promise<AsyncIterator<Int>>;
+  completed: () => Promise<AsyncIterator<Boolean>>;
+  workout: <T = WorkoutSubscription>() => T;
+  savedWorkout: <T = SavedWorkoutSubscription>() => T;
 }
 
 export interface SavedWorkout {
   id: ID_Output;
+  name: String;
 }
 
 export interface SavedWorkoutPromise
   extends Promise<SavedWorkout>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  workout: <T = WorkoutPromise>() => T;
+  name: () => Promise<String>;
   exercises: <T = FragmentableArray<Exercise>>(
     args?: {
       where?: ExerciseWhereInput;
@@ -1836,13 +2693,14 @@ export interface SavedWorkoutPromise
       last?: Int;
     }
   ) => T;
+  user: <T = UserPromise>() => T;
 }
 
 export interface SavedWorkoutSubscription
   extends Promise<AsyncIterator<SavedWorkout>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  workout: <T = WorkoutSubscription>() => T;
+  name: () => Promise<AsyncIterator<String>>;
   exercises: <T = Promise<AsyncIterator<ExerciseSubscription>>>(
     args?: {
       where?: ExerciseWhereInput;
@@ -1854,6 +2712,7 @@ export interface SavedWorkoutSubscription
       last?: Int;
     }
   ) => T;
+  user: <T = UserSubscription>() => T;
 }
 
 export interface Note {
@@ -1877,6 +2736,31 @@ export interface NoteSubscription
   workout: <T = WorkoutSubscription>() => T;
   createdBy: <T = UserSubscription>() => T;
   schedule: <T = ScheduleSubscription>() => T;
+}
+
+export interface BodyMetric {
+  id: ID_Output;
+  weight?: Float;
+  height?: Float;
+  bodyfat?: Float;
+}
+
+export interface BodyMetricPromise extends Promise<BodyMetric>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  weight: () => Promise<Float>;
+  height: () => Promise<Float>;
+  bodyfat: () => Promise<Float>;
+  user: <T = UserPromise>() => T;
+}
+
+export interface BodyMetricSubscription
+  extends Promise<AsyncIterator<BodyMetric>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  weight: () => Promise<AsyncIterator<Float>>;
+  height: () => Promise<AsyncIterator<Float>>;
+  bodyfat: () => Promise<AsyncIterator<Float>>;
+  user: <T = UserSubscription>() => T;
 }
 
 export interface BodyMeasurementConnection {
@@ -1956,28 +2840,6 @@ export interface AggregateBodyMeasurementSubscription
   extends Promise<AsyncIterator<AggregateBodyMeasurement>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BodyMetric {
-  weight?: Float;
-  height?: Float;
-  bodyfat?: Float;
-}
-
-export interface BodyMetricPromise extends Promise<BodyMetric>, Fragmentable {
-  weight: () => Promise<Float>;
-  height: () => Promise<Float>;
-  bodyfat: () => Promise<Float>;
-  user: <T = UserPromise>() => T;
-}
-
-export interface BodyMetricSubscription
-  extends Promise<AsyncIterator<BodyMetric>>,
-    Fragmentable {
-  weight: () => Promise<AsyncIterator<Float>>;
-  height: () => Promise<AsyncIterator<Float>>;
-  bodyfat: () => Promise<AsyncIterator<Float>>;
-  user: <T = UserSubscription>() => T;
 }
 
 export interface BodyMetricConnection {
@@ -2408,6 +3270,7 @@ export interface BodyMeasurementSubscriptionPayloadSubscription
 }
 
 export interface BodyMeasurementPreviousValues {
+  id: ID_Output;
   hips?: Float;
   waist?: Float;
   rightArm?: Float;
@@ -2419,6 +3282,7 @@ export interface BodyMeasurementPreviousValues {
 export interface BodyMeasurementPreviousValuesPromise
   extends Promise<BodyMeasurementPreviousValues>,
     Fragmentable {
+  id: () => Promise<ID_Output>;
   hips: () => Promise<Float>;
   waist: () => Promise<Float>;
   rightArm: () => Promise<Float>;
@@ -2430,6 +3294,7 @@ export interface BodyMeasurementPreviousValuesPromise
 export interface BodyMeasurementPreviousValuesSubscription
   extends Promise<AsyncIterator<BodyMeasurementPreviousValues>>,
     Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
   hips: () => Promise<AsyncIterator<Float>>;
   waist: () => Promise<AsyncIterator<Float>>;
   rightArm: () => Promise<AsyncIterator<Float>>;
@@ -2464,6 +3329,7 @@ export interface BodyMetricSubscriptionPayloadSubscription
 }
 
 export interface BodyMetricPreviousValues {
+  id: ID_Output;
   weight?: Float;
   height?: Float;
   bodyfat?: Float;
@@ -2472,6 +3338,7 @@ export interface BodyMetricPreviousValues {
 export interface BodyMetricPreviousValuesPromise
   extends Promise<BodyMetricPreviousValues>,
     Fragmentable {
+  id: () => Promise<ID_Output>;
   weight: () => Promise<Float>;
   height: () => Promise<Float>;
   bodyfat: () => Promise<Float>;
@@ -2480,6 +3347,7 @@ export interface BodyMetricPreviousValuesPromise
 export interface BodyMetricPreviousValuesSubscription
   extends Promise<AsyncIterator<BodyMetricPreviousValues>>,
     Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
   weight: () => Promise<AsyncIterator<Float>>;
   height: () => Promise<AsyncIterator<Float>>;
   bodyfat: () => Promise<AsyncIterator<Float>>;
@@ -2516,8 +3384,9 @@ export interface ExercisePreviousValues {
   sets?: Int;
   reps?: Int;
   intervals?: Int;
-  duration?: Int;
+  duration?: Float;
   intensity?: Int;
+  completed?: Boolean;
 }
 
 export interface ExercisePreviousValuesPromise
@@ -2528,8 +3397,9 @@ export interface ExercisePreviousValuesPromise
   sets: () => Promise<Int>;
   reps: () => Promise<Int>;
   intervals: () => Promise<Int>;
-  duration: () => Promise<Int>;
+  duration: () => Promise<Float>;
   intensity: () => Promise<Int>;
+  completed: () => Promise<Boolean>;
 }
 
 export interface ExercisePreviousValuesSubscription
@@ -2540,8 +3410,9 @@ export interface ExercisePreviousValuesSubscription
   sets: () => Promise<AsyncIterator<Int>>;
   reps: () => Promise<AsyncIterator<Int>>;
   intervals: () => Promise<AsyncIterator<Int>>;
-  duration: () => Promise<AsyncIterator<Int>>;
+  duration: () => Promise<AsyncIterator<Float>>;
   intensity: () => Promise<AsyncIterator<Int>>;
+  completed: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface NoteSubscriptionPayload {
@@ -2615,18 +3486,21 @@ export interface SavedWorkoutSubscriptionPayloadSubscription
 
 export interface SavedWorkoutPreviousValues {
   id: ID_Output;
+  name: String;
 }
 
 export interface SavedWorkoutPreviousValuesPromise
   extends Promise<SavedWorkoutPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
 }
 
 export interface SavedWorkoutPreviousValuesSubscription
   extends Promise<AsyncIterator<SavedWorkoutPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ScheduleSubscriptionPayload {
@@ -2656,21 +3530,24 @@ export interface ScheduleSubscriptionPayloadSubscription
 
 export interface SchedulePreviousValues {
   id: ID_Output;
-  time: DateTimeOutput;
+  time: String;
+  completed?: Boolean;
 }
 
 export interface SchedulePreviousValuesPromise
   extends Promise<SchedulePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  time: () => Promise<DateTimeOutput>;
+  time: () => Promise<String>;
+  completed: () => Promise<Boolean>;
 }
 
 export interface SchedulePreviousValuesSubscription
   extends Promise<AsyncIterator<SchedulePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  time: () => Promise<AsyncIterator<DateTimeOutput>>;
+  time: () => Promise<AsyncIterator<String>>;
+  completed: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -2700,21 +3577,21 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
-  googleId: String;
+  authId: String;
 }
 
 export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  googleId: () => Promise<String>;
+  authId: () => Promise<String>;
 }
 
 export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  googleId: () => Promise<AsyncIterator<String>>;
+  authId: () => Promise<AsyncIterator<String>>;
 }
 
 export interface WorkoutSubscriptionPayload {
@@ -2745,6 +3622,7 @@ export interface WorkoutSubscriptionPayloadSubscription
 export interface WorkoutPreviousValues {
   id: ID_Output;
   name: String;
+  completed?: Boolean;
 }
 
 export interface WorkoutPreviousValuesPromise
@@ -2752,6 +3630,7 @@ export interface WorkoutPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  completed: () => Promise<Boolean>;
 }
 
 export interface WorkoutPreviousValuesSubscription
@@ -2759,12 +3638,8 @@ export interface WorkoutPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
+  completed: () => Promise<AsyncIterator<Boolean>>;
 }
-
-/*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
-*/
-export type Float = number;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -2773,14 +3648,9 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-DateTime scalar input type, allowing Date
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
 */
-export type DateTimeInput = Date | string;
-
-/*
-DateTime scalar output type, which is always a string
-*/
-export type DateTimeOutput = string;
+export type Float = number;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
