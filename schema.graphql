@@ -2,6 +2,7 @@ type Query { #These are all the queries that can be called from our API. If you 
 	info: String!
 	users(skip: Int, first: Int): [User]
 	user(authId: String): User
+	getSchedules: [Schedule]
 }
 
 # Leave empty while no mutations
