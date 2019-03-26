@@ -16,6 +16,7 @@ type SavedWorkout { # This is a workout the user has saved, so they can easily a
 	id: ID! @unique
 	name: String!
 	exercises: [Exercise!]!
+	user: User!
 }
 
 type Exercise { # One exercise.
@@ -52,6 +53,7 @@ type BodyMetric {
 	weight: Float
 	height: Float
 	bodyfat: Float #User could enter a number representing the % of body fat.
+	user: User!
 }
 
 type BodyMeasurement {
@@ -62,4 +64,5 @@ type BodyMeasurement {
 	leftArm: Float
 	rightLeg: Float
 	leftLeg: Float
+	user: User!
 }
