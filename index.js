@@ -26,6 +26,7 @@ const checkJwt = jwt({
 
 //This takes the invalidated JWT error message and makes it understandable for the end user.
 const errorResponse = (err, req, res, next) => {
+	console.log(err);
 	if (err.name === "UnauthorizedError")
 		return res
 			.status(401)
