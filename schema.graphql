@@ -1,7 +1,7 @@
 type Query { #These are all the queries that can be called from our API. If you create a resolver and want it to be a query, you need to place the query here and define what it is called, it's arguments if it has any, and the type of data it returns. (Must match a query that's in the Query Resolver Object.)
 	info: String!
 	users(skip: Int, first: Int): [User]
-	user(googleId: String): User
+	user(authId: String): User
 }
 
 # Leave empty while no mutations
@@ -14,6 +14,7 @@ type Schedule { # Each record of this type is one single time a user has schedul
 	time: String!
 	workouts: [Workout!]!
 	completed: Boolean # User may or may not want to track which Workouts they attend.
+	user: User!
 }
 
 type Workout { # A workout that is named, and has exercises under it.
@@ -21,6 +22,7 @@ type Workout { # A workout that is named, and has exercises under it.
 	name: String!
 	exercises: [Exercise!]!
 	completed: Boolean
+	schedule: Schedule!
 }
 
 type SavedWorkout { # This is a workout the user has saved, so they can easily add it to any day instead of having to create it over and over.
@@ -39,6 +41,8 @@ type Exercise { # One exercise.
 	duration: Float
 	intensity: Int
 	completed: Boolean # Users can track which exercises and workouts that are completed.
+	workout: Workout
+	savedWorkout: SavedWorkout
 }
 
 type User { # User model.
@@ -48,7 +52,7 @@ type User { # User model.
 	notes: [Note!]!
 	bodyMetrics: [BodyMetric!]!
 	bodyMeasurements: [BodyMeasurement!]!
-	googleId: String!
+	authId: String!
 }
 
 type Note { # A user can write a note about a single scheduled workout time, or a workout.
