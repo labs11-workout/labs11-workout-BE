@@ -38,7 +38,11 @@ const editExercise = async (root, args, context, info) => {
 	return updatedExercise;
 };
 
+const deleteExercise = async (root, args, context, info) =>
+	context.prisma.deleteExercise({ id: args.exerciseId });
+
 module.exports = {
 	addExercise,
-	editExercise
+	editExercise,
+	deleteExercise
 };
