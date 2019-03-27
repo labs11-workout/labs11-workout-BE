@@ -1,5 +1,11 @@
 const getWorkouts = async (root, args, context, info) =>
-	context.prisma.workouts();
+	context.prisma.workouts({
+        where: {
+			schedule: {
+				id: args.scheduleId
+			}
+		}
+    });
 
 module.exports = {
     getWorkouts

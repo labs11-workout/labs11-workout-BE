@@ -5,18 +5,38 @@ type Query { #These are all the queries that can be called from our API. If you 
 	userLogin: User
 	getSchedules: [Schedule]
 	getProfile: User
-	getWorkouts: [Workout]
-	getBodyMeasurements: [BodyMeasurement]
+	getWorkouts(scheduleId: ID!): [Workout]
+	getExercises(workoutId: ID!): [Exercise]
+  getBodyMeasurements: [BodyMeasurement]
 }
 
 type Mutation { #These are all the mutations that can be called from our API. If you create a resolver and want it to be a mutation, you need to place the mutation here and define what it is called, it's arguments if it has any, and the type of data it returns. (Must match a mutation that's in the Mutation Resolver Object.)
 	addSchedule(time: String!): Schedule
 	deleteSchedule(id: ID!): Schedule
 	editSchedule(id: ID!, time: String!): Schedule
-	addWorkout(name: String!, scheduleId: ID): Workout
+	addWorkout(name: String!, scheduleId: ID!): Workout
 	deleteWorkout(id: ID!): Workout
 	editWorkout(id: ID!, name: String!): Workout
-	addBodyMeasurement(hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float, userId: ID): BodyMeasurement
+	addExercise(
+		sets: Int
+		reps: Int
+		intervals: Int
+		duration: Float
+		intensity: Int
+		name: String!
+		workoutId: ID!
+	): Exercise
+	editExercise(
+		sets: Int
+		reps: Int
+		intervals: Int
+		duration: Float
+		intensity: Int
+		name: String
+		exerciseId: ID!
+	): Exercise
+	deleteExercise(exerciseId: ID!): Exercise
+  addBodyMeasurement(hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float, userId: ID): BodyMeasurement
 	deleteBodyMeasurement(id: ID!): BodyMeasurement
 	editBodyMeasurement(id: ID!, hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float): BodyMeasurement
 }
@@ -29,7 +49,7 @@ type Schedule { # Each record of this type is one single time a user has schedul
 	user: User!
 }
 
-type Workout { # A workout that is named, and has exercises under it.
+type Workout { # A workout that is named, and has exercises under it. Is also assigned to a specific Schedule.
 	id: ID!
 	name: String!
 	exercises: [Exercise!]!
