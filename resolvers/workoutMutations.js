@@ -1,9 +1,9 @@
-const addWorkout = async(root, args, context, info)=> {
+const addWorkout = async(root, args, context, info)=> 
     await context.prisma.createWorkout({
         name: args.name,
-        schedule: {connect: {id: context.scheduleId}}
+        schedule: {connect: {id: args.scheduleId}}
     });
-}
+
 
 const deleteWorkout = async (root, args, context, info) =>
     await context.prisma.deleteWorkout({ id: args.id });

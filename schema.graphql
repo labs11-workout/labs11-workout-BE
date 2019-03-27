@@ -12,7 +12,7 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	addSchedule(time: String!): Schedule
 	deleteSchedule(id: ID!): Schedule
 	editSchedule(id: ID!, time: String!): Schedule
-	addWorkout(name: String!, schedule: ID): Workout
+	addWorkout(name: String!, scheduleId: ID): Workout
 	deleteWorkout(id: ID!): Workout
 	editWorkout(id: ID!, name: String!): Workout
 }
