@@ -5,6 +5,8 @@ const workoutQueries = require("./workout/workoutQueries");
 const workoutMutations = require("./workout/workoutMutations");
 const exerciseQueries = require("./exercise/exerciseQueries");
 const exerciseMutations = require("./exercise/exerciseMutations");
+const bodyMeasurementQueries = require('./bodyMeasurement/bodyMeasurementQueries');
+const bodyMeasurementMutations = require('./bodyMeasurement/bodyMeasurementMutations');
 
 const typeResolvers = require("./typeResolvers");
 
@@ -14,12 +16,14 @@ const resolvers = {
 		...userQueries,
 		...scheduleQueries,
 		...workoutQueries,
-		...exerciseQueries
+		...exerciseQueries,
+    ...bodyMeasurementQueries
 	},
 	Mutation: {
 		...scheduleMutations,
 		...workoutMutations,
-		...exerciseMutations
+		...exerciseMutations,
+    ...bodyMeasurementMutations
 	},
 	...typeResolvers
 };
