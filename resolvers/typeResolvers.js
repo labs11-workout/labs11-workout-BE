@@ -28,6 +28,12 @@ module.exports = {
 		exercises: (root, args, context, info) =>
 			context.prisma.savedWorkout({ id: root.id }).exercises()
 	},
+	Exercise: {
+		workout: (root, args, context, info) =>
+			context.prisma.exercise({ id: root.id }).workout(),
+		savedWorkout: (root, args, context, info) =>
+			context.prisma.exercise({ id: root.id }).savedWorkout()
+	},
 	Note: {
 		schedule: (root, args, context, info) =>
 			context.prisma.note({ id: root.id }).schedule()

@@ -1,8 +1,10 @@
-const userQueries = require("./userQueries");
-const scheduleQueries = require("./scheduleQueries");
-const scheduleMutations = require("./scheduleMutations");
-const workoutMutations = require('./workoutMutations');
-const workoutQueries = require('./workoutQueries');
+const userQueries = require("./user/userQueries");
+const scheduleQueries = require("./schedule/scheduleQueries");
+const scheduleMutations = require("./schedule/scheduleMutations");
+const workoutQueries = require("./workout/workoutQueries");
+const workoutMutations = require("./workout/workoutMutations");
+const exerciseQueries = require("./exercise/exerciseQueries");
+const exerciseMutations = require("./exercise/exerciseMutations");
 
 const typeResolvers = require("./typeResolvers");
 
@@ -11,11 +13,13 @@ const resolvers = {
 		info: () => `This is the API of CleanLift`,
 		...userQueries,
 		...scheduleQueries,
-		...workoutQueries
+		...workoutQueries,
+		...exerciseQueries
 	},
 	Mutation: {
 		...scheduleMutations,
-		...workoutMutations
+		...workoutMutations,
+		...exerciseMutations
 	},
 	...typeResolvers
 };

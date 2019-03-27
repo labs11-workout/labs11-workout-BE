@@ -13,9 +13,27 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	addSchedule(time: String!): Schedule
 	deleteSchedule(id: ID!): Schedule
 	editSchedule(id: ID!, time: String!): Schedule
-	addWorkout(name: String!, scheduleId: ID): Workout
+	addWorkout(name: String!, scheduleId: ID!): Workout
 	deleteWorkout(id: ID!): Workout
 	editWorkout(id: ID!, name: String!): Workout
+	addExercise(
+		sets: Int
+		reps: Int
+		intervals: Int
+		duration: Float
+		intensity: Int
+		name: String!
+		workoutId: ID!
+	): Exercise
+	editExercise(
+		sets: Int
+		reps: Int
+		intervals: Int
+		duration: Float
+		intensity: Int
+		name: String
+		exerciseId: ID!
+	): Exercise
 }
 
 type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.
