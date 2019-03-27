@@ -1,7 +1,7 @@
 const addWorkout = async(root, args, context, info)=> {
     await context.prisma.createWorkout({
         name: args.name,
-        schedule: args.id
+        schedule: {connect: {id: context.scheduleId}}
     });
 }
 
