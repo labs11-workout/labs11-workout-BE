@@ -38,7 +38,7 @@ const server = new GraphQLServer({
 	typeDefs: "./schema.graphql",
 	resolvers,
 	context: req => {
-		return { prisma, userID: req.request.user.sub }; //In all of our resolvers, the unique userID will be context.userID
+		return { prisma, userID: req.request.user.sub}; //In all of our resolvers, the unique userID will be context.userID
 	}
 });
 
