@@ -32,7 +32,7 @@ const editExercise = async (root, args, context, info) => {
 	//Delete the exerciseId argument from properties, as that's not a property we are updating.
 	delete properties.exerciseId;
 	const updatedExercise = await context.prisma.updateExercise({
-		data: { ...args },
+		data: { ...properties },
 		where: { id: args.exerciseId }
 	});
 	return updatedExercise;
