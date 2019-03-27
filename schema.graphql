@@ -6,6 +6,7 @@ type Query { #These are all the queries that can be called from our API. If you 
 	getSchedules: [Schedule]
 	getProfile: User
 	getWorkouts(scheduleId: ID!): [Workout]
+	getExercises(workoutId: ID!): [Exercise]
 }
 
 type Mutation { #These are all the mutations that can be called from our API. If you create a resolver and want it to be a mutation, you need to place the mutation here and define what it is called, it's arguments if it has any, and the type of data it returns. (Must match a mutation that's in the Mutation Resolver Object.)
@@ -25,7 +26,7 @@ type Schedule { # Each record of this type is one single time a user has schedul
 	user: User!
 }
 
-type Workout { # A workout that is named, and has exercises under it.
+type Workout { # A workout that is named, and has exercises under it. Is also assigned to a specific Schedule.
 	id: ID!
 	name: String!
 	exercises: [Exercise!]!
