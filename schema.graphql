@@ -7,7 +7,8 @@ type Query { #These are all the queries that can be called from our API. If you 
 	getProfile: User
 	getWorkouts(scheduleId: ID!): [Workout]
 	getExercises(workoutId: ID!): [Exercise]
-  getBodyMeasurements: [BodyMeasurement]
+  	getBodyMeasurements(userId: ID!): [BodyMeasurement]
+	getBodyMetrics(userId: ID!): [BodyMetric]
 }
 
 type Mutation { #These are all the mutations that can be called from our API. If you create a resolver and want it to be a mutation, you need to place the mutation here and define what it is called, it's arguments if it has any, and the type of data it returns. (Must match a mutation that's in the Mutation Resolver Object.)
@@ -36,9 +37,12 @@ type Mutation { #These are all the mutations that can be called from our API. If
 		exerciseId: ID!
 	): Exercise
 	deleteExercise(exerciseId: ID!): Exercise
-  addBodyMeasurement(hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float, userId: ID): BodyMeasurement
+  	addBodyMeasurement(hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float, userId: ID!): BodyMeasurement
 	deleteBodyMeasurement(id: ID!): BodyMeasurement
 	editBodyMeasurement(id: ID!, hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float): BodyMeasurement
+	addBodyMetric(userId: ID!, height: Float, weight: Float, bodyfat: Float): BodyMetric
+	deleteBodyMetric(id: ID!): BodyMetric
+	editBodyMetric(id: ID!, height: Float, weight: Float, bodyfat: Float): BodyMetric
 }
 
 type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.

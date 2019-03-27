@@ -5,7 +5,7 @@ const addBodyMeasurement = async(root, args, context, info)=>
         rightArm: args.rightArm,
         leftArm: args.leftArm,
         leftLeg: args.leftLeg,
-        user: {connect: {authId: context.userId}}
+        user: {connect: {id: args.userId}}
     });
 
 const deleteBodyMeasurement = async(root, args, context, info)=>
