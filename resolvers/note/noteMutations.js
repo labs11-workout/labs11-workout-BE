@@ -27,13 +27,17 @@ const addNote = async (root, args, context, info) => {
 	}
 };
 
-const editNote = async (root, args, context, info) =>
+const editNote = (root, args, context, info) =>
 	context.prisma.updateNote({
 		data: { note: args.note },
 		where: { id: args.noteId }
 	});
 
+const deleteNote = (root, args, context, info) =>
+	context.prisma.deleteNote({ id: args.noteId });
+
 module.exports = {
 	addNote,
-	editNote
+	editNote,
+	deleteNote
 };
