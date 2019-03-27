@@ -22,7 +22,9 @@ module.exports = {
 	},
 	Workout: {
 		exercises: (root, args, context, info) =>
-			context.prisma.workout({ id: root.id }).exercises()
+			context.prisma.workout({ id: root.id }).exercises(),
+		schedule: (root, args, context, info) =>
+			context.prisma.workout({ id: root.id }).schedule()
 	},
 	SavedWorkout: {
 		exercises: (root, args, context, info) =>
@@ -36,6 +38,10 @@ module.exports = {
 	},
 	Note: {
 		schedule: (root, args, context, info) =>
-			context.prisma.note({ id: root.id }).schedule()
+			context.prisma.note({ id: root.id }).schedule(),
+		workout: (root, args, context, info) =>
+			context.prisma.note({ id: root.id }).workout(),
+		createdBy: (root, args, context, info) =>
+			context.prisma.note({ id: root.id }).createdBy()
 	}
 };
