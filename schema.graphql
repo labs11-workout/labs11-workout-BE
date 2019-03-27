@@ -18,6 +18,7 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	editWorkout(id: ID!, name: String!): Workout
 	addBodyMeasurement(hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float, userId: ID): BodyMeasurement
 	deleteBodyMeasurement(id: ID!): BodyMeasurement
+	editBodyMeasurement(id: ID!, hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float): BodyMeasurement
 }
 
 type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.
