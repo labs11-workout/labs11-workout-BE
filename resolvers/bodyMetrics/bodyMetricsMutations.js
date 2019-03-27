@@ -6,7 +6,22 @@ const addBodyMetric = async (root, args, context, info)=>
         user: {connect: {id: args.userId}}
     });
 
+const deleteBodyMetric = async(root, args, context, info)=>
+    await context.prisma.deleteBodyMetric({id: args.id});
+
+const editBodyMetric = async(root, args, context, info)=>
+    await context.prisma.updateBodyMetric({
+        data: {
+            height: args.height,
+            weight: args.weight,
+            bodyfat: args.bodyfat,
+        },
+        where: {id: args.id}
+    });
+
 
 module.exports = {
-    addBodyMetric
+    addBodyMetric,
+    deleteBodyMetric,
+    editBodyMetric
 }

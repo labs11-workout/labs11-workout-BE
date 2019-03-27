@@ -41,6 +41,8 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	deleteBodyMeasurement(id: ID!): BodyMeasurement
 	editBodyMeasurement(id: ID!, hips: Float, waist: Float, rightArm: Float, leftArm: Float, rightLeg: Float, leftLeg: Float): BodyMeasurement
 	addBodyMetric(userId: ID!, height: Float, weight: Float, bodyfat: Float): BodyMetric
+	deleteBodyMetric(id: ID!): BodyMetric
+	editBodyMetric(id: ID!, height: Float, weight: Float, bodyfat: Float): BodyMetric
 }
 
 type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.
