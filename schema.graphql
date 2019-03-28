@@ -76,6 +76,7 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	deleteNote(noteId: ID!): Note
 	addSavedWorkout(name: String!, userId: ID!): SavedWorkout
 	editSavedWorkout(id: ID!, name: String!): SavedWorkout
+	deleteSavedWorkout(id: ID!): SavedWorkout
 }
 
 type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.

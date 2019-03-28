@@ -42,7 +42,7 @@ const server = new GraphQLServer({
 	}
 });
 
-//server.use("/", checkJwt, errorResponse);
+server.use("/", checkJwt, errorResponse);
 
 const port = process.env.PORT || 4000;
 
