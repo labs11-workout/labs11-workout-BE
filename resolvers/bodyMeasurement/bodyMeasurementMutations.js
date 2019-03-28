@@ -5,11 +5,11 @@ const addBodyMeasurement = async (root, args, context, info) =>
 		rightArm: args.rightArm,
 		leftArm: args.leftArm,
 		leftLeg: args.leftLeg,
-		user: { connect: { id: context.userID } }
+		user: { connect: { authId: context.userID } }
 	});
 
 const deleteBodyMeasurement = async (root, args, context, info) =>
-	await context.prisma.deleteBodyMeasurement({ id: context.userID });
+	await context.prisma.deleteBodyMeasurement({ id: args.id });
 
 const editBodyMeasurement = async (root, args, context, info) =>
 	await context.prisma.updateBodyMeasurement({
