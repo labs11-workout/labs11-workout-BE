@@ -10,6 +10,7 @@ type Query { #These are all the queries that can be called from our API. If you 
 	getBodyMeasurements(userId: ID!): [BodyMeasurement]
 	getBodyMetrics(userId: ID!): [BodyMetric]
 	getNotes(subjectId: ID): [Note]
+	getSavedWorkouts(userId: ID!): [SavedWorkout]
 }
 
 type Mutation { #These are all the mutations that can be called from our API. If you create a resolver and want it to be a mutation, you need to place the mutation here and define what it is called, it's arguments if it has any, and the type of data it returns. (Must match a mutation that's in the Mutation Resolver Object.)
@@ -73,6 +74,9 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	addNote(note: String!, subjectId: ID): Note
 	editNote(noteId: ID!, note: String!): Note
 	deleteNote(noteId: ID!): Note
+	addSavedWorkout(name: String!, userId: ID!): SavedWorkout
+	editSavedWorkout(id: ID!, name: String!): SavedWorkout
+	deleteSavedWorkout(id: ID!): SavedWorkout
 }
 
 type Schedule { # Each record of this type is one single time a user has scheduled a workout/s.
