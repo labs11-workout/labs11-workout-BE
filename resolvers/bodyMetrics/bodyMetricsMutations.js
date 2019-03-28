@@ -3,7 +3,7 @@ const addBodyMetric = async (root, args, context, info)=>
         weight: args.weight,
         height: args.height,
         bodyfat: args.bodyfat,
-        user: {connect: {id: args.userId}}
+        user: {connect: {authId: args.userId}}
     });
 
 const deleteBodyMetric = async(root, args, context, info)=>
