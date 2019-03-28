@@ -48,6 +48,8 @@ type BodyMeasurement {
   rightLeg: Float
   leftLeg: Float
   user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type BodyMeasurementConnection {
@@ -114,6 +116,8 @@ type BodyMeasurementPreviousValues {
   leftArm: Float
   rightLeg: Float
   leftLeg: Float
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input BodyMeasurementScalarWhereInput {
@@ -179,6 +183,22 @@ input BodyMeasurementScalarWhereInput {
   leftLeg_lte: Float
   leftLeg_gt: Float
   leftLeg_gte: Float
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [BodyMeasurementScalarWhereInput!]
   OR: [BodyMeasurementScalarWhereInput!]
   NOT: [BodyMeasurementScalarWhereInput!]
@@ -331,6 +351,22 @@ input BodyMeasurementWhereInput {
   leftLeg_gt: Float
   leftLeg_gte: Float
   user: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [BodyMeasurementWhereInput!]
   OR: [BodyMeasurementWhereInput!]
   NOT: [BodyMeasurementWhereInput!]
@@ -346,6 +382,8 @@ type BodyMetric {
   height: Float
   bodyfat: Float
   user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type BodyMetricConnection {
@@ -397,6 +435,8 @@ type BodyMetricPreviousValues {
   weight: Float
   height: Float
   bodyfat: Float
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input BodyMetricScalarWhereInput {
@@ -438,6 +478,22 @@ input BodyMetricScalarWhereInput {
   bodyfat_lte: Float
   bodyfat_gt: Float
   bodyfat_gte: Float
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [BodyMetricScalarWhereInput!]
   OR: [BodyMetricScalarWhereInput!]
   NOT: [BodyMetricScalarWhereInput!]
@@ -554,6 +610,22 @@ input BodyMetricWhereInput {
   bodyfat_gt: Float
   bodyfat_gte: Float
   user: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [BodyMetricWhereInput!]
   OR: [BodyMetricWhereInput!]
   NOT: [BodyMetricWhereInput!]
@@ -562,6 +634,8 @@ input BodyMetricWhereInput {
 input BodyMetricWhereUniqueInput {
   id: ID
 }
+
+scalar DateTime
 
 type Exercise {
   id: ID!
@@ -574,6 +648,8 @@ type Exercise {
   completed: Boolean
   workout: Workout
   savedWorkout: SavedWorkout
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type ExerciseConnection {
@@ -663,6 +739,8 @@ type ExercisePreviousValues {
   duration: Float
   intensity: Int
   completed: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input ExerciseScalarWhereInput {
@@ -736,6 +814,22 @@ input ExerciseScalarWhereInput {
   intensity_gte: Int
   completed: Boolean
   completed_not: Boolean
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [ExerciseScalarWhereInput!]
   OR: [ExerciseScalarWhereInput!]
   NOT: [ExerciseScalarWhereInput!]
@@ -937,6 +1031,22 @@ input ExerciseWhereInput {
   completed_not: Boolean
   workout: WorkoutWhereInput
   savedWorkout: SavedWorkoutWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [ExerciseWhereInput!]
   OR: [ExerciseWhereInput!]
   NOT: [ExerciseWhereInput!]
@@ -1015,6 +1125,8 @@ type Note {
   workout: Workout
   createdBy: User!
   schedule: Schedule
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type NoteConnection {
@@ -1060,6 +1172,8 @@ enum NoteOrderByInput {
 type NotePreviousValues {
   id: ID!
   note: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input NoteScalarWhereInput {
@@ -1091,6 +1205,22 @@ input NoteScalarWhereInput {
   note_not_starts_with: String
   note_ends_with: String
   note_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [NoteScalarWhereInput!]
   OR: [NoteScalarWhereInput!]
   NOT: [NoteScalarWhereInput!]
@@ -1195,6 +1325,22 @@ input NoteWhereInput {
   workout: WorkoutWhereInput
   createdBy: UserWhereInput
   schedule: ScheduleWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [NoteWhereInput!]
   OR: [NoteWhereInput!]
   NOT: [NoteWhereInput!]
@@ -1244,6 +1390,8 @@ type SavedWorkout {
   name: String!
   exercises(where: ExerciseWhereInput, orderBy: ExerciseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Exercise!]
   user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type SavedWorkoutConnection {
@@ -1297,6 +1445,8 @@ enum SavedWorkoutOrderByInput {
 type SavedWorkoutPreviousValues {
   id: ID!
   name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input SavedWorkoutScalarWhereInput {
@@ -1328,6 +1478,22 @@ input SavedWorkoutScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [SavedWorkoutScalarWhereInput!]
   OR: [SavedWorkoutScalarWhereInput!]
   NOT: [SavedWorkoutScalarWhereInput!]
@@ -1450,6 +1616,22 @@ input SavedWorkoutWhereInput {
   exercises_some: ExerciseWhereInput
   exercises_none: ExerciseWhereInput
   user: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [SavedWorkoutWhereInput!]
   OR: [SavedWorkoutWhereInput!]
   NOT: [SavedWorkoutWhereInput!]
@@ -1465,6 +1647,8 @@ type Schedule {
   workouts(where: WorkoutWhereInput, orderBy: WorkoutOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Workout!]
   completed: Boolean
   user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type ScheduleConnection {
@@ -1529,6 +1713,8 @@ type SchedulePreviousValues {
   id: ID!
   time: String!
   completed: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input ScheduleScalarWhereInput {
@@ -1562,6 +1748,22 @@ input ScheduleScalarWhereInput {
   time_not_ends_with: String
   completed: Boolean
   completed_not: Boolean
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [ScheduleScalarWhereInput!]
   OR: [ScheduleScalarWhereInput!]
   NOT: [ScheduleScalarWhereInput!]
@@ -1710,6 +1912,22 @@ input ScheduleWhereInput {
   completed: Boolean
   completed_not: Boolean
   user: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [ScheduleWhereInput!]
   OR: [ScheduleWhereInput!]
   NOT: [ScheduleWhereInput!]
@@ -1738,6 +1956,8 @@ type User {
   bodyMetrics(where: BodyMetricWhereInput, orderBy: BodyMetricOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BodyMetric!]
   bodyMeasurements(where: BodyMeasurementWhereInput, orderBy: BodyMeasurementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BodyMeasurement!]
   authId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type UserConnection {
@@ -1839,6 +2059,8 @@ enum UserOrderByInput {
 type UserPreviousValues {
   id: ID!
   authId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type UserSubscriptionPayload {
@@ -2016,6 +2238,22 @@ input UserWhereInput {
   authId_not_starts_with: String
   authId_ends_with: String
   authId_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -2032,6 +2270,8 @@ type Workout {
   exercises(where: ExerciseWhereInput, orderBy: ExerciseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Exercise!]
   completed: Boolean
   schedule: Schedule!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type WorkoutConnection {
@@ -2096,6 +2336,8 @@ type WorkoutPreviousValues {
   id: ID!
   name: String!
   completed: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input WorkoutScalarWhereInput {
@@ -2129,6 +2371,22 @@ input WorkoutScalarWhereInput {
   name_not_ends_with: String
   completed: Boolean
   completed_not: Boolean
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [WorkoutScalarWhereInput!]
   OR: [WorkoutScalarWhereInput!]
   NOT: [WorkoutScalarWhereInput!]
@@ -2279,6 +2537,22 @@ input WorkoutWhereInput {
   completed: Boolean
   completed_not: Boolean
   schedule: ScheduleWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [WorkoutWhereInput!]
   OR: [WorkoutWhereInput!]
   NOT: [WorkoutWhereInput!]

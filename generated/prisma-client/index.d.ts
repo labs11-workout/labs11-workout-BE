@@ -579,6 +579,22 @@ export interface ScheduleWhereInput {
   completed?: Boolean;
   completed_not?: Boolean;
   user?: UserWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: ScheduleWhereInput[] | ScheduleWhereInput;
   OR?: ScheduleWhereInput[] | ScheduleWhereInput;
   NOT?: ScheduleWhereInput[] | ScheduleWhereInput;
@@ -619,6 +635,22 @@ export interface WorkoutWhereInput {
   completed?: Boolean;
   completed_not?: Boolean;
   schedule?: ScheduleWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: WorkoutWhereInput[] | WorkoutWhereInput;
   OR?: WorkoutWhereInput[] | WorkoutWhereInput;
   NOT?: WorkoutWhereInput[] | WorkoutWhereInput;
@@ -697,6 +729,22 @@ export interface ExerciseWhereInput {
   completed_not?: Boolean;
   workout?: WorkoutWhereInput;
   savedWorkout?: SavedWorkoutWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: ExerciseWhereInput[] | ExerciseWhereInput;
   OR?: ExerciseWhereInput[] | ExerciseWhereInput;
   NOT?: ExerciseWhereInput[] | ExerciseWhereInput;
@@ -735,6 +783,22 @@ export interface SavedWorkoutWhereInput {
   exercises_some?: ExerciseWhereInput;
   exercises_none?: ExerciseWhereInput;
   user?: UserWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: SavedWorkoutWhereInput[] | SavedWorkoutWhereInput;
   OR?: SavedWorkoutWhereInput[] | SavedWorkoutWhereInput;
   NOT?: SavedWorkoutWhereInput[] | SavedWorkoutWhereInput;
@@ -784,6 +848,22 @@ export interface UserWhereInput {
   authId_not_starts_with?: String;
   authId_ends_with?: String;
   authId_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
@@ -821,6 +901,22 @@ export interface NoteWhereInput {
   workout?: WorkoutWhereInput;
   createdBy?: UserWhereInput;
   schedule?: ScheduleWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: NoteWhereInput[] | NoteWhereInput;
   OR?: NoteWhereInput[] | NoteWhereInput;
   NOT?: NoteWhereInput[] | NoteWhereInput;
@@ -866,6 +962,22 @@ export interface BodyMetricWhereInput {
   bodyfat_gt?: Float;
   bodyfat_gte?: Float;
   user?: UserWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: BodyMetricWhereInput[] | BodyMetricWhereInput;
   OR?: BodyMetricWhereInput[] | BodyMetricWhereInput;
   NOT?: BodyMetricWhereInput[] | BodyMetricWhereInput;
@@ -935,6 +1047,22 @@ export interface BodyMeasurementWhereInput {
   leftLeg_gt?: Float;
   leftLeg_gte?: Float;
   user?: UserWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
   OR?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
   NOT?: BodyMeasurementWhereInput[] | BodyMeasurementWhereInput;
@@ -1572,6 +1700,22 @@ export interface ExerciseScalarWhereInput {
   intensity_gte?: Int;
   completed?: Boolean;
   completed_not?: Boolean;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: ExerciseScalarWhereInput[] | ExerciseScalarWhereInput;
   OR?: ExerciseScalarWhereInput[] | ExerciseScalarWhereInput;
   NOT?: ExerciseScalarWhereInput[] | ExerciseScalarWhereInput;
@@ -1627,6 +1771,22 @@ export interface SavedWorkoutScalarWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: SavedWorkoutScalarWhereInput[] | SavedWorkoutScalarWhereInput;
   OR?: SavedWorkoutScalarWhereInput[] | SavedWorkoutScalarWhereInput;
   NOT?: SavedWorkoutScalarWhereInput[] | SavedWorkoutScalarWhereInput;
@@ -1717,6 +1877,22 @@ export interface BodyMetricScalarWhereInput {
   bodyfat_lte?: Float;
   bodyfat_gt?: Float;
   bodyfat_gte?: Float;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: BodyMetricScalarWhereInput[] | BodyMetricScalarWhereInput;
   OR?: BodyMetricScalarWhereInput[] | BodyMetricScalarWhereInput;
   NOT?: BodyMetricScalarWhereInput[] | BodyMetricScalarWhereInput;
@@ -1840,6 +2016,22 @@ export interface BodyMeasurementScalarWhereInput {
   leftLeg_lte?: Float;
   leftLeg_gt?: Float;
   leftLeg_gte?: Float;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: BodyMeasurementScalarWhereInput[] | BodyMeasurementScalarWhereInput;
   OR?: BodyMeasurementScalarWhereInput[] | BodyMeasurementScalarWhereInput;
   NOT?: BodyMeasurementScalarWhereInput[] | BodyMeasurementScalarWhereInput;
@@ -1930,6 +2122,22 @@ export interface NoteScalarWhereInput {
   note_not_starts_with?: String;
   note_ends_with?: String;
   note_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: NoteScalarWhereInput[] | NoteScalarWhereInput;
   OR?: NoteScalarWhereInput[] | NoteScalarWhereInput;
   NOT?: NoteScalarWhereInput[] | NoteScalarWhereInput;
@@ -1997,6 +2205,22 @@ export interface WorkoutScalarWhereInput {
   name_not_ends_with?: String;
   completed?: Boolean;
   completed_not?: Boolean;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
   OR?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
   NOT?: WorkoutScalarWhereInput[] | WorkoutScalarWhereInput;
@@ -2049,6 +2273,22 @@ export interface ScheduleScalarWhereInput {
   time_not_ends_with?: String;
   completed?: Boolean;
   completed_not?: Boolean;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
   OR?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
   NOT?: ScheduleScalarWhereInput[] | ScheduleScalarWhereInput;
@@ -2390,6 +2630,8 @@ export interface BodyMeasurement {
   leftArm?: Float;
   rightLeg?: Float;
   leftLeg?: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface BodyMeasurementPromise
@@ -2403,6 +2645,8 @@ export interface BodyMeasurementPromise
   rightLeg: () => Promise<Float>;
   leftLeg: () => Promise<Float>;
   user: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface BodyMeasurementSubscription
@@ -2416,11 +2660,15 @@ export interface BodyMeasurementSubscription
   rightLeg: () => Promise<AsyncIterator<Float>>;
   leftLeg: () => Promise<AsyncIterator<Float>>;
   user: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface User {
   id: ID_Output;
   authId: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -2481,6 +2729,8 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     }
   ) => T;
   authId: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface UserSubscription
@@ -2543,12 +2793,16 @@ export interface UserSubscription
     }
   ) => T;
   authId: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface Schedule {
   id: ID_Output;
   time: String;
   completed?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface SchedulePromise extends Promise<Schedule>, Fragmentable {
@@ -2567,6 +2821,8 @@ export interface SchedulePromise extends Promise<Schedule>, Fragmentable {
   ) => T;
   completed: () => Promise<Boolean>;
   user: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface ScheduleSubscription
@@ -2587,12 +2843,16 @@ export interface ScheduleSubscription
   ) => T;
   completed: () => Promise<AsyncIterator<Boolean>>;
   user: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface Workout {
   id: ID_Output;
   name: String;
   completed?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface WorkoutPromise extends Promise<Workout>, Fragmentable {
@@ -2611,6 +2871,8 @@ export interface WorkoutPromise extends Promise<Workout>, Fragmentable {
   ) => T;
   completed: () => Promise<Boolean>;
   schedule: <T = SchedulePromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface WorkoutSubscription
@@ -2631,6 +2893,8 @@ export interface WorkoutSubscription
   ) => T;
   completed: () => Promise<AsyncIterator<Boolean>>;
   schedule: <T = ScheduleSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface Exercise {
@@ -2642,6 +2906,8 @@ export interface Exercise {
   duration?: Float;
   intensity?: Int;
   completed?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface ExercisePromise extends Promise<Exercise>, Fragmentable {
@@ -2655,6 +2921,8 @@ export interface ExercisePromise extends Promise<Exercise>, Fragmentable {
   completed: () => Promise<Boolean>;
   workout: <T = WorkoutPromise>() => T;
   savedWorkout: <T = SavedWorkoutPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface ExerciseSubscription
@@ -2670,11 +2938,15 @@ export interface ExerciseSubscription
   completed: () => Promise<AsyncIterator<Boolean>>;
   workout: <T = WorkoutSubscription>() => T;
   savedWorkout: <T = SavedWorkoutSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface SavedWorkout {
   id: ID_Output;
   name: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface SavedWorkoutPromise
@@ -2694,6 +2966,8 @@ export interface SavedWorkoutPromise
     }
   ) => T;
   user: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface SavedWorkoutSubscription
@@ -2713,11 +2987,15 @@ export interface SavedWorkoutSubscription
     }
   ) => T;
   user: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface Note {
   id: ID_Output;
   note: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface NotePromise extends Promise<Note>, Fragmentable {
@@ -2726,6 +3004,8 @@ export interface NotePromise extends Promise<Note>, Fragmentable {
   workout: <T = WorkoutPromise>() => T;
   createdBy: <T = UserPromise>() => T;
   schedule: <T = SchedulePromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface NoteSubscription
@@ -2736,6 +3016,8 @@ export interface NoteSubscription
   workout: <T = WorkoutSubscription>() => T;
   createdBy: <T = UserSubscription>() => T;
   schedule: <T = ScheduleSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface BodyMetric {
@@ -2743,6 +3025,8 @@ export interface BodyMetric {
   weight?: Float;
   height?: Float;
   bodyfat?: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface BodyMetricPromise extends Promise<BodyMetric>, Fragmentable {
@@ -2751,6 +3035,8 @@ export interface BodyMetricPromise extends Promise<BodyMetric>, Fragmentable {
   height: () => Promise<Float>;
   bodyfat: () => Promise<Float>;
   user: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface BodyMetricSubscription
@@ -2761,6 +3047,8 @@ export interface BodyMetricSubscription
   height: () => Promise<AsyncIterator<Float>>;
   bodyfat: () => Promise<AsyncIterator<Float>>;
   user: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface BodyMeasurementConnection {
@@ -3277,6 +3565,8 @@ export interface BodyMeasurementPreviousValues {
   leftArm?: Float;
   rightLeg?: Float;
   leftLeg?: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface BodyMeasurementPreviousValuesPromise
@@ -3289,6 +3579,8 @@ export interface BodyMeasurementPreviousValuesPromise
   leftArm: () => Promise<Float>;
   rightLeg: () => Promise<Float>;
   leftLeg: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface BodyMeasurementPreviousValuesSubscription
@@ -3301,6 +3593,8 @@ export interface BodyMeasurementPreviousValuesSubscription
   leftArm: () => Promise<AsyncIterator<Float>>;
   rightLeg: () => Promise<AsyncIterator<Float>>;
   leftLeg: () => Promise<AsyncIterator<Float>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface BodyMetricSubscriptionPayload {
@@ -3333,6 +3627,8 @@ export interface BodyMetricPreviousValues {
   weight?: Float;
   height?: Float;
   bodyfat?: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface BodyMetricPreviousValuesPromise
@@ -3342,6 +3638,8 @@ export interface BodyMetricPreviousValuesPromise
   weight: () => Promise<Float>;
   height: () => Promise<Float>;
   bodyfat: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface BodyMetricPreviousValuesSubscription
@@ -3351,6 +3649,8 @@ export interface BodyMetricPreviousValuesSubscription
   weight: () => Promise<AsyncIterator<Float>>;
   height: () => Promise<AsyncIterator<Float>>;
   bodyfat: () => Promise<AsyncIterator<Float>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface ExerciseSubscriptionPayload {
@@ -3387,6 +3687,8 @@ export interface ExercisePreviousValues {
   duration?: Float;
   intensity?: Int;
   completed?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface ExercisePreviousValuesPromise
@@ -3400,6 +3702,8 @@ export interface ExercisePreviousValuesPromise
   duration: () => Promise<Float>;
   intensity: () => Promise<Int>;
   completed: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface ExercisePreviousValuesSubscription
@@ -3413,6 +3717,8 @@ export interface ExercisePreviousValuesSubscription
   duration: () => Promise<AsyncIterator<Float>>;
   intensity: () => Promise<AsyncIterator<Int>>;
   completed: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface NoteSubscriptionPayload {
@@ -3443,6 +3749,8 @@ export interface NoteSubscriptionPayloadSubscription
 export interface NotePreviousValues {
   id: ID_Output;
   note: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface NotePreviousValuesPromise
@@ -3450,6 +3758,8 @@ export interface NotePreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   note: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface NotePreviousValuesSubscription
@@ -3457,6 +3767,8 @@ export interface NotePreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   note: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface SavedWorkoutSubscriptionPayload {
@@ -3487,6 +3799,8 @@ export interface SavedWorkoutSubscriptionPayloadSubscription
 export interface SavedWorkoutPreviousValues {
   id: ID_Output;
   name: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface SavedWorkoutPreviousValuesPromise
@@ -3494,6 +3808,8 @@ export interface SavedWorkoutPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface SavedWorkoutPreviousValuesSubscription
@@ -3501,6 +3817,8 @@ export interface SavedWorkoutPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface ScheduleSubscriptionPayload {
@@ -3532,6 +3850,8 @@ export interface SchedulePreviousValues {
   id: ID_Output;
   time: String;
   completed?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface SchedulePreviousValuesPromise
@@ -3540,6 +3860,8 @@ export interface SchedulePreviousValuesPromise
   id: () => Promise<ID_Output>;
   time: () => Promise<String>;
   completed: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface SchedulePreviousValuesSubscription
@@ -3548,6 +3870,8 @@ export interface SchedulePreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   time: () => Promise<AsyncIterator<String>>;
   completed: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -3578,6 +3902,8 @@ export interface UserSubscriptionPayloadSubscription
 export interface UserPreviousValues {
   id: ID_Output;
   authId: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface UserPreviousValuesPromise
@@ -3585,6 +3911,8 @@ export interface UserPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   authId: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -3592,6 +3920,8 @@ export interface UserPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   authId: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface WorkoutSubscriptionPayload {
@@ -3623,6 +3953,8 @@ export interface WorkoutPreviousValues {
   id: ID_Output;
   name: String;
   completed?: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface WorkoutPreviousValuesPromise
@@ -3631,6 +3963,8 @@ export interface WorkoutPreviousValuesPromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   completed: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface WorkoutPreviousValuesSubscription
@@ -3639,6 +3973,8 @@ export interface WorkoutPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   completed: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 /*
@@ -3666,6 +4002,16 @@ export type Int = number;
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
 
 export type Long = string;
 
