@@ -7,8 +7,8 @@ type Query { #These are all the queries that can be called from our API. If you 
 	getProfile: User
 	getWorkouts(scheduleId: ID!): [Workout]
 	getExercises(workoutId: ID!): [Exercise]
-	getBodyMeasurements(userId: ID!): [BodyMeasurement]
-	getBodyMetrics(userId: ID!): [BodyMetric]
+	getBodyMeasurements: [BodyMeasurement]
+	getBodyMetrics: [BodyMetric]
 	getNotes(subjectId: ID): [Note]
 	getSavedWorkouts(userId: ID!): [SavedWorkout]
 }
@@ -46,7 +46,6 @@ type Mutation { #These are all the mutations that can be called from our API. If
 		leftArm: Float
 		rightLeg: Float
 		leftLeg: Float
-		userId: ID!
 	): BodyMeasurement
 	deleteBodyMeasurement(id: ID!): BodyMeasurement
 	editBodyMeasurement(
@@ -58,12 +57,7 @@ type Mutation { #These are all the mutations that can be called from our API. If
 		rightLeg: Float
 		leftLeg: Float
 	): BodyMeasurement
-	addBodyMetric(
-		userId: ID!
-		height: Float
-		weight: Float
-		bodyfat: Float
-	): BodyMetric
+	addBodyMetric(height: Float, weight: Float, bodyfat: Float): BodyMetric
 	deleteBodyMetric(id: ID!): BodyMetric
 	editBodyMetric(
 		id: ID!
@@ -74,7 +68,7 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	addNote(note: String!, subjectId: ID): Note
 	editNote(noteId: ID!, note: String!): Note
 	deleteNote(noteId: ID!): Note
-	addSavedWorkout(name: String!, userId: ID!): SavedWorkout
+	addSavedWorkout(name: String!): SavedWorkout
 	editSavedWorkout(id: ID!, name: String!): SavedWorkout
 	deleteSavedWorkout(id: ID!): SavedWorkout
 }
@@ -139,6 +133,7 @@ type BodyMetric {
 	height: Float
 	bodyfat: Float #User could enter a number representing the % of body fat.
 	user: User!
+	createdAt: String
 }
 
 type BodyMeasurement {

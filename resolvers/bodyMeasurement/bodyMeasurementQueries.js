@@ -1,12 +1,12 @@
 const getBodyMeasurements = async (root, args, context, info) =>
 	context.prisma.bodyMeasurements({
-        where: {
-            user: {
-                id: args.userId
-            }
-        }
-    });
+		where: {
+			user: {
+				id: context.userID
+			}
+		}
+	});
 
 module.exports = {
-    getBodyMeasurements
-}
+	getBodyMeasurements
+};

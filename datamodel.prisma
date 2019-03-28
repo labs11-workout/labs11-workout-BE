@@ -4,6 +4,8 @@ type Schedule { # Each record of this type is one single time a user has schedul
 	workouts: [Workout!]!
 	completed: Boolean @default(value: false) # User may or may not want to track which Workouts they attend.
 	user: User!
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
 type Workout { # A workout that is named, and has exercises under it.
@@ -12,6 +14,8 @@ type Workout { # A workout that is named, and has exercises under it.
 	exercises: [Exercise!]!
 	completed: Boolean @default(value: false)
 	schedule: Schedule!
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
 type SavedWorkout { # This is a workout the user has saved, so they can easily add it to any day instead of having to create it over and over.
@@ -19,6 +23,8 @@ type SavedWorkout { # This is a workout the user has saved, so they can easily a
 	name: String!
 	exercises: [Exercise!]!
 	user: User!
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
 type Exercise { # One exercise.
@@ -32,6 +38,8 @@ type Exercise { # One exercise.
 	completed: Boolean @default(value: false) # Users can track which exercises and workouts that are completed.
 	workout: Workout
 	savedWorkout: SavedWorkout
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
 type User { # User model.
@@ -42,6 +50,8 @@ type User { # User model.
 	bodyMetrics: [BodyMetric!]!
 	bodyMeasurements: [BodyMeasurement!]!
 	authId: String! @unique
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
 type Note { # A user can write a note about a single scheduled workout time, or a workout.
@@ -50,6 +60,8 @@ type Note { # A user can write a note about a single scheduled workout time, or 
 	workout: Workout
 	createdBy: User!
 	schedule: Schedule
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
 type BodyMetric {
@@ -58,6 +70,8 @@ type BodyMetric {
 	height: Float
 	bodyfat: Float #User could enter a number representing the % of body fat.
 	user: User!
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
 
 type BodyMeasurement {
@@ -69,4 +83,6 @@ type BodyMeasurement {
 	rightLeg: Float
 	leftLeg: Float
 	user: User!
+	createdAt: DateTime!
+	updatedAt: DateTime!
 }
