@@ -79,6 +79,8 @@ type Schedule { # Each record of this type is one single time a user has schedul
 	workouts: [Workout!]!
 	completed: Boolean # User may or may not want to track which Workouts they attend.
 	user: User!
+	createdAt: String
+	updatedAt: String
 }
 
 type Workout { # A workout that is named, and has exercises under it. Is also assigned to a specific Schedule.
@@ -87,6 +89,8 @@ type Workout { # A workout that is named, and has exercises under it. Is also as
 	exercises: [Exercise!]!
 	completed: Boolean
 	schedule: Schedule!
+	createdAt: String
+	updatedAt: String
 }
 
 type SavedWorkout { # This is a workout the user has saved, so they can easily add it to any day instead of having to create it over and over.
@@ -94,6 +98,8 @@ type SavedWorkout { # This is a workout the user has saved, so they can easily a
 	name: String!
 	exercises: [Exercise!]!
 	user: User!
+	createdAt: String
+	updatedAt: String
 }
 
 type Exercise { # One exercise.
@@ -107,6 +113,8 @@ type Exercise { # One exercise.
 	completed: Boolean # Users can track which exercises and workouts that are completed.
 	workout: Workout
 	savedWorkout: SavedWorkout
+	createdAt: String
+	updatedAt: String
 }
 
 type User { # User model.
@@ -117,6 +125,8 @@ type User { # User model.
 	bodyMetrics: [BodyMetric!]!
 	bodyMeasurements: [BodyMeasurement!]!
 	authId: String!
+	createdAt: String
+	updatedAt: String
 }
 
 type Note { # A user can write a note about a single scheduled workout time, or a workout.
@@ -125,6 +135,8 @@ type Note { # A user can write a note about a single scheduled workout time, or 
 	workout: Workout
 	createdBy: User!
 	schedule: Schedule
+	createdAt: String
+	updatedAt: String
 }
 
 type BodyMetric {
@@ -134,6 +146,7 @@ type BodyMetric {
 	bodyfat: Float #User could enter a number representing the % of body fat.
 	user: User!
 	createdAt: String
+	updatedAt: String
 }
 
 type BodyMeasurement {
@@ -145,4 +158,6 @@ type BodyMeasurement {
 	rightLeg: Float
 	leftLeg: Float
 	user: User!
+	createdAt: String
+	updatedAt: String
 }
