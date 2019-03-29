@@ -1,7 +1,7 @@
 const addSavedWorkout = async (root, args, context, info)=>
     context.prisma.createSavedWorkout({
         name: args.name,
-        user: {connect: {authId: context.userId}}
+        user: {connect: {authId: context.userID}}
     });
 
 const deleteSavedWorkout = async (root, args, context, info)=> 

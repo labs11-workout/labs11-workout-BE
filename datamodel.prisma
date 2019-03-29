@@ -13,7 +13,7 @@ type Workout { # A workout that is named, and has exercises under it.
 	name: String!
 	exercises: [Exercise!]!
 	completed: Boolean @default(value: false)
-	schedule: Schedule!
+	schedule: Schedule
 	createdAt: DateTime!
 	updatedAt: DateTime!
 }

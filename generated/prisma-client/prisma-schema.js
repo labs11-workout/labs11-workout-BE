@@ -1837,10 +1837,12 @@ input ScheduleUpdateOneInput {
   connect: ScheduleWhereUniqueInput
 }
 
-input ScheduleUpdateOneRequiredWithoutWorkoutsInput {
+input ScheduleUpdateOneWithoutWorkoutsInput {
   create: ScheduleCreateWithoutWorkoutsInput
   update: ScheduleUpdateWithoutWorkoutsDataInput
   upsert: ScheduleUpsertWithoutWorkoutsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: ScheduleWhereUniqueInput
 }
 
@@ -2269,7 +2271,7 @@ type Workout {
   name: String!
   exercises(where: ExerciseWhereInput, orderBy: ExerciseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Exercise!]
   completed: Boolean
-  schedule: Schedule!
+  schedule: Schedule
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2284,7 +2286,7 @@ input WorkoutCreateInput {
   name: String!
   exercises: ExerciseCreateManyWithoutWorkoutInput
   completed: Boolean
-  schedule: ScheduleCreateOneWithoutWorkoutsInput!
+  schedule: ScheduleCreateOneWithoutWorkoutsInput
 }
 
 input WorkoutCreateManyWithoutScheduleInput {
@@ -2305,7 +2307,7 @@ input WorkoutCreateOneWithoutExercisesInput {
 input WorkoutCreateWithoutExercisesInput {
   name: String!
   completed: Boolean
-  schedule: ScheduleCreateOneWithoutWorkoutsInput!
+  schedule: ScheduleCreateOneWithoutWorkoutsInput
 }
 
 input WorkoutCreateWithoutScheduleInput {
@@ -2414,14 +2416,14 @@ input WorkoutUpdateDataInput {
   name: String
   exercises: ExerciseUpdateManyWithoutWorkoutInput
   completed: Boolean
-  schedule: ScheduleUpdateOneRequiredWithoutWorkoutsInput
+  schedule: ScheduleUpdateOneWithoutWorkoutsInput
 }
 
 input WorkoutUpdateInput {
   name: String
   exercises: ExerciseUpdateManyWithoutWorkoutInput
   completed: Boolean
-  schedule: ScheduleUpdateOneRequiredWithoutWorkoutsInput
+  schedule: ScheduleUpdateOneWithoutWorkoutsInput
 }
 
 input WorkoutUpdateManyDataInput {
@@ -2472,7 +2474,7 @@ input WorkoutUpdateOneWithoutExercisesInput {
 input WorkoutUpdateWithoutExercisesDataInput {
   name: String
   completed: Boolean
-  schedule: ScheduleUpdateOneRequiredWithoutWorkoutsInput
+  schedule: ScheduleUpdateOneWithoutWorkoutsInput
 }
 
 input WorkoutUpdateWithoutScheduleDataInput {
