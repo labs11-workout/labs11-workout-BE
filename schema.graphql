@@ -125,6 +125,7 @@ type User { # User model.
 	bodyMetrics: [BodyMetric!]!
 	bodyMeasurements: [BodyMeasurement!]!
 	authId: String!
+	premium: Boolean
 	createdAt: String
 	updatedAt: String
 }

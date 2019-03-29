@@ -6,6 +6,7 @@
   "author": "MichaelNey <ney.quentin.michael@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^7.0.0",
     "express-jwt": "^5.3.1",
     "express-jwt-authz": "^2.3.0",
@@ -15,7 +16,8 @@
     "jwks-rsa": "^1.4.0",
     "passport": "^0.4.0",
     "passport-auth0": "^1.1.0",
-    "prisma-client-lib": "^1.29.1"
+    "prisma-client-lib": "^1.29.1",
+    "stripe": "^6.28.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
