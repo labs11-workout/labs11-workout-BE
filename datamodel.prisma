@@ -50,6 +50,7 @@ type User { # User model.
 	bodyMetrics: [BodyMetric!]!
 	bodyMeasurements: [BodyMeasurement!]!
 	authId: String! @unique
+	premium: Boolean @default(value: false) #no free lunch bb
 	createdAt: DateTime!
 	updatedAt: DateTime!
 }
