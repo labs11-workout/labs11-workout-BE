@@ -1205,7 +1205,7 @@ export interface WorkoutCreateInput {
   name: String;
   exercises?: ExerciseCreateManyWithoutWorkoutInput;
   completed?: Boolean;
-  schedule: ScheduleCreateOneWithoutWorkoutsInput;
+  schedule?: ScheduleCreateOneWithoutWorkoutsInput;
 }
 
 export interface ScheduleCreateOneWithoutWorkoutsInput {
@@ -1270,7 +1270,7 @@ export interface WorkoutCreateOneWithoutExercisesInput {
 export interface WorkoutCreateWithoutExercisesInput {
   name: String;
   completed?: Boolean;
-  schedule: ScheduleCreateOneWithoutWorkoutsInput;
+  schedule?: ScheduleCreateOneWithoutWorkoutsInput;
 }
 
 export interface BodyMetricCreateManyWithoutUserInput {
@@ -1506,13 +1506,15 @@ export interface WorkoutUpdateDataInput {
   name?: String;
   exercises?: ExerciseUpdateManyWithoutWorkoutInput;
   completed?: Boolean;
-  schedule?: ScheduleUpdateOneRequiredWithoutWorkoutsInput;
+  schedule?: ScheduleUpdateOneWithoutWorkoutsInput;
 }
 
-export interface ScheduleUpdateOneRequiredWithoutWorkoutsInput {
+export interface ScheduleUpdateOneWithoutWorkoutsInput {
   create?: ScheduleCreateWithoutWorkoutsInput;
   update?: ScheduleUpdateWithoutWorkoutsDataInput;
   upsert?: ScheduleUpsertWithoutWorkoutsInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
   connect?: ScheduleWhereUniqueInput;
 }
 
@@ -1615,7 +1617,7 @@ export interface WorkoutUpdateOneWithoutExercisesInput {
 export interface WorkoutUpdateWithoutExercisesDataInput {
   name?: String;
   completed?: Boolean;
-  schedule?: ScheduleUpdateOneRequiredWithoutWorkoutsInput;
+  schedule?: ScheduleUpdateOneWithoutWorkoutsInput;
 }
 
 export interface WorkoutUpsertWithoutExercisesInput {
@@ -2510,7 +2512,7 @@ export interface WorkoutUpdateInput {
   name?: String;
   exercises?: ExerciseUpdateManyWithoutWorkoutInput;
   completed?: Boolean;
-  schedule?: ScheduleUpdateOneRequiredWithoutWorkoutsInput;
+  schedule?: ScheduleUpdateOneWithoutWorkoutsInput;
 }
 
 export interface WorkoutUpdateManyMutationInput {
