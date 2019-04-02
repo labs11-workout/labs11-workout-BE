@@ -46,10 +46,10 @@ module.exports = {
 	},
 	BodyMeasurement: {
 		user: (root, args, context, info) =>
-			context.prisma.BodyMeasurement({ id: root.id }).user()
+			context.prisma.bodyMeasurement({ id: root.id }).user()
 	},
 	BodyMetric: {
 		user: (root, args, context, info) =>
-			context.prisma.BodyMetric({ id: root.id }).user()
+			context.prisma.bodyMetric({ id: root.id }).user()
 	}
 };
