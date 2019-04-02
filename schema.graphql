@@ -18,6 +18,7 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	deleteSchedule(id: ID!): Schedule
 	editSchedule(id: ID!, time: String!): Schedule
 	addWorkout(name: String!, scheduleId: ID!): Workout
+	addWorkoutFromSavedWorkout(scheduleId: ID!, savedWorkoutId: ID!): Workout
 	deleteWorkout(id: ID!): Workout
 	editWorkout(id: ID!, name: String!): Workout
 	addExercise(
