@@ -10,9 +10,8 @@ module.exports = {
 			context.prisma.user({ id: root.id }).savedWorkouts(),
 		bodyMetrics: (root, args, context, info) =>
 			context.prisma.user({ id: root.id }).bodyMetrics(),
-		bodyMeasurements: (root, args, context, info) => {
-			context.prisma.user({ id: root.id }).bodyMeasurements();
-		}
+		bodyMeasurements: (root, args, context, info) =>
+			context.prisma.user({ id: root.id }).bodyMeasurements()
 	},
 	Schedule: {
 		workouts: (root, args, context, info) =>
