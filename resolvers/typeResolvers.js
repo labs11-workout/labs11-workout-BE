@@ -43,5 +43,13 @@ module.exports = {
 			context.prisma.note({ id: root.id }).workout(),
 		createdBy: (root, args, context, info) =>
 			context.prisma.note({ id: root.id }).createdBy()
+	},
+	BodyMeasurement: {
+		user: (root, args, context, info) =>
+			context.prisma.BodyMeasurement({ id: root.id }).user()
+	},
+	BodyMetric: {
+		user: (root, args, context, info) =>
+			context.prisma.BodyMetric({ id: root.id }).user()
 	}
 };
