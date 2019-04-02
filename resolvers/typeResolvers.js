@@ -50,6 +50,6 @@ module.exports = {
 	},
 	BodyMetric: {
 		user: (root, args, context, info) =>
-			context.prisma.BodyMeasurement({ id: root.id }).user()
+			context.prisma.BodyMetric({ id: root.id }).user()
 	}
 };
