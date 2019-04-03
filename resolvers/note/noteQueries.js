@@ -28,6 +28,10 @@ const getNotes = async (root, args, context, info) => {
 	}
 };
 
+const getNote = async (root, args, context, info) =>
+	context.prisma.note({ id: args.id });
+
 module.exports = {
-	getNotes
+	getNotes,
+	getNote
 };

@@ -7,6 +7,11 @@ const getSchedules = async (root, args, context, info) =>
 		}
 	});
 
+const getSchedule = async(root, args, context, info) => context.prisma.schedule({
+	id: args.id
+});
+
 module.exports = {
-	getSchedules
+	getSchedules,
+	getSchedule
 };

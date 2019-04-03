@@ -22,6 +22,12 @@ const getExercises = async (root, args, context, info) => {
 	}
 };
 
+const getExercise = async (root, args, context, info) =>
+	context.prisma.exercise({
+		id: args.id
+	});
+
 module.exports = {
-	getExercises
+	getExercises,
+	getExercise
 };

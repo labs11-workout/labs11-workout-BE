@@ -7,6 +7,12 @@ const getBodyMeasurements = async (root, args, context, info) =>
 		}
 	});
 
+const getBodyMeasurement = async (root, args, context, info) =>
+	context.prisma.bodyMeasurement({
+		id: args.id
+	});
+
 module.exports = {
-	getBodyMeasurements
+	getBodyMeasurements,
+	getBodyMeasurement
 };
