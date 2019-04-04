@@ -23,11 +23,11 @@ type Query { #These are all the queries that can be called from our API. If you 
 type Mutation { #These are all the mutations that can be called from our API. If you create a resolver and want it to be a mutation, you need to place the mutation here and define what it is called, it's arguments if it has any, and the type of data it returns. (Must match a mutation that's in the Mutation Resolver Object.)
 	addSchedule(time: String!): Schedule
 	deleteSchedule(id: ID!): Schedule
-	editSchedule(id: ID!, time: String!): Schedule
+	editSchedule(id: ID!, time: String, completed: Boolean): Schedule
 	addWorkout(name: String!, scheduleId: ID!): Workout
 	addWorkoutFromSavedWorkout(scheduleId: ID!, savedWorkoutId: ID!): Workout
 	deleteWorkout(id: ID!): Workout
-	editWorkout(id: ID!, name: String!): Workout
+	editWorkout(id: ID!, name: String, completed: Boolean): Workout
 	addExercise(
 		sets: Int
 		reps: Int
@@ -44,6 +44,7 @@ type Mutation { #These are all the mutations that can be called from our API. If
 		duration: Float
 		intensity: Int
 		name: String
+		completed: Boolean
 		exerciseId: ID!
 	): Exercise
 	deleteExercise(exerciseId: ID!): Exercise
