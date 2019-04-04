@@ -55,11 +55,16 @@ const addWorkoutFromSavedWorkout = async (root, args, context, info) => {
 const deleteWorkout = async (root, args, context, info) =>
 	await context.prisma.deleteWorkout({ id: args.id });
 
-const editWorkout = async (root, args, context, info) =>
-	await context.prisma.updateWorkout({
-		data: { name: args.name },
+const editWorkout = async (root, args, context, info) => {
+	const properties = { ...args };
+	//Delete the id argument from properties, as that's not a property we are updating.
+	delete properties.id;
+	const updatedWorkout = await context.prisma.updateWorkout({
+		data: { ...properties },
 		where: { id: args.id }
 	});
+	return updatedWorkout;
+};
 
 module.exports = {
 	addWorkout,
