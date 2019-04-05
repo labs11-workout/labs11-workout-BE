@@ -6,7 +6,7 @@ type Query { #These are all the queries that can be called from our API. If you 
 	getSchedules: [Schedule]
 	getSchedule(id: ID!): Schedule
 	getProfile: User
-	getWorkouts(scheduleId: ID!): [Workout]
+	getWorkouts(scheduleId: ID): [Workout]
 	getWorkout(id: ID!): Workout
 	getExercises(workoutId: ID!): [Exercise]
 	getExercise(id: ID!): Exercise
