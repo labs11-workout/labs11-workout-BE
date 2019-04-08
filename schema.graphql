@@ -78,6 +78,7 @@ type Mutation { #These are all the mutations that can be called from our API. If
 	editNote(noteId: ID!, note: String!): Note
 	deleteNote(noteId: ID!): Note
 	addSavedWorkout(name: String!): SavedWorkout
+	addSavedWorkoutFromWorkout(workoutId: ID!): SavedWorkout
 	editSavedWorkout(id: ID!, name: String!): SavedWorkout
 	deleteSavedWorkout(id: ID!): SavedWorkout
 }

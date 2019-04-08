@@ -7,7 +7,7 @@ const addWorkout = async (root, args, context, info) =>
 //Mutation to take a ScheduleId to add a Workout to, and a SavedWorkoutId for a SavedWorkout the new Workout will be based off of.
 const addWorkoutFromSavedWorkout = async (root, args, context, info) => {
 	try {
-		console.log(args)
+		console.log(args);
 		//Get Saved Workout
 		const foundSavedWorkout = await context.prisma.savedWorkout({
 			id: args.savedWorkoutId
