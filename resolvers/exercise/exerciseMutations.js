@@ -35,6 +35,26 @@ const editExercise = async (root, args, context, info) => {
 		data: { ...properties },
 		where: { id: args.exerciseId }
 	});
+	//If the user passes completed boolean, check if the workout is also completed or not to update it's status.
+	if (args.completed !== null || args.completed !== undefined) {
+		const exercisesWorkout = await context.prisma
+			.exercise({ id: args.exerciseId })
+			.workout();
+		const incompleteWorkoutExercises = await context.prisma
+			.workout({ id: exercisesWorkout.id })
+			.exercises({ where: { completed: false } });
+		if (incompleteWorkoutExercises.length === 0) {
+			const updateWorkout = await context.prisma.updateWorkout({
+				where: { id: exercisesWorkout.id },
+				data: { completed: true }
+			});
+		} else {
+			const updateWorkout = await context.prisma.updateWorkout({
+				where: { id: exercisesWorkout.id },
+				data: { completed: false }
+			});
+		}
+	}
 	return updatedExercise;
 };
 
