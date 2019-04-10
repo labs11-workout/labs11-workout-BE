@@ -64,7 +64,24 @@ const editWorkout = async (root, args, context, info) => {
 		data: { ...properties },
 		where: { id: args.id }
 	});
-	return updatedWorkout;
+	//If a user marks a workout as complete or not, update the exercises inside of it to match it as well.
+	if (args.completed !== null || args.completed !== undefined) {
+		const updatedWorkoutExercises = await context.prisma
+			.workout({ id: args.id })
+			.exercises();
+		//If updatedWorkout is completed, make sure every exercise inside of it is completed.
+		for (let i = 0; i < updatedWorkoutExercises.length; i++) {
+			let foundExercise = updatedWorkoutExercises[i];
+			if (foundExercise.completed !== args.completed) {
+				const updatedExercise = await context.prisma.updateExercise({
+					data: { completed: args.completed },
+					where: { id: foundExercise.id }
+				});
+			}
+		}
+	}
+	//Return the workout with the exercises in it that are now updated.
+	return context.prisma.workout({ id: args.id });
 };
 
 module.exports = {
