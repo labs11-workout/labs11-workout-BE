@@ -36,8 +36,15 @@ const editNote = (root, args, context, info) =>
 const deleteNote = (root, args, context, info) =>
 	context.prisma.deleteNote({ id: args.noteId });
 
+const deleteAllNotes = async(root, args, context, info) => {
+	const deletedNotes = await context.prisma.deleteManyNotes({createdBy: {authId: context.userID}});
+	return null;
+};
+	
+
 module.exports = {
 	addNote,
 	editNote,
-	deleteNote
+	deleteNote,
+	deleteAllNotes
 };
