@@ -1,11 +1,38 @@
-const addSavedWorkout = async (root, args, context, info) =>
-	context.prisma.createSavedWorkout({
-		name: args.name,
-		user: { connect: { authId: context.userID } }
-	});
+const addSavedWorkout = async (root, args, context, info) => {
+	try {
+		//Check if user is premium, if not, make sure they don't have more than 3 already.
+		const creatingUser = await context.prisma.user({ authId: context.userID });
+		if (!creatingUser.premium) {
+			const creatingUsersSavedWorkouts = await context.prisma.savedWorkouts({
+				where: { user: { authId: context.userID } }
+			});
+			if (creatingUsersSavedWorkouts.length >= 3)
+				return new Error(
+					"You must buy premium to have 3 or more Workout Templates."
+				);
+		}
+		return context.prisma.createSavedWorkout({
+			name: args.name,
+			user: { connect: { authId: context.userID } }
+		});
+	} catch (error) {
+		return new Error(error);
+	}
+};
 
 const addSavedWorkoutFromWorkout = async (root, args, context, info) => {
 	try {
+		//Check if user is premium, if not, make sure they don't have more than 3 already.
+		const creatingUser = await context.prisma.user({ authId: context.userID });
+		if (!creatingUser.premium) {
+			const creatingUsersSavedWorkouts = await context.prisma.savedWorkouts({
+				where: { user: { authId: context.userID } }
+			});
+			if (creatingUsersSavedWorkouts.length >= 3)
+				return new Error(
+					"You must buy premium to have 3 or more Workout Templates."
+				);
+		}
 		//Find the workout and workout's exercises.
 		const foundWorkout = await context.prisma.workout({ id: args.workoutId });
 		const foundWorkoutExercises = await context.prisma
